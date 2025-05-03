@@ -1,0 +1,64 @@
+html {-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+:root
+{
+    --background-color: #999;
+    --heading-color: #3f4443 ;
+    --border-color: #646a6e;
+    --red-accent-color: #ba0c2f;
+    --menu-color-background: var--(red-accent-color);
+    --text-color: #000;
+    --vaild-color: rgb(12, 216, 12);
+
+    --heading-font: "Stardos Stencil", serif;
+    --text-font: "Allerta Stencil", serif;
+
+    --shadow-color: #000
+}
+
+body 
+{    
+    color: var(--text-color);
+    font-family: var(--text-font);
+}
+
+main
+{
+    padding: 0 2%;
+    min-height: 20rem;
+}
+
+h1 
+{
+    font-family: var(--heading-font);
+    font-size: 38px;
+    color: var(--heading-color);
+    text-align: center;        
+}
+
+h2
+{
+    font-family: var(--heading-font);
+    font-size: 28px;
+    text-align: center;       
+}
+
+.bottom-border 
+{
+    border-bottom: 2px solid var(--border-color);
+}
+
+footer {
+    border-top: 2px solid var(--border-color);
+    padding: 10px;
+}
+
+footer p
+{
+    margin: 1px;
+    font-family: var(--text-font);
+    font-size: small;
+    text-align: center;
+}
