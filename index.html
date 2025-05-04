@@ -15,15 +15,70 @@
     <script defer src="./scripts/common.js"></script>
 </head>
 <body>
-    <header>
-        <img src=images/profile.webp alt="Profile Photo">
-        <span>Matthew D. Barker</span>
+    <header>        
+        <div class="header-top">
+            <div class="profile-container">
+                <img class="profile-image" src=images/profile.webp alt="Profile Photo">
+                <span class="profile-name">Matthew D. Barker</span>
+            </div>
+            <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="menu-wrapper">
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#chamber">Chamber</a></li>
+                    <li><a href="#final">Final</a></li>
+                    <li><a href="#github">GitHub Profile</a></li>
+                    <li><a href="#linkedin">LinkedIn</a></li>
+                </ul>
+                <ul class="nav-menu mobile-menu" id="mobileMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#chamber">Chamber</a></li>
+                    <li><a href="#final">Final</a></li>
+                    <li><a href="#github">GitHub Profile</a></li>
+                    <li><a href="#linkedin">LinkedIn</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
-
+        <h1>Home</h1>
+        <section>
+            <h2>Course Work</h2>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Cape Coral, Florida</h2>
+            <figure>
+                <img src="images/cape-coral.webp" alt="Cape Coral">
+                <figcaption>Cape Coral, Florida</figcaption>
+            </figure>
+        </section>
+        <section>
+            <h2>Web and Computer Programming Certificate</h2>
+            <div>
+                <button>ALL</button>
+                <button>CSE</button>
+                <button>WDD</button>
+            </div>
+            <div>
+                <button>CSE 110</button>
+                <button>WDD 130</button>
+                <button>CSE 111</button>
+                <button>WDD 131</button>
+                <button>CSE 210</button>
+                <button>WDD 231</button>
+            </div>
+                
+        </section>
     </main>
     <footer>
-        <p><span id="currentyear"></span> | Matthew D. Barker | Florida, United States of America</p>
+        <p><span id="currentyear"></span> | Matthew D. Barker | Florida, United States of America <img src="images/us-flag.svg"></p>
         <p id="lastmodified"></p>
     </footer>
 </body>
