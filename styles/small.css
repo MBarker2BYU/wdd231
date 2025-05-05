@@ -161,6 +161,11 @@ nav
 
     .profile-name
     {
-        font-size: 1.85em;
+        font-size: 1.5em;
+    }
+
+    footer p 
+    {
+        font-size: x-small;
     }
   }
