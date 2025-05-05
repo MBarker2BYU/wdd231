@@ -1,19 +1,29 @@
+/* Navigation */
+
+/* #desktop-menu ul
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    height: 100%;
+}
+
+#desktop-menu ul li
+{
+    padding: 5px;
+    color: var(--heading-color);
+}
+
+#desktop-menu ul li:hover
+{
+    transform: scale(1.1);
+    transition: 0.3s;    
+} */
+
 /* Media Query */
 
-@media (min-width: 768px) 
+/* @media (min-width: 768px) 
 {
-    .mobile-menu 
-    {
-      display: none;
-    }
-
-    .hamburger-menu 
-    {
-      display: none;
-    }
-
-    .nav-menu 
-    {
-      display: flex;
-    }    
-  }
+    
+} */

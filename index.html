@@ -11,9 +11,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/small.css">
-    <link rel="stylesheet" href="styles/large.css">
+    <link rel="stylesheet" href="styles/desktop.css">
+    <link rel="stylesheet" href="styles/mobile.css">
     <script defer src="scripts/common.js"></script>
     <script defer src="scripts/navigation.js"></script>
     <script defer src="scripts/courses.js"></script>
@@ -24,27 +23,31 @@
             <div class="profile-container">
                 <img class="profile-image" src="images/profile.webp" alt="Profile Photo">
                 <span class="profile-name">Matthew D. Barker</span>
+            </div>            
+            <div id="hamburger-icon">
+                <div class="top-bar"></div>
+                <div class="middle-bar"></div>
+                <div class="bottom-bar"></div>                
             </div>
-            <button id="menu-toggle" class="hamburger-menu">☰</button>
-        </div>
+        </div>        
         <div class="menu-wrapper">
             <nav>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#chamber">Chamber</a></li>
-                    <li><a href="#final">Final</a></li>
-                    <li><a href="#github">GitHub Profile</a></li>
-                    <li><a href="#linkedin">LinkedIn</a></li>
+                <ul id="desktop-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Chamber</a></li>
+                    <li><a href="#">Final</a></li>
+                    <li><a href="#">GitHub Profile</a></li>
+                    <li><a href="#">LinkedIn</a></li>
                 </ul>
-                <ul id="mobileMenu" class="nav-menu mobile-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#chamber">Chamber</a></li>
-                    <li><a href="#final">Final</a></li>
-                    <li><a href="#github">GitHub Profile</a></li>
-                    <li><a href="#linkedin">LinkedIn</a></li>
-                </ul>
+                <ul id="mobile-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Chamber</a></li>
+                    <li><a href="#">Final</a></li>
+                    <li><a href="#">GitHub Profile</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>                
             </nav>
-        </div>
+        </div>        
     </header>
     <main>
 

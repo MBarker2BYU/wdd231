@@ -17,13 +17,14 @@
     -webkit-box-sizing: border-box;
     margin: 0;    
     padding: 0;
-    box-sizing: border-box;    
+    box-sizing: border-box;     
 }
 
 body 
 {
     font-family: var(--text-font);
     color: var(--heading-color);    
+    min-width: 320px;
 }
 
 /* Header */
@@ -76,39 +77,27 @@ header a
     font-weight: bold;
 }
 
-/* Hamburger Icon */
-#hamburger-icon 
+/* Navigation */
+
+#desktop-menu 
 {
-    margin: 0;
-    display: none;
-    cursor: pointer;
-    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    height: 100%;
 }
 
-#hamburger-icon div 
+#desktop-menu li 
 {
-    width: 25px;
-    height: 3px;
-    background-color: var(--heading-color);
-    margin: 6px 0;
-    transition: 0.4s;    
+    padding: 5px;
+    color: var(--heading-color);
 }
 
-.open .top-bar
+#desktop-menu li:hover 
 {
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.open .middle-bar
-{
-    opacity: 0;
-}
-
-.open .bottom-bar
-{
-    -webkit-transform: rotate(45deg) translate(-6px, -7px);
-    transform: rotate(45deg) translate(-6px, -7px);
+    transform: scale(1.1);
+    transition: 0.3s;    
 }
 
 
@@ -137,4 +126,34 @@ footer img
     width: 40px;
     height: 40px;
     margin: 0 5px;
+}
+
+/* Swithch to Mobile View */
+@media screen and (max-width: 768px) 
+{
+    .profile-name 
+    {
+        font-size: 1.5em;
+    }
+    
+    #hamburger-icon
+    {
+        display: block;
+        border: red solid 1px;     
+    }
+
+    #desktop-menu 
+    {
+        display: none;
+    }
+
+    #mobile-menu 
+    {
+        display: block;               
+    }
+
+    footer 
+    {
+        font-size: xx-small;
+    }
 }
