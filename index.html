@@ -20,13 +20,37 @@
 </head>
 <body>
     <header>
-
+        <div class="header-top">
+            <div class="profile-container">
+                <img class="profile-image" src=images/profile.webp alt="Profile Photo">
+                <span class="profile-name">Matthew D. Barker</span>
+            </div>
+            <button id="menu-toggle" class="hamburger-menu">☰</button>
+        </div>
+        <div class="menu-wrapper">
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#chamber">Chamber</a></li>
+                    <li><a href="#final">Final</a></li>
+                    <li><a href="#github">GitHub Profile</a></li>
+                    <li><a href="#linkedin">LinkedIn</a></li>
+                </ul>
+                <ul id="mobileMenu" class="nav-menu mobile-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#chamber">Chamber</a></li>
+                    <li><a href="#final">Final</a></li>
+                    <li><a href="#github">GitHub Profile</a></li>
+                    <li><a href="#linkedin">LinkedIn</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
 
     </main>
     <footer>
-        <p><span id="currentyear"></span> | Matthew D. Barker | Florida, United States of America</p>
+        <p><span id="currentyear"></span> | Matthew D. Barker | Florida, United States of America <img src="images/us-flag.svg"></p>
         <p id="lastmodified"></p>
     </footer>
 </body>
