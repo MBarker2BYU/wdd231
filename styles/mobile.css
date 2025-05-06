@@ -133,10 +133,10 @@ header a
     list-style: none;
     display: none;
     position: fixed;
-    top: 200px + 20px;
+    top: 220px;
     left: 0;
     width: 100%;
-    height: calc(100vh - (200px + 20px));
+    height: calc(100vh - 220px);
     background: var(--transparent-nav-color);
     flex-direction: column;
     justify-content: center;
@@ -279,7 +279,7 @@ body
 
 .info-card2 img
 {
-    max-width: 100%;
+    max-width: 300px;
     height: auto;
     border-radius: 8px;
     margin-bottom: 10px;

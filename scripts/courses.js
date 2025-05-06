@@ -84,12 +84,12 @@ function renderCourses(courses)
         
         if (course.completed) 
         {
-            innerHTML = `<span style="color: green; background: white; border-radius: 12px; font-weight: bold;">✓</span>`; // Append "(Completed)" if the course is completed
+            innerHTML = `<span style="font-weight: bold;">✓</span>`; // Append "(Completed)" if the course is completed
             completedCredits += course.credits; // Add to completed credits if the course is completed
         }
         else 
         {
-            innerHTML = `<span style="color: red; background: white; border-radius: 12px; font-weight: bold;">✗</span>`; // Append "(Not Completed)" if the course is not completed
+            innerHTML = `<span style="font-weight: bold;">✗</span>`; // Append "(Not Completed)" if the course is not completed
 
             courseButton.style.backgroundColor = "#3f4443"; // Change color to green if completed            
         }         
