@@ -1,14 +1,15 @@
 /* Hamburger Icon */
 
-#hamburger-icon 
+#hamburger-menu 
 {
     margin: 0;
     display: none;
-    /* cursor: pointer; */
+    cursor: pointer;
     padding-right: 15px;
+    z-index: 1000;
 }
 
-#hamburger-icon div 
+#hamburger-menu div 
 {
     width: 25px;
     height: 3px;
@@ -34,21 +35,10 @@
     transform: rotate(45deg) translate(-6px, -7px);
 }
 
-/* navigation menu */
-
-#mobile-menu
+@media only screen and (max-width: 599px) 
 {
-    display: none;    
-}
-
-#mobile-menu li 
-{
-    padding: 5px;
-    color: var(--heading-color);
-}
-
-#mobile-menu li:hover 
-{
-    transform: scale(1.1);
-    transition: 0.3s;    
+    .main-container
+    {
+          
+    }
 }
