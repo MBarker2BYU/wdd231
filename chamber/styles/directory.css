@@ -1,0 +1,29 @@
+#cards
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    border-top: var(--border-color) solid 2px;
+}
+
+#cards section
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    border: var(--red-accent-color) solid 1px;
+    box-shadow: 3px 3px 10px var(--shadow-color);    
+}
+
+#cards section img
+{
+    border-radius: 5px;
+    background-color: var(--osu-light-gray);
+    box-shadow: 3px 3px 10px var(--osu-dark-gray);
+    padding: 10px;
+    margin: 10px;
+}
