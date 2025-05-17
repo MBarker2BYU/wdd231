@@ -1,0 +1,222 @@
+@import url('desktop.css');
+@import url('mobile.css');
+
+:root 
+{
+    --osu-black: #000000; /* OSU Black */
+    --osu-scarlet: #BB0000; /* OSU Scarlet */
+    --osu-gray: #666666; /* OSU Gray */
+    --osu-white: #FFFFFF; /* OSU White */
+
+    --osu-light-gray: #B0B0B0; /* Light gray for dark mode */
+    --osu-dark-gray: #333333; /* Dark gray for dark mode */
+
+    --heading-font: "Stardos Stencil", serif;
+    --text-font: "Allerta Stencil", serif;
+}
+
+*{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body 
+{
+    font-family: var(--heading-font);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light Mode */
+body.light-mode 
+{
+    background-color: var(--osu-white); 
+    color: var(--osu-black)
+}
+
+/* Dark Mode */
+body.dark-mode 
+{
+    background-color: var(--osu-dark-gray); 
+    color: var(--osu-white);
+}
+
+header 
+{
+    background-color: inherit;
+    border-bottom: 1px solid var(--osu-gray); 
+    position: relative; /* For mobile menu positioning */
+}
+
+body.dark-mode header 
+{
+    border-bottom: 1px solid var(--osu-scarlet);
+}
+
+
+.title-container 
+{
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.title-container h1 
+{
+    /* font-size: 1.8rem; */
+    color: var(--osu-black);
+}
+
+body.dark-mode .title-container h1 
+{ 
+    color: var(--osu-white);
+}
+
+.title-container p 
+{
+    font-size: 0.9rem;
+    color: var(--osu-dark-gray); 
+    opacity: 0.8;
+}
+
+body.dark-mode .title-container p 
+{
+    color: var(--osu-light-gray);     
+}
+
+nav 
+{
+    display: flex;
+    align-items: center;
+}
+
+.nav-links 
+{
+    list-style: none;
+}
+
+.nav-links a 
+{
+    text-decoration: none;
+    color: var(--osu-dark-gray); 
+    font-weight: 500;    
+}
+
+body.dark-mode .nav-links a 
+{
+    color: var(--osu-scarlet);     
+}
+
+.nav-links a:hover 
+{
+    color: var(--osu-scarlet);      
+}
+
+body.dark-mode .nav-links a:hover 
+{
+    color: var(--osu-light-gray);    
+}
+
+.theme-toggle 
+{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 1rem;
+    color: var(--osu-scarlet); 
+}
+
+body.dark-mode .theme-toggle 
+{
+    color: var(--osu-white); 
+}
+
+.theme-toggle:hover 
+{
+    color: var(--osu-gray); 
+}
+
+body.dark-mode .theme-toggle:hover 
+{
+    color: var(--osu-scarlet);
+}
+
+.hamburger 
+{
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+body.light-mode .hamburger 
+{
+    color: var(--osu-black); 
+}
+
+body.dark-mode .hamburger 
+{
+    color: var(--osu-white); 
+}
+
+body.light-mode .nav-links 
+{
+    background-color: var(--osu-white); 
+}
+
+body.dark-mode .nav-links 
+{
+    background-color: var(--osu-dark-gray); 
+}
+
+main 
+{
+    padding: 2rem;
+    min-height: calc(100vh - 500px);
+}
+
+footer 
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background-color: inherit;
+    border-top: 1px solid var(--osu-gray);
+}
+
+body.dark-mode footer 
+{
+    border-top: 1px solid var(--osu-scarlet); 
+}
+
+.footer-section 
+{
+    text-align: left;
+}
+
+.social-media 
+{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.social-media img 
+{
+    width: 64px;
+    height: auto;
+    margin: 0.5rem;
+}
+
+.error-message 
+{
+    color: var(--osu-scarlet);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1rem;
+}
