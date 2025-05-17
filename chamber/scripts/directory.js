@@ -18,7 +18,7 @@ const displayMemberData = (members) =>
         let website = document.createElement('a');
 
         // Reduce clutter and make it more readable
-        setImageAttributes(image, `./images/${member.image_icon_filename}`, `${member.image_icon_filename} Logo`, '96px', 'auto');
+        setImageAttributes(image, `./images/${member.image_icon_filename}`, `${member.image_icon_filename} Logo`, '128px', 'auto');
         setMemberInfo(address, phone, website, member.address, member.phone_number, member.website_url);
 
         card.appendChild(image);

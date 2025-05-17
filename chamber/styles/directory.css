@@ -13,7 +13,7 @@
     align-items: center;
     padding: 10px;
     margin: 10px;
-    background-color: var(--background-color);
+    background-color: var(--osu-light-gray);
     border-radius: 5px;
     border: var(--red-accent-color) solid 1px;
     box-shadow: 3px 3px 10px var(--shadow-color);    
@@ -21,9 +21,20 @@
 
 #cards section img
 {
-    border-radius: 5px;
-    background-color: var(--osu-light-gray);
-    box-shadow: 3px 3px 10px var(--osu-dark-gray);
+    border-radius: 5px;    
     padding: 10px;
     margin: 10px;
+}
+
+#cards section  p
+{
+    font-family: var(--text-font);
+    font-size: 0.8em;
+    color: var(--osu-black);
+    text-align: center;
+}
+
+#cards section a:visited
+{
+    color: var(--osu-black);
 }

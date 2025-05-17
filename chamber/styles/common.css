@@ -85,7 +85,7 @@ body.dark-mode .title-container h1
 
 body.dark-mode .title-container p 
 {
-    color: var(--osu-light-gray);     
+    color: var(--osu-white);     
 }
 
 nav 
