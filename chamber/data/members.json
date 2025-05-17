@@ -1,92 +1,103 @@
-[
-  {
-    "name": "Twisted Lobster",
-    "address": "1341 Del Prado Blvd S, Cape Coral, FL 33990",
-    "phone_number": "(239) 800-2878",
-    "website_url": "http://www.thetwistedlobster.com/",
-    "image_icon_filename": "twisted_lobster_logo.jpg",
-    "membership_level": 1,
-    "other_information": "Seafood restaurant with a 4.5-star Yelp rating. Known for lobster rolls and casual dining. Open for lunch and dinner."
-  },
-  {
-    "name": "10 Twenty Five",
-    "address": "1025 Santa Barbara Blvd, Cape Coral, FL 33991",
-    "phone_number": "(239) 829-0407",
-    "website_url": "https://www.10twentyfive.com/",
-    "image_icon_filename": "10twentyfive_logo.png",
-    "membership_level": 1,
-    "other_information": "Gastropub with craft beers and burgers. Yelp reviews praise the cheeseburger lo mein and deviled eggs. 4.4-star rating."
-  },
-  {
-    "name": "Point 57",
-    "address": "3522 Del Prado Blvd S, Cape Coral, FL 33904",
-    "phone_number": "(239) 471-7785",
-    "website_url": "https://point-57.com/",
-    "image_icon_filename": "point57_logo.jpg",
-    "membership_level": 1,
-    "other_information": "Upscale American restaurant with a 4.3-star Yelp rating. Known for steak and seafood. Outdoor seating available."
-  },
-  {
-    "name": "Cape Coral Chamber of Commerce",
-    "address": "2051 Cape Coral Parkway E, Cape Coral, FL 33904",
-    "phone_number": "(239) 549-6900",
-    "website_url": "https://capecoralchamber.com/",
-    "image_icon_filename": "chamber_logo.png",
-    "membership_level": 3,
-    "other_information": "Provides networking, training, and two Welcome Centers for 50,000+ annual visitors. Website attracts 2M visitors yearly. Hosts Farmers’ Market every Saturday."
-  },
-  {
-    "name": "Lobster Lady Seafood Market & Bistro",
-    "address": "1715 Cape Coral Pkwy W, Cape Coral, FL 33914",
-    "phone_number": "(239) 471-0136",
-    "website_url": "https://lobsterladyseafood.com/",
-    "image_icon_filename": "lobsterlady_logo.jpg",
-    "membership_level": 1,
-    "other_information": "Seafood market and bistro with a 4.6-star Yelp rating. Offers fresh fish and live music. Popular for brunch."
-  },
-  {
-    "name": "Ford’s Garage – Cape Coral",
-    "address": "1719 Cape Coral Pkwy E, Cape Coral, FL 33904",
-    "phone_number": "(239) 540-3673",
-    "website_url": "https://www.fordsgarageusa.com/locations/cape-coral/",
-    "image_icon_filename": "fordsgarage_logo.png",
-    "membership_level": 1,
-    "other_information": "American comfort food with a 1920s garage theme. 4.2-star Yelp rating. Known for burgers and craft beer."
-  },
-  {
-    "name": "Cape Coral Farmers’ Market",
-    "address": "Club Square, SE 47th Ter, Cape Coral, FL 33904",
-    "phone_number": "(239) 549-6900",
-    "website_url": "https://capecoralchamber.com/farmers-market/",
-    "image_icon_filename": "farmersmarket_logo.jpg",
-    "membership_level": 2,
-    "other_information": "Operates every Saturday, 8 AM–1 PM, offering produce, seafood, and flowers. Community staple with high foot traffic."
-  },
-  {
-    "name": "Masala Mantra – The Indian Bistro",
-    "address": "4518 Del Prado Blvd S, Cape Coral, FL 33904",
-    "phone_number": "(239) 540-1111",
-    "website_url": "https://masalamantracapecoral.com/",
-    "image_icon_filename": "masalamantra_logo.jpg",
-    "membership_level": 1,
-    "other_information": "Indian cuisine with a 4.7-star Yelp rating. Praised for authentic flavors and friendly service. Offers vegetarian options."
-  },
-  {
-    "name": "Nice Guys Pizza",
-    "address": "1334 Cape Coral Pkwy E, Cape Coral, FL 33904",
-    "phone_number": "(239) 549-7542",
-    "website_url": "https://niceguyspizza.com/",
-    "image_icon_filename": "niceguys_logo.png",
-    "membership_level": 1,
-    "other_information": "Pizzeria with a 4.5-star Yelp rating. Known for creative pies and vegan options. Funky atmosphere with arcade games."
-  },
-  {
-    "name": "Jungle Bird",
-    "address": "1520 Lafayette St, Cape Coral, FL 33904",
-    "phone_number": "(239) 471-4111",
-    "website_url": "https://junglebirdtiki.com/",
-    "image_icon_filename": "junglebird_logo.jpg",
-    "membership_level": 1,
-    "other_information": "Tiki bar and restaurant with a 4.4-star Yelp rating. Specializes in tropical cocktails and Polynesian-inspired dishes."
-  }
-]
+{
+  "members": [
+    {
+      "name": "Twisted Lobster",
+      "tagline": "Seafood Restaurant",
+      "address": "1341 Del Prado Blvd S, Cape Coral, FL 33990",
+      "phone_number": "(239) 800-2878",
+      "website_url": "http://www.thetwistedlobster.com/",
+      "email": "info@thetwistedlobster.com",
+      "image_icon_filename": "twisted_lobster_logo.jpg",
+      "membership_level": 1,
+      "other_information": "Seafood restaurant with a 4.5-star Yelp rating. Known for lobster rolls and casual dining. Open for lunch and dinner."
+    },
+    {
+      "name": "10 Twenty Five",
+      "tagline": "Gastropub",
+      "address": "1025 Santa Barbara Blvd, Cape Coral, FL 33991",
+      "phone_number": "(239) 829-0407",
+      "website_url": "https://www.10twentyfive.com/",
+      "email":"info@10twentyfive.com",
+      "image_icon_filename": "10twentyfive_logo.png",
+      "membership_level": 1,
+      "other_information": "Gastropub with craft beers and burgers. Yelp reviews praise the cheeseburger lo mein and deviled eggs. 4.4-star rating."
+    },
+    {
+      "name": "Point 57",
+      "tagline": "American Restaurant",
+      "address": "3522 Del Prado Blvd S, Cape Coral, FL 33904",
+      "phone_number": "(239) 471-7785",
+      "website_url": "https://point-57.com/",
+      "email": "info@point-57.com",
+      "image_icon_filename": "point57_logo.jpg",
+      "membership_level": 1,
+      "other_information": "Upscale American restaurant with a 4.3-star Yelp rating. Known for steak and seafood. Outdoor seating available."
+    },
+    {
+      "name": "Lobster Lady Seafood Market & Bistro",
+      "tagline": "Seafood Market & Bistro",
+      "address": "1715 Cape Coral Pkwy W, Cape Coral, FL 33914",
+      "phone_number": "(239) 471-0136",
+      "website_url": "https://lobsterladyseafood.com/",
+      "email": "info@lobsterladyseafood.com",
+      "image_icon_filename": "lobsterlady_logo.jpg",
+      "membership_level": 1,
+      "other_information": "Seafood market and bistro with a 4.6-star Yelp rating. Offers fresh fish and live music. Popular for brunch."
+    },
+    {
+      "name": "Ford’s Garage – Cape Coral",
+      "tagline": "American Restaurant",
+      "address": "1719 Cape Coral Pkwy E, Cape Coral, FL 33904",
+      "phone_number": "(239) 540-3673",
+      "website_url": "https://www.fordsgarageusa.com/locations/cape-coral/",
+      "email": "info@fordsgarageusa.com",
+      "image_icon_filename": "fordsgarage_logo.png",
+      "membership_level": 1,
+      "other_information": "American comfort food with a 1920s garage theme. 4.2-star Yelp rating. Known for burgers and craft beer."
+    },
+    {
+      "name": "Cape Coral Farmers’ Market",
+      "tagline": "Local Farmers Market",
+      "address": "Club Square, SE 47th Ter, Cape Coral, FL 33904",
+      "phone_number": "(239) 549-6900",
+      "website_url": "https://capecoralchamber.com/farmers-market/",
+      "email": "info@farmers-market.com",
+      "image_icon_filename": "farmersmarket_logo.jpg",
+      "membership_level": 2,
+      "other_information": "Operates every Saturday, 8 AM–1 PM, offering produce, seafood, and flowers. Community staple with high foot traffic."
+    },
+    {
+      "name": "Masala Mantra – The Indian Bistro",
+      "tagline": "Indian Bistro",
+      "address": "4518 Del Prado Blvd S, Cape Coral, FL 33904",
+      "phone_number": "(239) 540-1111",
+      "website_url": "https://masalamantracapecoral.com/",
+      "email": "info@masalamantracapecoral.com",
+      "image_icon_filename": "masalamantra_logo.jpg",
+      "membership_level": 1,
+      "other_information": "Indian cuisine with a 4.7-star Yelp rating. Praised for authentic flavors and friendly service. Offers vegetarian options."
+    },
+    {
+      "name": "Nice Guys Pizza",
+      "tagline": "Pizza Restaurant",
+      "address": "1334 Cape Coral Pkwy E, Cape Coral, FL 33904",
+      "phone_number": "(239) 549-7542",
+      "website_url": "https://niceguyspizza.com/",
+      "email": "info@niceguyspizza.com",
+      "image_icon_filename": "niceguys_logo.png",
+      "membership_level": 1,
+      "other_information": "Pizzeria with a 4.5-star Yelp rating. Known for creative pies and vegan options. Funky atmosphere with arcade games."
+    },
+    {
+      "name": "Jungle Bird",
+      "tagline": "Tiki Bar & Restaurant",
+      "address": "1520 Lafayette St, Cape Coral, FL 33904",
+      "phone_number": "(239) 471-4111",
+      "website_url": "https://junglebirdtiki.com/",
+      "email": "info@junglebirdtiki.com",
+      "image_icon_filename": "junglebird_logo.jpg",
+      "membership_level": 1,
+      "other_information": "Tiki bar and restaurant with a 4.4-star Yelp rating. Specializes in tropical cocktails and Polynesian-inspired dishes."
+    }
+  ]
+}
