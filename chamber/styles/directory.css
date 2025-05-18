@@ -26,7 +26,7 @@
     margin: 10px;
 }
 
-#cards section  p
+#cards section p
 {
     font-family: var(--text-font);
     font-size: 0.8em;
@@ -37,4 +37,103 @@
 #cards section a:visited
 {
     color: var(--osu-black);
+}
+
+.directory-header
+{
+    width: 100%;
+    padding: 0;
+}
+
+.directory-header .header-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.directory-header h1
+{
+    margin: 0;
+    padding: 0;
+    font-size: 1.8rem;
+}
+
+.view-toggle
+{
+    background-color: var(--osu-scarlet);
+    border: none;
+    padding: 0.25rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--text-font);
+    min-width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.view-toggle:hover
+{
+    background-color: var(--osu-gray);
+}
+
+.view-icon
+{
+    stroke: var(--osu-scarlet);
+    fill: var(--osu-white);
+    width: 32px; /* Enforce SVG size */
+    height: 32px;
+    display: block; /* Ensure SVG behaves as a block element */
+    margin: 0; /* Remove any potential margins */
+}
+
+.view-toggle:hover .view-icon
+{
+    stroke: var(--osu-scarlet);
+    fill: var(--osu-white);
+}
+
+#cards.list-view
+{
+    display: flex;
+    flex-direction: column;
+    border-top: none;
+}
+
+#cards.list-view section
+{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+#cards.list-view section img
+{
+    width: 48px;
+    height: auto;
+    margin-right: 1rem;
+    padding: 0;
+    border-radius: 0;
+}
+
+#cards.list-view section p,
+#cards.list-view section a
+{
+    font-size: 0.9em;
+    margin-right: 1rem;
+    text-align: left;
+}
+
+#cards.list-view section p:not(:first-of-type),
+#cards.list-view section a
+{
+    display: none; /* Hide phone and website in list view */
 }
