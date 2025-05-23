@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setImageAttributes(element, source, alt, height, width) 
     {
-        const imageWidth = '256px';
+        const imageWidth = '256';
 
         element.setAttribute('src', source);
         element.setAttribute('alt', alt);
