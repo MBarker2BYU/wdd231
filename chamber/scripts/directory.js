@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let phone = document.createElement('p');
             let website = document.createElement('a');
 
-            setImageAttributes(image, `./images/${member.image_icon_filename}`, `${member.image_icon_filename} Logo`, '128px', 'auto');
+            setImageAttributes(image, `./images/${member.image_icon_filename}`, `${member.image_icon_filename} Logo`, '128', 'auto');
             setMemberInfo(address, phone, website, member.address, member.phone_number, member.website_url);
 
             card.appendChild(image);
