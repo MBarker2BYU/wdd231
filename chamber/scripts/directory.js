@@ -85,11 +85,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setImageAttributes(element, source, alt, height, width) 
     {
+        const imageWidth = '256px';
+
         element.setAttribute('src', source);
         element.setAttribute('alt', alt);
         element.setAttribute('loading', 'lazy');
-        element.setAttribute('width', height);
-        element.setAttribute('height', width);
+
+        const img = new Image();
+        img.src = source;
+        img.onload = () => 
+            {
+                const naturalWidth = img.naturalWidth;
+                const naturalHeight = img.naturalHeight;
+                const fixedWidth = imageWidth;
+                // Calculate height to maintain aspect ratio: height = (naturalHeight / naturalWidth) * fixedWidth
+                const calculatedHeight = Math.round((naturalHeight / naturalWidth) * fixedWidth);
+                element.setAttribute('width', fixedWidth);
+                element.setAttribute('height', calculatedHeight);
+                element.style.minHeight = 'auto'; // Remove placeholder height            
+            };
+
+        element.onerror = () => 
+            {
+                alert('Error loading image:', source);
+                // Fallback dimensions if image fails to load
+                element.setAttribute('width', imageWidth);
+                element.setAttribute('height', imageWidth);
+                element.style.minHeight = 'auto';
+            };
+        
     }
 
     function setMemberInfo(addressElement, phoneElement, websiteElement, address, phone, website) 
