@@ -1,6 +1,17 @@
 @import url('desktop.css');
 @import url('mobile.css');
 
+@font-face {
+  font-family: 'Allerta Stencil';
+  src: url('https://fonts.googleapis.com/css2?family=Allerta+Stencil');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Stardos Stencil';
+  src: url('https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700');
+  font-display: swap;
+}
+
 :root 
 {
     --osu-black: #000000; /* OSU Black */
@@ -11,8 +22,8 @@
     --osu-light-gray: #B0B0B0; /* Light gray for dark mode */
     --osu-dark-gray: #333333; /* Dark gray for dark mode */
 
-    --heading-font: "Stardos Stencil", serif;
-    --text-font: "Allerta Stencil", serif;
+    --heading-font: "Stardos Stencil", Arial, serif;
+    --text-font: "Allerta Stencil", Arial, serif;
 
     --shadow-color: rgba(0, 0, 0, 0.65);
 }
