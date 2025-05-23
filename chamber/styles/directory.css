@@ -16,7 +16,8 @@
     background-color: var(--osu-light-gray);
     border-radius: 5px;
     border: var(--red-accent-color) solid 1px;
-    box-shadow: 3px 3px 10px var(--shadow-color);    
+    box-shadow: 3px 3px 10px var(--shadow-color);
+    min-height: 350px;    
 }
 
 #cards section img
