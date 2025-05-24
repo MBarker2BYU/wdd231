@@ -143,55 +143,80 @@
     }
     
     .business-card 
-{
-    border-radius: 0.5rem;
-    box-shadow: 3px 3px 10px var(--shadow-color);
-    padding: 10px;
-    text-align: center;
-    transition: transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff; /* Ensure the card background is white */
-}
+    {
+        border-radius: 0.5rem;
+        box-shadow: 3px 3px 10px var(--shadow-color);
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff; /* Ensure the card background is white */
+    }
 
-.card-top
-{
-    text-align: center;
-}
+    body.dark-mode .business-card 
+    {
+        background-color: var(--osu-dark-gray);
+        border: 1px solid var(--osu-scarlet);
+    }
 
-.card-bottom
-{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-}
+    .card-top
+    {
+        text-align: center;
+        border-bottom: var(--osu-gray) solid 1px;
+    }
 
-.bottom-image
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;      
-    padding: 5px;
-    width: 96px;
-    height: 96px;
-    background-color: transparent; /* Remove gray background */
-    border: none;
-}
+    body.dark-mode .card-top
+    {
+        border-bottom: var(--osu-scarlet) solid 1px;
+    }
 
-.business-card-image 
-{
-    width: 100%;
-    height: auto;          
-}
-    
+    .card-top h2
+    {
+        font-size: large;
+    }
 
-.bottom-info 
-{
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-}
+    .card-top p
+    {
+        font-size: medium;
+    }
+
+    .card-bottom
+    {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        padding-top: 10px;      
+    }    
+
+    .bottom-image
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;      
+        padding: 5px;
+        width: 96px;
+        height: 96px;
+        min-width: 96px;
+        min-height: 96px;
+        background-color: transparent; /* Remove gray background */
+        border: none;
+    }
+
+    .business-card-image 
+    {
+        width: 100%;
+        height: auto;               
+    }
+        
+
+    .bottom-info 
+    {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+    }
 
     /* .business-card 
     {

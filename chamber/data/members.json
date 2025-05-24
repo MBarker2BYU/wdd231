@@ -8,6 +8,7 @@
       "website_url": "www.thetwistedlobster.com",
       "email": "info@thetwistedlobster.com",
       "image_icon_filename": "twisted_lobster_logo.png",
+      "use_dark_background": false,
       "membership_level": 1,
       "other_information": "Seafood restaurant with a 4.5-star Yelp rating. Known for lobster rolls and casual dining. Open for lunch and dinner."
     },
@@ -19,6 +20,7 @@
       "website_url": "www.10twentyfive.com",
       "email":"info@10twentyfive.com",
       "image_icon_filename": "10twentyfive_logo.png",
+      "use_dark_background": true,
       "membership_level": 1,
       "other_information": "Gastropub with craft beers and burgers. Yelp reviews praise the cheeseburger lo mein and deviled eggs. 4.4-star rating."
     },
@@ -30,6 +32,7 @@
       "website_url": "www.point-57.com",
       "email": "info@point-57.com",
       "image_icon_filename": "point57_logo.png",
+      "use_dark_background": true,
       "membership_level": 1,
       "other_information": "Upscale American restaurant with a 4.3-star Yelp rating. Known for steak and seafood. Outdoor seating available."
     },
@@ -41,6 +44,7 @@
       "website_url": "www.lobsterladyseafood.com",
       "email": "info@lobsterladyseafood.com",
       "image_icon_filename": "lobsterlady_logo.png",
+      "use_dark_background": false,
       "membership_level": 1,
       "other_information": "Seafood market and bistro with a 4.6-star Yelp rating. Offers fresh fish and live music. Popular for brunch."
     },
@@ -52,6 +56,7 @@
       "website_url": "www.fordsgarageusa.com",
       "email": "info@fordsgarageusa.com",
       "image_icon_filename": "fordsgarage_logo.svg",
+      "use_dark_background": true,
       "membership_level": 1,
       "other_information": "American comfort food with a 1920s garage theme. 4.2-star Yelp rating. Known for burgers and craft beer."
     },
@@ -63,6 +68,7 @@
       "website_url": "www.capecoralchamber.com/farmers-market",
       "email": "info@farmers-market.com",
       "image_icon_filename": "farmersmarket_logo.png",
+      "use_dark_background": false,
       "membership_level": 2,
       "other_information": "Operates every Saturday, 8 AM–1 PM, offering produce, seafood, and flowers. Community staple with high foot traffic."
     },
@@ -74,6 +80,7 @@
       "website_url": "www.masalamantracapecoral.com",
       "email": "info@masalamantracapecoral.com",
       "image_icon_filename": "masala_mantra_logo.webp",
+      "use_dark_background": true,
       "membership_level": 1,
       "other_information": "Indian cuisine with a 4.7-star Yelp rating. Praised for authentic flavors and friendly service. Offers vegetarian options."
     },
@@ -85,6 +92,7 @@
       "website_url": "www.niceguyspizza.com",
       "email": "info@niceguyspizza.com",
       "image_icon_filename": "niceguys_logo.png",
+      "use_dark_background": false,
       "membership_level": 1,
       "other_information": "Pizzeria with a 4.5-star Yelp rating. Known for creative pies and vegan options. Funky atmosphere with arcade games."
     },
@@ -96,6 +104,7 @@
       "website_url": "www.junglebirdtiki.com",
       "email": "info@junglebirdtiki.com",
       "image_icon_filename": "junglebird_logo.png",
+      "use_dark_background": true,
       "membership_level": 1,
       "other_information": "Tiki bar and restaurant with a 4.4-star Yelp rating. Specializes in tropical cocktails and Polynesian-inspired dishes."
     }

@@ -143,10 +143,15 @@
 
                 const tagline = document.createElement('p');
                 tagline.textContent = member.tagline;
-
+                
                 const image = document.createElement('img');
                 image.classList.add('business-card-image');
                 image.setAttribute('src', `./images/${member.image_icon_filename}`);
+                
+                if (member.use_dark_background) 
+                {
+                    bottomImage.style.backgroundColor = 'var(--osu-black)';
+                }
 
                 const email = document.createElement('p');
                 email.textContent = member.email;
