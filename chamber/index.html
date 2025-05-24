@@ -6,27 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WDD 231 – Web Frontend Development I - Matthew D. Barker</title>
     <meta name="description" content="WDD231: Web Frontend Development I - Matthew D. Barker - Index Page">
-    <meta name="keywords" content="WDD 231, Web Frontend Development I, Index Page, Cape Coral, Florida, United States of America">
+    <meta name="keywords"
+        content="WDD 231, Web Frontend Development I, Index Page, Cape Coral, Florida, United States of America">
     <meta name="author" content="Matthew D. Barker">
 
     <!-- Open Graph (og) properties -->
 
     <meta property="og:title" content="WDD 231 – Web Frontend Development I - Matthew D. Barker">
-    <meta property="og:description" content="Chamber of Commerce website for WDD 231 - Web Frontend Development I. This is the home page. It contains information about Chamber of Commerece.">
+    <meta property="og:description"
+        content="Chamber of Commerce website for WDD 231 - Web Frontend Development I. This is the home page. It contains information about Chamber of Commerece.">
     <meta property="og:image" content="https://mbarker2byu.github.io/wdd231/chamber/images/Hammerhead-commerce.webp">
     <meta property="og:url" content="https://mbarker2byu.github.io/wdd231/chamber/index.html">
 
 
-    <!-- End Open Graph (og) properties -->    
+    <!-- End Open Graph (og) properties -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap"
+        as="style">
     <link
         href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/common.css">
-    <script defer src="scripts/common.js"></script>    
+    <link rel="stylesheet" href="styles/home.css">
+    <script defer src="scripts/common.js"></script>
+    <script defer src="scripts/home.js"></script>
 </head>
+
 <body class="light-mode">
     <header>
         <div class="logo">
@@ -42,9 +50,73 @@
             <button class="hamburger" aria-label="Toggle menu">☰</button>
         </nav>
     </header>
-    <main>
-        <h1>Hammerhead Cove</h1>
-        <h2>Under Construction</h2>        
+    <main>        
+        <div>
+            <!-- Hero Section -->
+            <section class="hero">
+                <img src="images/cape-coral-beach.webp" alt="Cape Coral Beach" class="hero-image">
+                <button class="hero-button">
+                    Keynote Tickets
+                </button>
+            </section>
+
+            <!-- Main Content -->
+            <div class="container">
+                <!-- Home Section -->
+                <h1>Home</h1>
+
+                <!-- Events and Weather Section -->
+                <div class="events-weather">
+                    <!-- Events Card -->
+                    <div class="events-card card">
+                        <div>
+                            <h2>Events</h2>
+                        </div>
+                        <div class="events-content">
+                            <p>Event listings will go here.</p>
+                        </div>
+                    </div>
+
+                    <!-- Weather Card -->
+                    <div class="current-weather-card card">
+                        <div>
+                            <h2>Current Weather</h2>
+                        </div>
+                        <div class="weather-content">
+                            <div class="weather-icon-container">
+                                <img id="weather-icon" src="" alt="Weather Icon">
+                            </div>
+                            <div class="weather-details">
+                                <p id="current-temp"></p>
+                                <p id="weather-description"></p>
+                                <p id="high-temp"></p>
+                                <p id="low-temp"></p>
+                                <p id="humidity"></p>
+                                <p id="sunrise"></p>
+                                <p id="sunset"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather Forecast Card -->
+                    <div class="forecast-weather-card card">
+                        <div>
+                            <h2>Weather Forecast</h2>
+                        </div>
+                        <div class="forecast-content">
+                            <p id="day1"></p>
+                            <p id="day2"></p>
+                            <p id="day3"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Cards Section -->
+                <div id="business-cards">
+                    <!-- Business cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="footer-section">
@@ -58,8 +130,10 @@
         </div>
         <div class="footer-section">
             <h3>WDD231 Class Project</h3>
-            <p>Matthew D. Barker<br><span id="currentyear"></span> Hammerhead Cove Chamber of Commerce<br>Last Modification: <span id="lastmodified"></span></p>
+            <p>Matthew D. Barker<br><span id="currentyear"></span> Hammerhead Cove Chamber of Commerce<br>Last
+                Modification: <span id="lastmodified"></span></p>
         </div>
-    </footer>    
+    </footer>
 </body>
+
 </html>

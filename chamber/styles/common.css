@@ -118,7 +118,7 @@ nav
 
 body.dark-mode .nav-links a 
 {
-    color: var(--osu-scarlet);     
+    color: var(--osu-white);     
 }
 
 .nav-links a:hover 
@@ -128,7 +128,7 @@ body.dark-mode .nav-links a
 
 body.dark-mode .nav-links a:hover 
 {
-    color: var(--osu-light-gray);    
+    color: var(--osu-scarlet);    
 }
 
 .theme-toggle 

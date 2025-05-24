@@ -1,0 +1,288 @@
+/* Hero Section */
+    .hero 
+    {
+      position: relative;
+      height: 16rem;
+      background-color: #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 3px 10px var(--shadow-color);      
+    }
+
+    .hero img
+    {
+        max-width: 100%;
+        width: 100%;
+        max-height: 100%;
+        height: auto;
+    }
+
+    .hero-button {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: var(--osu-light-gray);
+      color: var(--osu-black);
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border: var(--osu-gray) solid 1px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 3px 3px 10px var(--shadow-color);
+    }
+
+    .hero-button:hover 
+    {
+      background-color: #d1d5db;
+    }
+
+    /* Event and Weather */
+
+    .events-weather {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: stretch;
+        gap: 20px;
+        padding: 20px; /* Add padding to the container for breathing room */
+    }
+
+    /* Shared styles for all cards */
+    .card {
+        border-radius: 0.5rem;
+        box-shadow: 3px 3px 10px var(--shadow-color);
+        /* padding: 1.5rem; */
+        box-sizing: border-box;
+    }
+
+    body.dark-mode .card {
+        background-color: var(--osu-dark-gray);
+        border: 1px solid var(--osu-scarlet);
+    }
+
+    .card h2 
+    {
+        padding: 10px; 
+        border-bottom: var(--osu-gray) solid 1px;              
+    }
+
+    body.dark-mode .card h2 
+    {
+        border-bottom: var(--osu-scarlet) solid 1px;              
+    }
+
+    .events-card {
+        flex: 2; /* 50% of the space (2 parts out of 4) */
+        min-width: 300px; /* Prevent it from shrinking too much */
+    }
+
+    .events-content 
+    {
+        padding: 10px;
+    }
+
+    .current-weather-card {
+        flex: 1; /* 25% of the space (1 part out of 4) */
+        min-width: 250px; /* Prevent it from shrinking too much */
+    }
+
+    .forecast-weather-card {
+        flex: 1; /* 25% of the space (1 part out of 4) */
+        min-width: 250px; /* Prevent it from shrinking too much */
+    }
+
+    .forecast-content
+    {
+        font-size: x-large;
+        padding: 10px;
+    }
+
+    /* Style the internal layout of the current weather card */
+    .weather-content 
+    {
+        display: flex;
+        align-items: flex-start; /* Align items to the top */
+        gap: 15px; /* Space between icon and details */
+        padding: 15px; /* Add padding for better spacing */
+    }
+
+    .weather-icon-container {
+        flex-shrink: 0; /* Prevent the icon container from shrinking */
+    }
+
+    #weather-icon {
+        width: 75px; /* Set a fixed size for the weather icon */
+        height: 75px;
+        display: block; /* Ensure the image behaves as a block element */        
+    }
+
+    .weather-details {
+        flex: 1; /* Take remaining space */
+    }
+
+    .weather-details p {
+        margin: 5px 0; /* Add spacing between paragraphs */
+        white-space: nowrap; /* Prevent text from wrapping unnecessarily */
+    }
+
+    #current-temp
+    {
+        font-size: 2rem; /* Adjust font size for current temperature */
+        font-weight: bold; /* Make it bold */
+    }
+
+
+    /* Business Cards*/
+    #business-cards 
+    {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px; /* Add padding to the container for breathing room */
+    }
+    
+    .business-card 
+{
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 10px var(--shadow-color);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* Ensure the card background is white */
+}
+
+.card-top
+{
+    text-align: center;
+}
+
+.card-bottom
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.bottom-image
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;      
+    padding: 5px;
+    width: 96px;
+    height: 96px;
+    background-color: transparent; /* Remove gray background */
+    border: none;
+}
+
+.business-card-image 
+{
+    width: 100%;
+    height: auto;          
+}
+    
+
+.bottom-info 
+{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+    /* .business-card 
+    {
+        border-radius: 0.5rem;
+        box-shadow: 3px 3px 10px var(--shadow-color);
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+
+    .card-bottom
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px; 
+    }
+
+
+    .bottom-image
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;      
+        background-color: var(--osu-gray);
+        padding: 5px;
+        width: 96px;
+        height: 96px;
+        border: red solid 1px;       
+    }
+
+    .business-card-image 
+    {
+        width: 100%;
+        height: auto;          
+        border: red dotted 1px;              
+    } */
+
+    /* Responsive Design */
+    /* @media (min-width: 640px) 
+    {
+      .business-grid 
+      {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    } */
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+      .hero {
+        height: 24rem;
+      }
+      .hero-text {
+        font-size: 1rem;
+      }
+      .events-weather-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .events-weather {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .events-card,
+        .current-weather-card,
+        .forecast-weather-card {
+            width: 100%;
+            max-width: 500px; /* Limit the width on small screens */
+        }
+
+        .weather-details p {
+            white-space: normal; /* Allow wrapping on smaller screens */
+        }
+
+        .business-card {
+        width: 100%; /* Full width on small screens */
+        max-width: 600px;
+      }
+
+      .content-section {
+        flex-direction: column; /* Stack logo and contact info on small screens */
+        align-items: flex-start;
+      }
+
+      .contact-info {
+        width: 100%;
+      }
+    }
