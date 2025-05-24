@@ -101,10 +101,20 @@
     
     async function getMemberData() 
     {
-        const response = await fetch('./data/members.json');
-        const data = await response.json();
+        try {
+            const response = await fetch('./data/members.json');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch members.json: ${response.statusText}`);
+            }
+            const data = await response.json();
 
-        displayMemberData(data.members);
+            const shuffledMembers = data.members.sort(() => 0.5 - Math.random()); // Shuffle the array
+            const selectedMembers = shuffledMembers.slice(0, 3);
+
+            displayMemberData(selectedMembers);
+        } catch (error) {
+            console.error('Error fetching or displaying member data:', error);
+        }
     }
 
     function displayMemberData(members)
