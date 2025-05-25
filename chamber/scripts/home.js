@@ -168,6 +168,7 @@
                     bottomImage.style.backgroundColor = 'var(--osu-black)';
                 }
 
+                
                 const email = document.createElement('p');
                 email.textContent = member.email;
 
