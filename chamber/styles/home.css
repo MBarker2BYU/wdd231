@@ -210,18 +210,32 @@
     {
         width: 100%;
         height: auto;               
-    }
-        
+    }        
 
     .bottom-info 
     {
+        font-size: small;
         text-align: left;
         display: flex;
         flex-direction: column;
         overflow-wrap: break-word;
     }
 
-    
+    .bottom-info a
+    {
+        text-decoration: none;
+        color: var(--osu-black);        
+    }
+
+    body.dark-mode .bottom-info a
+    {
+        color: var(--osu-white);
+    }
+
+    .bottom-info a:hover
+    {
+        transform: scale(1.2);
+    }
 
     @media (min-width: 768px) {
       h1 {

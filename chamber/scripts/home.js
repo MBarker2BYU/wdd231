@@ -169,13 +169,15 @@
                 }
 
                 
-                const email = document.createElement('p');
+                const email = document.createElement('a');
+                email.setAttribute('href', `mailto:${member.email}`);
                 email.textContent = member.email;
 
                 const phone = document.createElement('p');
                 phone.textContent = member.phone_number;
 
-                const url = document.createElement('p');
+                const url = document.createElement('a');
+                url.setAttribute('href', 'https://' + member.website_url);
                 url.textContent = member.website_url;
 
                 top.appendChild(name);
