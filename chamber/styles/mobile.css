@@ -19,7 +19,7 @@
         padding: 1rem;
         z-index: 1000;
         min-height: 150px;
-    }
+    }    
 
     .nav-links.active {
         display: flex;

@@ -185,10 +185,9 @@
             });
     }
 
-
     document.addEventListener('DOMContentLoaded', () => 
         {
             fetchCurrentWeather();
             fetchWeatherForecast();
-            getMemberData();
+            getMemberData();            
         });

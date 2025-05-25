@@ -111,9 +111,12 @@ nav
 
 .nav-links a 
 {
+    font-size: x-large;
     text-decoration: none;
     color: var(--osu-dark-gray); 
-    font-weight: 500;    
+    font-weight: 500;
+    display: inline-block; /* Ensures transform works */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and scale */    
 }
 
 body.dark-mode .nav-links a 
@@ -121,15 +124,52 @@ body.dark-mode .nav-links a
     color: var(--osu-white);     
 }
 
-.nav-links a:hover 
+/* .nav-links a:hover,
+.nav-links a:focus,
+.nav-links a:active 
 {
-    color: var(--osu-scarlet);      
+    color: var(--osu-scarlet);
+    transform: scale(1.2); 
 }
 
-body.dark-mode .nav-links a:hover 
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a:focus,
+body.dark-mode .nav-links a:active 
 {
-    color: var(--osu-scarlet);    
+    color: var(--osu-scarlet);
+    transform: scale(1.2);
+} */
+
+/* Base styles for nav links */
+.nav-links a:hover,
+.nav-links a:focus,
+.nav-links a:active {
+    color: var(--osu-scarlet);
+    transform: scale(1.2);
 }
+
+/* Style for the active (current page) link */
+.nav-links a.active 
+{
+    color: var(--osu-white);
+    border-radius: 10px;
+    background-color: var(--osu-scarlet); 
+    padding: 0 5px;   
+}
+
+
+/* Dark mode styles */
+body.dark-mode .nav-links a:hover,
+body.dark-mode .nav-links a:focus,
+body.dark-mode .nav-links a:active {
+    color: var(--osu-white);
+    transform: scale(1.2);
+}
+
+body.dark-mode .nav-links a.active {
+    color: var(--osu-white);    
+}
+
 
 .theme-toggle 
 {
