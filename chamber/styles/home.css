@@ -107,7 +107,7 @@
         padding: 15px; /* Add padding for better spacing */
     }
 
-    .weather-icon-container {
+    #weather-icon-container {
         flex-shrink: 0; /* Prevent the icon container from shrinking */
     }
 

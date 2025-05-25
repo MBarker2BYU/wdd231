@@ -22,7 +22,7 @@
         const temp = Math.round(data.main.temp);
         const desc = data.weather[0].description;
         
-        const weatherIcon = document.getElementById('weather-icon');
+        const weatherIconContainer = document.getElementById('weather-icon-container');
         const currentTemp = document.getElementById('current-temp');
         const weatherDescription = document.getElementById('weather-description');
         const highTemp = document.getElementById('high-temp');
@@ -31,10 +31,15 @@
         const sunrise = document.getElementById('sunrise');
         const sunset = document.getElementById('sunset');
 
+        const weatherIcon = document.createElement('img');
+        weatherIcon.classList.add('weather-icon');
+
         const iconsrc = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;        
         weatherIcon.setAttribute('src', iconsrc);
         weatherIcon.setAttribute('alt', desc);
         
+        weatherIconContainer.appendChild(weatherIcon);
+
         const high = Math.round(data.main.temp_max);
         const low = Math.round(data.main.temp_min);
         const humidityValue = data.main.humidity;
