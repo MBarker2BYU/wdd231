@@ -25,8 +25,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Setup Modal for Calculator
-  setupModal();
+  // Function to Display Calculator Results
+  const displayResults = (results) => {
+    const tbody = document.querySelector('#calcResultsTable tbody');
+    tbody.innerHTML = ''; // Clear previous results
+    results.forEach(result => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${result.distance}</td>
+        <td>${result.velocity}</td>
+        <td>${result.energy}</td>
+        <td>${result.drop}</td>
+        <td>${result.windDrift}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  };
+
+  // Setup Modal for Calculator with Callback
+  setupModal(displayResults);
+
+  // Display Last Calculation Results (if any)
+  const savedResults = localStorage.getItem('calculationResults');
+  if (savedResults) {
+    displayResults(JSON.parse(savedResults));
+  }
 
   // Local Storage for Preferences (e.g., last selected ammo)
   const savedAmmo = localStorage.getItem('selectedAmmo');

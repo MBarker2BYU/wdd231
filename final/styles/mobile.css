@@ -23,10 +23,6 @@ body {
   line-height: 1.6;
 }
 
-main {
-  padding: 20px;
-}
-
 header {
   background-color: var(--osu-scarlet);
   color: var(--osu-white);
@@ -34,11 +30,23 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logo img {
   width: 100px;
   height: auto;
+}
+
+.logo h1 {
+  font-size: 1.5em;
+  margin: 0;
 }
 
 nav ul {
@@ -110,7 +118,12 @@ main {
   margin-bottom: 20px;
 }
 
-h1, h2 {
+h1{
+  font-family: var(--heading-font);
+  color: var(--osu-white);
+}
+
+h2 {
   font-family: var(--heading-font);
   color: var(--osu-scarlet);
 }

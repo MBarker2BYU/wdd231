@@ -1,4 +1,6 @@
-export function setupModal() {
+import { calculateTrajectory } from './ballistics.js';
+
+export function setupModal(displayResultsCallback) {
   const calculateBtn = document.getElementById('calculateBtn');
   const modal = document.getElementById('calcModal');
   const closeBtn = document.getElementById('closeModalBtn');
@@ -15,14 +17,32 @@ export function setupModal() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    const data = {
-      muzzleVelocity: formData.get('muzzleVelocity'),
-      ballisticCoefficient: formData.get('ballisticCoefficient'),
-      bulletWeight: formData.get('bulletWeight'),
-      windSpeed: formData.get('windSpeed')
+    const inputs = {
+      muzzleVelocity: parseFloat(formData.get('muzzleVelocity')),
+      ballisticCoefficient: parseFloat(formData.get('ballisticCoefficient')),
+      bulletWeight: parseFloat(formData.get('bulletWeight')),
+      windSpeed: parseFloat(formData.get('windSpeed'))
     };
-    localStorage.setItem('lastCalculation', JSON.stringify(data));
-    console.log('Calculation submitted:', data);
+
+    // Validate inputs
+    if (isNaN(inputs.muzzleVelocity) || isNaN(inputs.ballisticCoefficient) ||
+        isNaN(inputs.bulletWeight) || isNaN(inputs.windSpeed)) {
+      alert('Please enter valid numbers for all fields.');
+      return;
+    }
+
+    // Calculate trajectory
+    const results = calculateTrajectory(inputs);
+
+    // Store the last calculation in localStorage
+    localStorage.setItem('lastCalculation', JSON.stringify(inputs));
+    localStorage.setItem('calculationResults', JSON.stringify(results));
+
+    // Call the callback to display results
+    if (displayResultsCallback) {
+      displayResultsCallback(results);
+    }
+
     modal.close();
   });
 }

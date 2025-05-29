@@ -24,4 +24,8 @@
   .results {
     grid-column: 2;
   }
+
+  .logo h1 {
+    font-size: 2em;
+  }
 }
