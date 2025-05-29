@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BallisticsPro - Calculate bullet trajectories, drop, velocity, and wind drift for shooters.">
+  <meta name="author" content="Your Name">
+  
+  <!-- Open Graph Tags for Social Sharing -->
+  <meta property="og:title" content="BallisticsPro - Ballistics Calculator for Shooters">
+  <meta property="og:description" content="Calculate bullet trajectories, drop, velocity, and wind drift with BallisticsPro, a tool for hunters and competitive shooters.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/yourusername/wdd231/finalproject/index.html">
+  <meta property="og:image" content="images/logo.png">
+  <!-- End Open Graph Tags -->
+
+  <title>BallisticsPro - Home</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil&family=Allerta+Stencil&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mobile.css">
+  <link rel="stylesheet" href="styles/desktop.css">
+  <script defer type="module" src="scripts/main.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="BallisticsPro Logo" loading="lazy">
+    </div>
+    <nav>
+      <button class="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>BallisticsPro</h1>
+      <p>Calculate bullet trajectories for long-range shooting.</p>
+      <button id="calculateBtn">Calculate Now</button>
+    </section>
+    <dialog id="calcModal">
+      <h2>Ballistics Calculator</h2>
+      <form id="calcForm">
+        <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
+        <input type="number" id="muzzleVelocity" name="muzzleVelocity" required>
+        <label for="ballisticCoefficient">Ballistic Coefficient:</label>
+        <input type="number" id="ballisticCoefficient" name="ballisticCoefficient" step="0.001" required>
+        <label for="bulletWeight">Bullet Weight (grains):</label>
+        <input type="number" id="bulletWeight" name="bulletWeight" required>
+        <label for="windSpeed">Wind Speed (mph):</label>
+        <input type="number" id="windSpeed" name="windSpeed" required>
+        <button type="submit">Calculate</button>
+        <button type="button" id="closeModalBtn">Close</button>
+      </form>
+    </dialog>
+    <section class="results">
+      <h2>Ammunition Data</h2>
+      <table id="ammoTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Muzzle Velocity (fps)</th>
+            <th>Ballistic Coefficient</th>
+            <th>Bullet Weight (grains)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 BallisticsPro | Matthew D. Barker</p>
+    <!-- <ul>
+      <li><a href="attributions.html">Attributions</a></li>
+      <li><a href="https://your-video-link.com" target="_blank">Project Video</a></li>
+    </ul> -->
+  </footer>  
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact BallisticsPro for inquiries or feedback about our ballistics calculator for shooters.">
+  <meta name="author" content="Your Name">
+  <!-- Open Graph Tags for Social Sharing -->
+  <meta property="og:title" content="BallisticsPro - Contact">
+  <meta property="og:description" content="Get in touch with BallisticsPro for support or feedback on our ballistics calculator tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/yourusername/wdd231/finalproject/contact.html">
+  <meta property="og:image" content="images/logo.png">
+  <title>BallisticsPro - Contact</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil&family=Allerta+Stencil&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/mobile.css">
+  <link rel="stylesheet" href="styles/desktop.css">
+  <script type="module" src="scripts/main.js"></script>
+  <script src="scripts/contact.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/logo.png" alt="BallisticsPro Logo" loading="lazy">
+    </div>
+    <nav>
+      <button class="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="contact">
+      <h1>Contact Us</h1>
+      <p>We’d love to hear from you! Use the form below to send us your questions, feedback, or suggestions about BallisticsPro.</p>
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required aria-required="true">
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required aria-required="true">
+        
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+        
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 BallisticsPro | Matthew D. Barker</p>
+    <!-- <ul>
+      <li><a href="attributions.html">Attributions</a></li>
+      <li><a href="https://your-video-link.com" target="_blank">Project Video</a></li>
+    </ul> -->
+  </footer>
+</body>
+</html>
