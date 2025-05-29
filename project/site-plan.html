@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 231 – Web Frontend Development I - Ballistics Calculator Website Plan</title>
+    <meta name="description" content="WDD231: Web Frontend Development I - Matthew D. Barker - Ballistics Calculator Website Plan">
+    <meta name="author" content="Matthew D. Barker">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil&family=Allerta+Stencil&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <script defer src="scripts/common.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Project Site Plan : Ballistics Calculator</h1>
+    </header>
+
+    <section>
+        <h2>Site Name</h2>
+        <p><strong>BallisticsPro</strong></p>
+        <p>This name reflects the professional and technical nature of the website, which is a ballistics calculator
+            designed for shooters. It emphasizes accuracy and expertise ("Pro"), appealing to hunters, competitive
+            shooters, and firearms enthusiasts who need precise trajectory predictions. While domain availability isn't
+            required for this class, a potential domain like ballisticspro.com would align with the branding.</p>
+    </section>
+
+    <section>
+        <h2>Site Purpose</h2>
+        <p>The BallisticsPro website serves as a tool for shooters to calculate bullet trajectories, drop, velocity,
+            energy, and wind drift. It provides an intuitive interface to input firearm, ammunition, and environmental
+            data, offering detailed results in a table and visual chart. Additional features include saving and
+            comparing load profiles, exporting range cards, and real-time adjustments for environmental factors, making
+            it a practical resource for long-range shooting.</p>
+    </section>
+
+    <section>
+        <h2>Scenarios</h2>
+        <ul>
+            <li>What is the bullet drop and wind drift for my .308 Winchester at 500 yards with a 10 mph crosswind?</li>
+            <li>How can I compare the trajectories of my two favorite rifle loads to choose the best one for a hunting
+                trip?</li>
+        </ul>
+        <p>These questions reflect the needs of the target audience—hunters and competitive shooters—who want to
+            optimize their shooting accuracy and make informed decisions about their equipment.</p>
+    </section>
+
+    <section>
+        <h2>Color Schema</h2>
+        <p>The color schema uses two primary colors inspired by the Ohio State University palette to create a bold and
+            professional design:</p>
+        <ul>
+            <li><strong>#BB0000 (OSU Scarlet)</strong>: Used for headers, buttons, and borders to convey energy and draw
+                attention, aligning with the technical focus of the ballistics calculator.</li>
+            <li><strong>#FFFFFF (OSU White)</strong>: Used for the background to ensure readability and provide strong
+                contrast with the scarlet elements.</li>
+        </ul>
+        <p>Additional colors like OSU Black (#000000), OSU Gray (#666666), OSU Light Gray (#B0B0B0), and OSU Dark Gray
+            (#333333) may be used for accents, text, or dark mode in the final site. A shadow color (rgba(0, 0, 0,
+            0.65)) may be used for depth effects. These colors are applied to this planning document to demonstrate
+            their usage.</p>
+    </section>
+
+    <section>
+        <h2>Typography</h2>
+        <p>The typography includes two fonts to create a rugged, technical aesthetic while ensuring readability:</p>
+        <ul>
+            <li><strong>Stardos Stencil (Sans-Serif)</strong>: Used for headings (h1, h2, h3) to provide a bold,
+                stencil-style look that reflects the precision and utility of a ballistics calculator.</li>
+            <li><strong>Allerta Stencil (Sans-Serif)</strong>: Used for body text, including paragraphs and lists, to
+                maintain a consistent stencil theme while ensuring clarity across devices.</li>
+        </ul>
+        <p>Both fonts fall back to Arial and serif if unavailable. These fonts are applied to this planning document to
+            reflect their intended usage.</p>
+    </section>
+
+    <section>
+        <h2>Wireframe</h2>
+        <h3>Mobile View (Home Page)</h3>
+        <p>The mobile view uses a single-column layout for simplicity, ensuring usability on smaller screens:</p>
+        <img src="images/mobile-wireframe.png" alt="Mobile Wireframe for BallisticsPro Home Page">
+        <p><strong>Description</strong>: The header includes the logo and a hamburger menu icon for navigation. The main
+            section has a prominent "Calculate Now" button (in OSU Scarlet, #BB0000) that opens a modal form for inputs.
+            Below, the results table and trajectory chart are stacked vertically to fit the narrow screen. The footer
+            contains copyright information.</p>
+
+        <h3>Desktop View (Home Page)</h3>
+        <p>The desktop view uses a two-column layout to optimize space and usability on larger screens:</p>
+        <img src="images/desktop-wireframe.png" alt="Desktop Wireframe for BallisticsPro Home Page">
+        <p><strong>Description</strong>: The header includes the logo on the left and navigation links on the right. The
+            main section is split into two columns: the left column (40% width) contains the "Calculate Now" button (in
+            OSU Scarlet, #BB0000) to trigger the input modal; the right column (60% width) displays the results table
+            and trajectory chart side by side. The footer spans the bottom with copyright information.</p>
+        <p><strong>Note</strong>: The images above are placeholders to be replaced with actual wireframe sketches
+            created in a tool like Figma or on paper (scanned/photographed).</p>
+    </section>
+
+    <section>
+        <h2>Testing</h2>
+        <p>I will self-check and evaluate this site plan and the final website using common tools from the class,
+            including:</p>
+        <ul>
+            <li><strong>HTML/CSS Validation</strong>: Use the W3C Markup Validation Service and CSS Validation Service
+                to ensure code compliance.</li>
+            <li><strong>Accessibility</strong>: Test with WAVE or axe DevTools to ensure proper ARIA labels and keyboard
+                navigation (e.g., for the modal).</li>
+            <li><strong>Best Practices</strong>: Follow semantic HTML and CSS best practices (e.g., using <dialog> for
+                    modals, avoiding inline styles).</li>
+            <li><strong>Color Contrast</strong>: Use WebAIM Contrast Checker to verify that #BB0000 text on #FFFFFF
+                background meets WCAG 2.1 AA standards (contrast ratio is 9.5:1, which passes).</li>
+            <li><strong>SEO</strong>: Ensure meta tags (title, description) are included and use semantic HTML for
+                better search engine indexing.</li>
+            <li><strong>Performance</strong>: Test with Lighthouse to optimize load times (e.g., minify CSS, use
+                efficient Chart.js for charts).</li>
+        </ul>
+    </section>
+    <footer>
+        <p><span id="currentyear"></span> BallisticsPro | Matthew D. Barker</p>
+        <p id="lastmodified"></p>
+    </footer>
+</body>
+
+</html>
