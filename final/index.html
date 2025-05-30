@@ -33,6 +33,7 @@
 
     <!-- Scripts -->
     <script defer type="module" src="./scripts/common.mjs"></script>
+    <script defer type="module" src="./scripts/ballistics-pro.mjs"></script>
 </head>
 
 <body>
@@ -54,9 +55,11 @@
     <main>
         <div class="home-container">
             <section class="hero">
-                <h2>Ballistics Calculator</h2>
+                <div>
+                    <h2>Ballistics Calculator</h2>
+                </div>
                 <div class="form-wrapper">
-                    <form id="calcForm" class="calculator-form">
+                    <form id="calcForm">
                         <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
                         <input type="number" id="muzzleVelocity" name="muzzleVelocity" required>
                         <label for="ballisticCoefficient">Ballistic Coefficient:</label>
@@ -69,35 +72,37 @@
                     </form>
                 </div>
             </section>
-            <section class="results">
+            <section>
                 <h2>Ammunition Data</h2>
-                <table id="ammoTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Muzzle Velocity (fps)</th>
-                            <th>Ballistic Coefficient</th>
-                            <th>Bullet Weight (grains)</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <div id="calculationResults">
-                    <h2>Calculation Results</h2>
-                    <table id="resultsTableBody">
+                <div class="ballistics-container">
+                    <table id="ammoTable">
                         <thead>
                             <tr>
-                                <th>Distance (yards)</th>
-                                <th>Velocity (fps)</th>
-                                <th>Energy (ft-lbs)</th>
-                                <th>Drop (inches)</th>
-                                <th>Wind Drift (inches)</th>
+                                <th>Name</th>
+                                <th>Muzzle Velocity (fps)</th>
+                                <th>Ballistic Coefficient</th>
+                                <th>Bullet Weight (grains)</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
+                    <div id="calculationResults">
+                        <h2>Calculation Results</h2>
+                        <table id="resultsTableBody">
+                            <thead>
+                                <tr>
+                                    <th>Distance (yards)</th>
+                                    <th>Velocity (fps)</th>
+                                    <th>Energy (ft-lbs)</th>
+                                    <th>Drop (inches)</th>
+                                    <th>Wind Drift (inches)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
-                <div id="chart-container">
+                <div class="ballistics-chart-container">
                     <h2>Trajectory Chart</h2>
                     <canvas id="trajectory-chart"></canvas>
                 </div>

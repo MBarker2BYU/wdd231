@@ -1,8 +1,6 @@
-document.getElementById('contactForm').addEventListener('submit', (e) => 
-{
-    e.preventDefault(); // Prevent default form submission
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    // Collect form data
     const formData = new FormData(e.target);
     const data = {
         name: formData.get('name'),
@@ -10,27 +8,22 @@ document.getElementById('contactForm').addEventListener('submit', (e) =>
         message: formData.get('message')
     };
 
-    // Store form data in localStorage
     localStorage.setItem('contactFormData', JSON.stringify(data));
 
-    // Show the modal
     const contactModal = document.getElementById('contactModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
 
     if (contactModal && closeModalBtn) {
+        // Hide body scrollbars when modal is open
+        document.body.style.overflow = 'hidden';
+        
         contactModal.showModal();
 
-        // Close the modal when the "Close" button is clicked
         closeModalBtn.addEventListener('click', () => {
             contactModal.close();
+            // Restore body scrollbars
+            document.body.style.overflow = '';
         });
-
-        // Close the modal if the user clicks outside it (on the backdrop)
-        // contactModal.addEventListener('click', (e) => {
-        //     if (e.target === contactModal) {
-        //         contactModal.close();
-        //     }
-        // });
 
         // Optionally clear the form
         e.target.reset();
