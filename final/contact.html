@@ -18,14 +18,20 @@
     <title>BallisticsPro - Home</title>
     <link rel="icon" href="images/BallisticsPro.ico" type="image/x-icon">
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap"
         rel="stylesheet">
+    
+    <!-- Stylesheets Mobile and Desktop -->
     <link rel="stylesheet" href="./styles/mobile.css">
     <link rel="stylesheet" href="./styles/desktop.css">
+    
+    <!-- Scripts -->
     <script defer type="module" src="./scripts/common.mjs"></script>
+    <script defer src="./scripts/contact.js"></script>
 </head>
 
 <body>
@@ -34,7 +40,7 @@
             <img src="images/logo.png" alt="BallisticsPro Logo" loading="lazy">
             <h1>BallisticsPro</h1>
         </div>
-        <nav>            
+        <nav>
             <ul class="nav-links"></ul>
             <button class="mode-toggle" id="modeToggle">Dark Mode</button>
             <button class="hamburger" aria-label="Toggle navigation menu">
@@ -45,8 +51,30 @@
         </nav>
     </header>
     <main>
-        <div>
+        <div class="contact-container">
+            <section class="contact">
+                <p>We’d love to hear from you! Use the form below to send us your questions, feedback, or suggestions about BallisticsPro.</p>
+                <div class="form-wrapper">
+                    <form id="contactForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
 
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+                <!-- Modal Dialog for Acknowledgment -->
+                <dialog id="contactModal">
+                    <h3>Message Sent</h3>
+                    <p>Your message has been sent successfully. We’ll get back to you soon!</p>
+                    <button id="closeModalBtn">Close</button>
+                </dialog>
+            </section>
         </div>
     </main>
     <footer>

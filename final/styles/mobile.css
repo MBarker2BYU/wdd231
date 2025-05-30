@@ -8,6 +8,8 @@
     --osu-light-gray: #B0B0B0;
     --osu-dark-gray: #333333;
 
+    --osu-near-black: #1a1a1a;
+
     --shadow-color: rgba(0, 0, 0, 0.65);
 
     /* Fonts */
@@ -17,6 +19,9 @@
 
 [data-theme="light"]
 {
+    --main-bg: var(--osu-white);
+    --main-text: var(--osu-black);
+
     --header-bg: var(--osu-white);
     --header-text: var(--osu-black);
     
@@ -29,12 +34,21 @@
     --menu-active-bg: var(--osu-scarlet);
     --menu-active-text: var(--osu-white);
 
+    --form-bg: var(--osu-white);
+    --form-border: var(--osu-gray);
+    --form-text: var(--osu-dark-gray);
+
+    --control-border: var(--osu-dark-gray);
+
     --footer-bg: var(--osu-white);
     --footer-text: var(--osu-dark-gray);    
 }
 
 [data-theme="dark"] 
 {
+    --main-bg: var(--osu-near-black);
+    --main-text: var(--osu-white);    
+
     --header-bg: var(--osu-dark-gray);
     --header-text: var(--osu-white);
 
@@ -47,8 +61,14 @@
     --menu-active-bg: var(--osu-scarlet);
     --menu-active-text: var(--osu-white);
 
+    --form-bg: var(--osu-dark-gray);
+    --form-border: var(--osu-scarlet);
+    --form-text: var(--osu-white);
+
+    --control-border: var(--osu-light-gray);
+
     --footer-bg: var(--osu-dark-gray);
-    --footer-text: #e0e0e0;
+    --footer-text: var(--osu-white);
 
     --shadow-color: rgba(255, 255, 255, 0.1);
 }
@@ -72,6 +92,13 @@ header
     align-items: center;
     flex-wrap: wrap;
     border-bottom: var(--border-color) 2px solid;       
+}
+
+h1, h2, h3, h4, h5, h6 
+{
+    font-family: var(--heading-font);
+    color: var(--header-text);
+    margin: 0;
 }
 
 /* header */
@@ -204,6 +231,29 @@ nav ul li a.active
     border-color: var(--osu-scarlet);
 }
 
+/* Body */
+
+body 
+{
+    font-family: var(--text-font);
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-bg);
+    color: var(--main-text);
+    line-height: 1.6;
+}
+
+/* Main */
+
+main 
+{   
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 
 /* === Footer === */
 footer {
@@ -225,4 +275,161 @@ footer ul {
 footer ul li a {
     color: var(--footer-text);
     text-decoration: none;
+}
+
+/* Home Page */
+
+/* About Page */
+
+/* Contact Page */
+
+.contact-container 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;   
+}
+
+.contact 
+{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.contact p 
+{
+    text-align: left;
+    width: 100%;
+    max-width: 500px; 
+    margin: 20px;
+}
+
+.form-wrapper 
+{
+    width: 100%;
+    max-width: 500px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 20px, auto;    
+}
+
+#contactForm 
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--form-bg);
+    border: 1px solid var(--form-border);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-color);    
+}
+
+#contactForm label 
+{
+    font-family: var(--text-font);
+    color: var(--form-text);    
+}
+
+#contactForm input,
+#contactForm textarea {
+    font-family: var(--text-font);
+    padding: 8px;
+    border: 1px solid var(--control-border);
+    border-radius: 5px;
+    background-color: var(--form-bg);
+    color: var(--form-text);
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+#contactForm textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+    border-color: var(--osu-scarlet);
+    outline: none;
+}
+
+#contactForm button {
+    font-family: var(--text-font);
+    background-color: var(--osu-scarlet);
+    color: var(--osu-white);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#contactForm button:hover,
+#contactForm button:focus 
+{
+    background-color: var(--osu-gray);
+}
+
+/* Contact Modal */
+
+#contactModal 
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--osu-scarlet);
+    border-radius: 5px;
+    padding: 20px;
+    background-color: var(--form-bg);
+    max-width: calc(100vh - 125px);
+    overflow: auto;
+    margin: 0 auto;
+    font-family: var(--text-font);
+    color: var(--form-text);
+    z-index: 100; /* Ensure modal appears above other elements */
+}
+
+#contactModal h3 
+{    
+    margin-bottom: 10px;
+}
+
+#contactModal p 
+{    
+    margin-bottom: 20px;
+}
+
+#contactModal button 
+{
+    background-color: var(--osu-scarlet);
+    color: var(--osu-white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: var(--text-font);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#contactModal button:hover
+{
+    background-color: var(--osu-gray);
+}
+
+#contactModal::backdrop 
+{
+    background-color: rgba(0, 0, 0, 0.5);
 }
