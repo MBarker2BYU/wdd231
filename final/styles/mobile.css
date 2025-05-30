@@ -281,6 +281,57 @@ footer ul li a {
 
 /* About Page */
 
+.about-container 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;   
+}
+
+.about-container section
+{
+    margin: 20px 0;
+    width: 100%;
+    max-width: 800px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: start;    
+    border-radius: 10px;
+    background-color: var(--form-bg);
+    border: 1px solid var(--form-border);
+    box-shadow: 0 2px 5px var(--shadow-color); 
+}
+
+.card
+{
+    background-color: var(--osu-scarlet);
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    width: 100%;
+}
+
+.card-content 
+{
+    padding: 20px;    
+}
+
+.card-content ul 
+{
+    padding: 10px 10px 10px 40px;
+}
+
+.about-container section h2, h3 
+{
+    font-family: var(--heading-font);
+    color: var(--osu-white);
+    margin: 5px;
+}
+
 /* Contact Page */
 
 .contact-container 
