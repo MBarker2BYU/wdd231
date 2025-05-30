@@ -1,0 +1,228 @@
+:root 
+{
+    /* Color */
+    --osu-black: #000000;
+    --osu-scarlet: #BB0000;
+    --osu-gray: #666666;
+    --osu-white: #FFFFFF;
+    --osu-light-gray: #B0B0B0;
+    --osu-dark-gray: #333333;
+
+    --shadow-color: rgba(0, 0, 0, 0.65);
+
+    /* Fonts */
+    --heading-font: "Stardos Stencil", Arial, serif;
+    --text-font: "Allerta Stencil", Arial, serif;    
+}
+
+[data-theme="light"]
+{
+    --header-bg: var(--osu-white);
+    --header-text: var(--osu-black);
+    
+    --border-color: var(--osu-gray);
+
+    --menu-bg: var(--osu-white);
+    --menu-text: var(--osu-black);
+    --menu-hover-bg: var(--osu-white);
+    --menu-hover-text: var(--osu-scarlet);
+    --menu-active-bg: var(--osu-scarlet);
+    --menu-active-text: var(--osu-white);
+
+    --footer-bg: var(--osu-white);
+    --footer-text: var(--osu-dark-gray);    
+}
+
+[data-theme="dark"] 
+{
+    --header-bg: var(--osu-dark-gray);
+    --header-text: var(--osu-white);
+
+    --border-color: var(--osu-scarlet);
+
+    --menu-bg: var(--osu-dark-gray);
+    --menu-text: var(--osu-white);
+    --menu-hover-bg: var(--osu-dark-gray);
+    --menu-hover-text: var(--osu-scarlet);
+    --menu-active-bg: var(--osu-scarlet);
+    --menu-active-text: var(--osu-white);
+
+    --footer-bg: var(--osu-dark-gray);
+    --footer-text: #e0e0e0;
+
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+
+*{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;    
+    padding: 0;
+    box-sizing: border-box;     
+}
+
+header 
+{
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: var(--border-color) 2px solid;       
+}
+
+/* header */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--osu-scarlet);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.logo h1 {
+    font-family: var(--heading-font);
+    font-size: 1.5em;
+    color: var(--header-text);
+    margin: 0;
+}
+
+/* Navigation */
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav ul 
+{
+    background-color: var(--menu-bg);
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 140px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav ul.active 
+{
+    display: flex;
+}
+
+nav ul li 
+{
+    margin: 15px 0;
+    text-align: center;
+}
+
+nav ul li a 
+{
+    display: inline-block;
+    color: var(--menu-text);
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav ul li a:hover 
+{
+    color: var(--menu-hover-text);
+    background-color: var(--menu-hover-bg);
+    transform: scale(1.2);
+}
+
+nav ul li a.active 
+{
+    color: var(--menu-active-text);
+    background-color: var(--menu-active-bg);
+    font-weight: bold;
+} 
+
+/* Hamburger Menu */
+.hamburger {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--header-text);
+    margin: 5px 0;
+    transition: all 0.3s ease-out;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mode Toggle Button */
+.mode-toggle 
+{
+    background-color: transparent;
+    border: 1px solid var(--header-text);
+    color: var(--header-text);
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: var(--text-font);
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.mode-toggle:hover 
+{
+    background-color: var(--osu-scarlet) !important;
+    color: var(--osu-white);
+    border-color: var(--osu-scarlet);
+}
+
+
+/* === Footer === */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 10px;
+    border-top: var(--border-color) 2px solid;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+footer ul li a {
+    color: var(--footer-text);
+    text-decoration: none;
+}
