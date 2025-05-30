@@ -360,8 +360,7 @@ footer ul li a {
     padding: 30px;
     padding-bottom: 60px;
     box-sizing: border-box;
-    width: 100%;
-    border: 2px solid green; /* Debug: Outer green for main */
+    width: 100%;    
 }
 
 .hero 
@@ -508,25 +507,26 @@ footer ul li a {
     border-radius: 5px;
     padding: 20px;
     background-color: var(--form-bg);
-    max-width: calc(100vw - 40px); /* Use vw, leave margin for padding */
-    width: 90%; /* Ensure it scales down */
-    overflow-y: auto; /* Only vertical scrollbar if needed */
-    margin: 0;
+    max-width: 800px;
+    width: 90vw; /* Use viewport width for responsive scaling */
+    max-height: 80vh; /* Limit height to avoid overflow */
+    overflow: hidden; /* Ensure no scrollbar */
     font-family: var(--text-font);
     color: var(--form-text);
     z-index: 100;
-    box-sizing: border-box; /* Include padding/border in width */
+    box-sizing: border-box;
+    text-align: center;
 }
 
-#contactModal h3 {    
-    margin-bottom: 10px;
-}
-
-#contactModal p {    
-    margin-bottom: 20px;
+#contactModal h3, 
+#contactModal p {
+    margin: 0 auto 15px; /* Consolidate margins, center content */
+    width: 100%; /* Ensure content fits within modal */
 }
 
 #contactModal button {
+    display: block;
+    margin: 0 auto;
     background-color: var(--osu-scarlet);
     color: var(--osu-white);
     border: none;
