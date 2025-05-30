@@ -13,8 +13,10 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
     const contactModal = document.getElementById('contactModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modalName = document.getElementById('modalName');
-    
+    const modalEmail = document.getElementById('modalEmail');
+
     modalName.textContent = data.name || 'User';
+    modalEmail.textContent = data.email || 'No email provided';
 
     if (contactModal && closeModalBtn) {
         // Hide body scrollbars when modal is open

@@ -30,23 +30,29 @@ function setupHambergerMenu()
     });
 }
 
-function setupThemeToggle()
+function setupThemeToggle() 
 {
-    const modeToggle = document.getElementById('modeToggle');
+    const modeToggle = document.querySelector('.toggle-container');
     const htmlElement = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || 'light';
 
+    // Set initial theme and toggle state
     htmlElement.setAttribute('data-theme', savedTheme);
-    modeToggle.textContent = savedTheme === 'light' ? 'Dark Mode' : 'Light Mode';
+    
+    if (savedTheme === 'dark') {
+        modeToggle.classList.add('on');
+    }
 
-    modeToggle.addEventListener('click', () => 
+    // Add event listener for toggle
+    modeToggle.addEventListener('click', function () 
     {
         const currentTheme = htmlElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        htmlElement.setAttribute('data-theme', newTheme);
 
+        // Update theme, toggle state, and label
+        htmlElement.setAttribute('data-theme', newTheme);
+        this.classList.toggle('on');
+    
         localStorage.setItem('theme', newTheme);
-        modeToggle.textContent = newTheme === 'light' ? 'Dark Mode' : 'Light Mode';
     });
 }

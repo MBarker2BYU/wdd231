@@ -44,7 +44,15 @@
         </div>
         <nav>
             <ul class="nav-links"></ul>
-            <button class="mode-toggle" id="modeToggle">Dark Mode</button>
+            <!-- <button class="mode-toggle" id="modeToggle">Dark Mode</button> -->
+            <div class="toggle-wrapper">
+                <span class="toggle-label">Dark Mode</span>
+                <div class="toggle-container">
+                    <span class="toggle-off">ON</span>
+                    <span class="toggle-on">OFF</span>
+                    <div class="toggle-slider"></div>
+                </div>    
+            </div> 
             <button class="hamburger" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
@@ -73,14 +81,14 @@
                 <!-- Modal Dialog for Acknowledgment -->
                 <dialog id="contactModal">
                     <h3>Message Sent</h3>
-                    <p><span id="modalName"></span>, your message has been sent successfully. We’ll get back to you soon!</p>
+                    <p><span id="modalName"></span>, your message has been sent successfully. We’ll get back to you at <span id="modalEmail"></span> soon!</p>
                     <button id="closeModalBtn">Close</button>
                 </dialog>
             </section>
         </div>
     </main>
     <footer>
-        <p><span id="currentyear"></span> BallisticsPro | Matthew D. Barker</p>
+        <p><span id="currentyear"></span> BallisticsPro | Matthew D. Barker | All Rights Reserved</p>
         <p>Last Updated: <span id="lastmodified"></span></p>
     </footer>
 </body>

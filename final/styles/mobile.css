@@ -34,6 +34,9 @@
     --menu-active-bg: var(--osu-scarlet);
     --menu-active-text: var(--osu-white);
 
+    --dark-mode-bg: var(--osu-scarlet);
+    --dark-mode-switch: var(--osu-white);
+
     --form-bg: var(--osu-white);
     --form-border: var(--osu-gray);
     --form-text: var(--osu-dark-gray);
@@ -41,7 +44,8 @@
     --control-border: var(--osu-dark-gray);
 
     --footer-bg: var(--osu-white);
-    --footer-text: var(--osu-dark-gray);    
+    --footer-text: var(--osu-dark-gray);  
+    
 }
 
 [data-theme="dark"] 
@@ -60,6 +64,9 @@
     --menu-hover-text: var(--osu-scarlet);
     --menu-active-bg: var(--osu-scarlet);
     --menu-active-text: var(--osu-white);
+
+    --dark-mode-bg: rgb(0, 255, 0);
+    --dark-mode-switch: var(--osu-dark-gray);
 
     --form-bg: var(--osu-dark-gray);
     --form-border: var(--osu-scarlet);
@@ -139,7 +146,7 @@ nav ul
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 140px;
+    top: 126px;
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -211,25 +218,95 @@ nav ul li a.active
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Mode Toggle Button */
-.mode-toggle 
+/* Toggle switch styles */
+.toggle-wrapper 
 {
-    background-color: transparent;
-    border: 1px solid var(--header-text);
-    color: var(--header-text);
-    padding: 5px 10px;
-    cursor: pointer;
-    font-family: var(--text-font);
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.mode-toggle:hover 
+.toggle-label 
 {
-    background-color: var(--osu-scarlet) !important;
-    color: var(--osu-white);
-    border-color: var(--osu-scarlet);
+    font-family: var(--text-font);
+    font-size: 1.2em;
+    color: var(--header-text);
+    user-select: none;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
+
+.toggle-container 
+{
+    width: 64px;
+    height: 30px;
+    background-color: var(--osu-scarlet);
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;    
+}
+
+.toggle-slider 
+{
+    width: 26px;
+    height: 26px;
+    background-color: var(--osu-white);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    z-index: 1;
+}
+
+.toggle-container.on 
+{
+    background-color: #4caf50;
+}
+
+.toggle-container.on .toggle-slider 
+{
+    transform: translateX(36px);
+}
+
+
+.toggle-on,
+.toggle-off {
+    font-family: var(--text-font);
+    font-size: 12px;
+    color: var(--osu-white);
+    user-select: none;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.toggle-on 
+{
+    opacity: 1;
+}
+
+.toggle-off 
+{
+    opacity: 0;
+}
+
+.toggle-container.on .toggle-on 
+{
+    opacity: 0;
+}
+
+.toggle-container.on .toggle-off 
+{
+    opacity: 1;
+}
+
 
 /* Body */
 
@@ -519,9 +596,11 @@ footer ul li a {
 }
 
 #contactModal h3, 
-#contactModal p {
-    margin: 0 auto 15px; /* Consolidate margins, center content */
-    width: 100%; /* Ensure content fits within modal */
+#contactModal p 
+{
+    color: var(--form-text);
+    margin: 0 auto 15px; 
+    width: 100%; 
 }
 
 #contactModal button {
