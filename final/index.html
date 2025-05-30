@@ -8,14 +8,16 @@
 
     <!-- Open Graph Tags for Social Sharing -->
     <meta property="og:title" content="BallisticsPro - Ballistics Calculator for Shooters">
-    <meta property="og:description"
-        content="Calculate bullet trajectories, drop, velocity, and wind drift with BallisticsPro, a tool for hunters and competitive shooters.">
+    <meta property="og:description" content="Calculate bullet trajectories, drop, velocity, and wind drift with BallisticsPro, a tool for hunters and competitive shooters.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://github.com/yourusername/wdd231/final/index.html">
+    <meta property="og:url" content="https://github.com/yourusername/wdd231/finalproject/index.html">
     <meta property="og:image" content="images/logo.png">
     <!-- End Open Graph Tags -->
 
     <title>BallisticsPro - Home</title>
+    <meta name="description" content="BallisticsPro is a powerful ballistics calculator designed for shooters and hunters to calculate bullet trajectories, drop, velocity, and wind drift.">
+    <meta name="keywords" content="BallisticsPro, ballistics calculator, shooters, hunters, bullet trajectories, drop, velocity, wind drift">
+    
     <link rel="icon" href="images/BallisticsPro.ico" type="image/x-icon">
 
     <!-- Fonts -->
@@ -50,8 +52,56 @@
         </nav>
     </header>
     <main>
-        <div>
-
+        <div class="home-container">
+            <section class="hero">
+                <h2>Ballistics Calculator</h2>
+                <div class="form-wrapper">
+                    <form id="calcForm" class="calculator-form">
+                        <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
+                        <input type="number" id="muzzleVelocity" name="muzzleVelocity" required>
+                        <label for="ballisticCoefficient">Ballistic Coefficient:</label>
+                        <input type="number" id="ballisticCoefficient" name="ballisticCoefficient" step="0.001" required>
+                        <label for="bulletWeight">Bullet Weight (grains):</label>
+                        <input type="number" id="bulletWeight" name="bulletWeight" required>
+                        <label for="windSpeed">Wind Speed (mph):</label>
+                        <input type="number" id="windSpeed" name="windSpeed" required>
+                        <button type="submit">Calculate</button>
+                    </form>
+                </div>
+            </section>
+            <section class="results">
+                <h2>Ammunition Data</h2>
+                <table id="ammoTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Muzzle Velocity (fps)</th>
+                            <th>Ballistic Coefficient</th>
+                            <th>Bullet Weight (grains)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="calculationResults">
+                    <h2>Calculation Results</h2>
+                    <table id="resultsTableBody">
+                        <thead>
+                            <tr>
+                                <th>Distance (yards)</th>
+                                <th>Velocity (fps)</th>
+                                <th>Energy (ft-lbs)</th>
+                                <th>Drop (inches)</th>
+                                <th>Wind Drift (inches)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="chart-container">
+                    <h2>Trajectory Chart</h2>
+                    <canvas id="trajectory-chart"></canvas>
+                </div>
+            </section>
         </div>
     </main>
     <footer>

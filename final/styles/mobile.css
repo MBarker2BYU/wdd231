@@ -277,7 +277,93 @@ footer ul li a {
     text-decoration: none;
 }
 
+/* Form Wrapper Common Format*/
+
+.form-wrapper 
+{
+    width: 100%;
+    max-width: 500px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 20px, auto;    
+}
+
+.form-wrapper form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--form-bg);
+    border: 1px solid var(--form-border);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.form-wrapper form label 
+{
+    font-family: var(--text-font);
+    color: var(--form-text);
+}
+
+.form-wrapper form input,
+.form-wrapper form textarea 
+{
+    font-family: var(--text-font);
+    padding: 8px;
+    border: 1px solid var(--control-border);
+    border-radius: 5px;
+    background-color: var(--form-bg);
+    color: var(--form-text);
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form-wrapper form textarea 
+{
+    height: 150px;
+    resize: vertical;
+}
+
+.form-wrapper form input:focus,
+.form-wrapper form textarea:focus 
+{
+    border-color: var(--osu-scarlet);
+    outline: none;
+}
+
+.form-wrapper form button 
+{
+    font-family: var(--text-font);
+    background-color: var(--osu-scarlet);
+    color: var(--osu-white);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-wrapper form button:hover,
+.form-wrapper form button:focus 
+{
+    background-color: var(--osu-gray);
+}
+
 /* Home Page */
+
+.home-container 
+{
+    padding: 30px;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid green; /* Debug: Outer green for main */
+}
+
 
 /* About Page */
 
@@ -329,7 +415,7 @@ footer ul li a {
 {
     font-family: var(--heading-font);
     color: var(--osu-white);
-    margin: 5px;
+    margin: 5px 10px;
 }
 
 /* Contact Page */
@@ -361,76 +447,6 @@ footer ul li a {
     width: 100%;
     max-width: 500px; 
     margin: 20px;
-}
-
-.form-wrapper 
-{
-    width: 100%;
-    max-width: 500px; 
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    padding: 20px, auto;    
-}
-
-#contactForm 
-{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
-    background-color: var(--form-bg);
-    border: 1px solid var(--form-border);
-    border-radius: 5px;
-    box-shadow: 0 2px 5px var(--shadow-color);    
-}
-
-#contactForm label 
-{
-    font-family: var(--text-font);
-    color: var(--form-text);    
-}
-
-#contactForm input,
-#contactForm textarea {
-    font-family: var(--text-font);
-    padding: 8px;
-    border: 1px solid var(--control-border);
-    border-radius: 5px;
-    background-color: var(--form-bg);
-    color: var(--form-text);
-    font-size: 1em;
-    transition: border-color 0.3s ease;
-}
-
-#contactForm textarea {
-    height: 150px;
-    resize: vertical;
-}
-
-#contactForm input:focus,
-#contactForm textarea:focus {
-    border-color: var(--osu-scarlet);
-    outline: none;
-}
-
-#contactForm button {
-    font-family: var(--text-font);
-    background-color: var(--osu-scarlet);
-    color: var(--osu-white);
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#contactForm button:hover,
-#contactForm button:focus 
-{
-    background-color: var(--osu-gray);
 }
 
 /* Contact Modal */

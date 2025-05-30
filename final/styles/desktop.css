@@ -19,19 +19,22 @@
         display: none;
     }
     
-    /* main 
+    .home-container 
     {
         display: grid;
         grid-template-columns: 40% 60%;
         gap: 20px;
-        padding: 40px;        
+        padding: 40px; 
     }
-    .hero {
+    
+    .hero 
+    {
         grid-column: 1;
     }
-    .results {
+    .results 
+    {
         grid-column: 2;
-    } */
+    } 
 
     .logo h1 
     {
