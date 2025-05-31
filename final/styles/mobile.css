@@ -35,7 +35,7 @@
     --menu-active-text: var(--osu-white);
 
     --dark-mode-bg: var(--osu-scarlet);
-    --dark-mode-switch: var(--osu-white);
+    --dark-mode-text: var(--osu-white);
 
     --form-bg: var(--osu-white);
     --form-border: var(--osu-gray);
@@ -65,8 +65,8 @@
     --menu-active-bg: var(--osu-scarlet);
     --menu-active-text: var(--osu-white);
 
-    --dark-mode-bg: rgb(0, 255, 0);
-    --dark-mode-switch: var(--osu-dark-gray);
+    --dark-mode-bg: darkgreen;
+    /* --dark-mode-switch: var(--osu-dark-gray); */
 
     --form-bg: var(--osu-dark-gray);
     --form-border: var(--osu-scarlet);
@@ -230,16 +230,15 @@ nav ul li a.active
 {
     font-family: var(--text-font);
     font-size: 1.2em;
-    color: var(--header-text);
+    color: var var(--header-text);
     user-select: none;
-    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 
 .toggle-container 
 {
     width: 64px;
     height: 30px;
-    background-color: var(--osu-scarlet);
+    background-color: var(--dark-mode-bg);
     border-radius: 15px;
     position: relative;
     cursor: pointer;
@@ -247,9 +246,8 @@ nav ul li a.active
     user-select: none;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 10px;
-    box-sizing: border-box;    
+    box-sizing: border-box;
 }
 
 .toggle-slider 
@@ -268,7 +266,7 @@ nav ul li a.active
 
 .toggle-container.on 
 {
-    background-color: #4caf50;
+    background-color: var(--dark-mode-bg);
 }
 
 .toggle-container.on .toggle-slider 
@@ -276,35 +274,26 @@ nav ul li a.active
     transform: translateX(36px);
 }
 
-
-.toggle-on,
-.toggle-off {
+/* Single text label styles */
+.toggle-text 
+{
     font-family: var(--text-font);
     font-size: 12px;
+    /* font-weight: bold; */
     color: var(--osu-white);
     user-select: none;
-    transition: opacity 0.3s ease;
     z-index: 2;
+    /* Ensure text is above slider */
+    width: 100%;
+    text-align: right;
+    /* Default: "OFF" on right (light theme) */
+    transition: text-align 0.3s ease;
 }
 
-.toggle-on 
+.toggle-container.on .toggle-text 
 {
-    opacity: 1;
-}
-
-.toggle-off 
-{
-    opacity: 0;
-}
-
-.toggle-container.on .toggle-on 
-{
-    opacity: 0;
-}
-
-.toggle-container.on .toggle-off 
-{
-    opacity: 1;
+    text-align: left;
+    /* "ON" on left (dark theme) */
 }
 
 

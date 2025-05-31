@@ -33,26 +33,29 @@ function setupHambergerMenu()
 function setupThemeToggle() 
 {
     const modeToggle = document.querySelector('.toggle-container');
+    const toggleLabel = document.querySelector('.toggle-label');
+    const toggleText = document.querySelector('.toggle-text');
     const htmlElement = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || 'light';
 
-    // Set initial theme and toggle state
+    // Set initial theme, toggle state, and text
     htmlElement.setAttribute('data-theme', savedTheme);
-    
+    // toggleLabel.textContent = savedTheme === 'light' ? 'Dark Mode' : 'Light Mode';
+    toggleText.textContent = savedTheme === 'light' ? 'OFF' : 'ON';
     if (savedTheme === 'dark') {
         modeToggle.classList.add('on');
     }
 
     // Add event listener for toggle
-    modeToggle.addEventListener('click', function () 
-    {
+    modeToggle.addEventListener('click', function () {
         const currentTheme = htmlElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-        // Update theme, toggle state, and label
+        // Update theme, toggle state, label, and text
         htmlElement.setAttribute('data-theme', newTheme);
         this.classList.toggle('on');
-    
+        // toggleLabel.textContent = newTheme === 'light' ? 'Dark Mode' : 'Light Mode';
+        toggleText.textContent = newTheme === 'light' ? 'OFF' : 'ON';
         localStorage.setItem('theme', newTheme);
     });
 }
