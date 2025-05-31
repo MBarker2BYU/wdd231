@@ -237,7 +237,7 @@ nav ul li a.active
 .toggle-container 
 {
     width: 75px;
-    height: 30px;
+    height: 31px;
     background-color: var(--dark-mode-bg);
     border-radius: 15px;
     position: relative;
@@ -248,13 +248,14 @@ nav ul li a.active
     align-items: center;
     padding: 0 10px;
     box-sizing: border-box;
+    border: var(--osu-gray) 1px solid;
 }
 
 .toggle-slider 
 {
     width: 26px;
     height: 26px;
-    background-color: var(--osu-white);
+    background-color: var(--osu-light-gray);
     border-radius: 50%;
     position: absolute;
     top: 2px;
@@ -262,6 +263,7 @@ nav ul li a.active
     transition: transform 0.3s ease;
     box-shadow: 0 2px 4px var(--shadow-color);
     z-index: 1;
+    border: var(--osu-near-black) 1px solid;
 }
 
 .toggle-container.on 
