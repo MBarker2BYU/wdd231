@@ -102,8 +102,7 @@ header
 
 h1, h2, h3, h4, h5, h6 
 {
-    font-family: var(--heading-font);    
-    margin: 0;
+    font-family: var(--heading-font);       
 }
 
 /* header */
@@ -324,6 +323,7 @@ main
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    min-height: 800px;
 }
 
 /* === Footer === */
@@ -431,7 +431,8 @@ footer ul li a {
     padding: 20px;
     padding-bottom: 60px;
     box-sizing: border-box;
-    width: 100%;    
+    width: 100%;
+    min-height: 800px;
 }
 
 .home-container h1,
@@ -450,6 +451,12 @@ footer ul li a {
     align-items: center;
     text-align: center;
     margin-bottom: 20px;
+}
+
+.hero h1 
+{
+    font-size: 2em;
+    margin: 0; 
 }
 
 .headers 
@@ -488,6 +495,8 @@ footer ul li a {
 {
     max-width: 100%;
     position: relative;
+    min-height: 400px;
+    min-width: 300px;
 }
 
 .ballistics-chart-container canvas 
@@ -512,6 +521,7 @@ footer ul li a {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;   
+    min-height: 800px;
 }
 
 .about-container section
@@ -567,6 +577,7 @@ footer ul li a {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;   
+    min-height: 800px;
 }
 
 .contact 
