@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () =>
     const table = document.getElementById('resultsTableBody');
     const canvas = document.getElementById('trajectory-chart');
 
-    initializeCharting(table, canvas);
+    // initializeCharting(table, canvas);
 
     loadAmmunitionData();
     initilizeCalculator(displayTrajectoryData);
@@ -56,7 +56,7 @@ function displayTrajectoryData(trajectoryData)
         tbody.appendChild(row);
     });
 
-    renderChart(trajectoryData);
+    // renderChart(trajectoryData);
 }
 
 function initilizeCalculator(displayCallback) 
