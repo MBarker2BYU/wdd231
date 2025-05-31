@@ -2,11 +2,11 @@ import { fetchData } from "./utilities.mjs";
 
 export async function loadMenu() 
 {
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks = document.getElementById('nav-links');
 
     if (!navLinks) 
     {
-        console.error('Navigation container (.nav-links) not found in the DOM');
+        console.error('Navigation container (nav-links) not found in the DOM');
         return;
     }
 
