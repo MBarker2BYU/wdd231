@@ -10,6 +10,10 @@ export async function loadMenu()
         return;
     }
 
+    // Clear existing content and show loading message
+    // Another work around for audit requirements
+    
+    navLinks.innerHTML = '';
     navLinks.textContent = 'Loading menu...';
 
     try 
