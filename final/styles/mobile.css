@@ -434,10 +434,12 @@ footer ul li a {
     width: 100%;    
 }
 
-.home-container h1, h2, h3 
+.home-container h1,
+.home-container h2,
+.home-container h3 
 {
     font-family: var(--heading-font);
-    color: var(--main-text) !important;
+    color: var(--main-text);
     margin-bottom: 20px;
 }
 
@@ -545,7 +547,9 @@ footer ul li a {
     padding: 10px 10px 10px 40px;
 }
 
-.about-container section h1, h2, h3 
+.about-container h1,
+.about-container h2,
+.about-container h3 
 {
     font-family: var(--heading-font);
     color: var(--osu-white);
