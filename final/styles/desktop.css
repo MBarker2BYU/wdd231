@@ -37,7 +37,7 @@
         grid-column: 2;
     } 
 
-    .logo h1 
+    .logo p 
     {
         font-size: 2em;
     }
@@ -48,4 +48,9 @@
         font-size: large;
     }
     
+    .contact h1
+    {
+        font-size: 2em;
+    }
+
 }

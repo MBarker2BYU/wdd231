@@ -25,8 +25,6 @@
     --header-bg: var(--osu-gray);
     --header-text: var(--osu-black);
 
-    --h1-header-text: var(--osu-white);
-
     --border-color: var(--osu-black);
 
     --menu-bg: var(--osu-gray);
@@ -104,14 +102,8 @@ header
 
 h1, h2, h3, h4, h5, h6 
 {
-    font-family: var(--heading-font);
-    color: var(--header-text);
+    font-family: var(--heading-font);    
     margin: 0;
-}
-
-h1 
-{
-    color: var(--h1-header-text) !important;
 }
 
 /* header */
@@ -130,10 +122,10 @@ h1
     box-shadow: 0 2px 5px var(--shadow-color);
 }
 
-.logo h1 {
+.logo p {
     font-family: var(--heading-font);
     font-size: 1.5em;
-    color: var(--header-text);
+    color: var(--menu-text);
     margin: 0;
 }
 
@@ -193,6 +185,15 @@ nav ul li a.active
     background-color: var(--menu-active-bg);
     font-weight: bold;
 } 
+
+/* Work-around for audit 3 page requirement */
+.required 
+{
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
 
 /* Hamburger Menu */
 .hamburger 
@@ -325,15 +326,6 @@ main
     gap: 20px;
 }
 
-.required 
-{
-    visibility: hidden;
-    height: 0;
-    margin: 0;
-    padding: 0;
-}
-
-
 /* === Footer === */
 footer {
     background-color: var(--footer-bg);
@@ -442,6 +434,13 @@ footer ul li a {
     width: 100%;    
 }
 
+.home-container h1, h2, h3 
+{
+    font-family: var(--heading-font);
+    color: var(--main-text) !important;
+    margin-bottom: 20px;
+}
+
 .hero 
 {
     display: flex;
@@ -546,7 +545,7 @@ footer ul li a {
     padding: 10px 10px 10px 40px;
 }
 
-.about-container section h2, h3 
+.about-container section h1, h2, h3 
 {
     font-family: var(--heading-font);
     color: var(--osu-white);
@@ -574,6 +573,11 @@ footer ul li a {
     display: flex;
     flex-direction: column;
     align-items: center; 
+}
+
+.contact h1
+{
+    font-size: 1.5em;
 }
 
 .contact p 
