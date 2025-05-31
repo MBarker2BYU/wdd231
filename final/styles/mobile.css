@@ -238,7 +238,7 @@ nav ul li a.active
 {
     font-family: var(--text-font);
     font-size: 1.2em;
-    color: var var(--header-text);
+    color: var(--header-text);
     user-select: none;
 }
 
@@ -358,7 +358,7 @@ footer ul li a {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    padding: 20px, auto;    
+    padding: 20px auto;    
 }
 
 .form-wrapper form

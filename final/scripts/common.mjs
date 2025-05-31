@@ -33,7 +33,6 @@ function setupHambergerMenu()
 function setupThemeToggle() 
 {
     const modeToggle = document.querySelector('.toggle-container');
-    const toggleLabel = document.querySelector('.toggle-label');
     const toggleText = document.querySelector('.toggle-text');
     const htmlElement = document.documentElement;
     const savedTheme = localStorage.getItem('theme') || 'light';
