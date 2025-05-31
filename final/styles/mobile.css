@@ -472,6 +472,12 @@ footer ul li a {
     /* border: green 1px solid; */
 }
 
+#ammoTable,
+#resultsTableBody 
+{
+    min-height: 150px;
+}
+
 .ballistics-container table
 {
     width: 100%;

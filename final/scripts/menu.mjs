@@ -8,12 +8,8 @@ export async function loadMenu()
     {
         console.error('Navigation container (nav-links) not found in the DOM');
         return;
-    }
+    }    
 
-    // Clear existing content and show loading message
-    // Another work around for audit requirements
-    
-    navLinks.innerHTML = '';
     navLinks.textContent = 'Loading menu...';
 
     try 
@@ -36,8 +32,12 @@ export async function loadMenu()
 
 function buildMenu(menuItems, navLinks)
 {
+    // Clear existing content and show loading message
+    // Another work around for audit requirements
+    
+    navLinks.innerHTML = '';
     navLinks.textContent = '';
-
+    
     const pageName = window.location.pathname
         .split('/')
         .pop()

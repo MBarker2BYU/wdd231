@@ -28,10 +28,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap" rel="stylesheet">
     </noscript>
 
-
     <!-- Stylesheets Mobile and Desktop -->
     <link rel="stylesheet" href="./styles/mobile.css">
     <link rel="stylesheet" href="./styles/desktop.css">
+
+    <!-- JSON Files -->
+    <link rel="preload" href="data/menu.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/ammunition.json" as="fetch" crossorigin="anonymous">
 
     <!-- Scripts -->
     <script type="module" src="./scripts/common.mjs"></script>
@@ -41,14 +44,14 @@
 <body>
     <header>
         <div class="logo">
-            <img src="images/logo-v2.webp" alt="BallisticsPro Logo" width="100" height="100" loading="lazy">
+            <img src="images/logo-v2.webp" alt="BallisticsPro Logo" width="100" height="100" loading="lazy" fetchpriority="high">
             <p>BallisticsPro</p>            
         </div>
         <nav>            
             <ul id="nav-links">
-                <li class="required"><a href="./index.html">Home - place holder</a></li>
-                <li class="required"><a href="./about.html">About - place holder</a></li>
-                <li class="required"><a href="./contact.html">Contact - place holder</a></li>                
+                <li><a href="./index.html">Home - place holder</a></li>
+                <li><a href="./about.html">About - place holder</a></li>
+                <li><a href="./contact.html">Contact - place holder</a></li>                
             </ul>
             <div class="toggle-wrapper">
                 <div class="toggle-container">
