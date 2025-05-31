@@ -325,6 +325,12 @@ main
     gap: 20px;
 }
 
+.required 
+{
+    visibility: hidden;
+    height: 0;
+}
+
 
 /* === Footer === */
 footer {
