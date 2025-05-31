@@ -41,5 +41,11 @@
     {
         font-size: 2em;
     }
+
+    .ballistics-container th,
+    .ballistics-container td
+    {   
+        font-size: large;
+    }
     
 }

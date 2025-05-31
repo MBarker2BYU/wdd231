@@ -19,17 +19,19 @@
 
 [data-theme="light"]
 {
-    --main-bg: var(--osu-white);
+    --main-bg: var(--osu-light-gray);
     --main-text: var(--osu-black);
 
-    --header-bg: var(--osu-white);
+    --header-bg: var(--osu-gray);
     --header-text: var(--osu-black);
-    
-    --border-color: var(--osu-gray);
 
-    --menu-bg: var(--osu-white);
-    --menu-text: var(--osu-black);
-    --menu-hover-bg: var(--osu-white);
+    --h1-header-text: var(--osu-white);
+
+    --border-color: var(--osu-black);
+
+    --menu-bg: var(--osu-gray);
+    --menu-text: var(--osu-white);
+    --menu-hover-bg: var(--osu-gray);
     --menu-hover-text: var(--osu-scarlet);
     --menu-active-bg: var(--osu-scarlet);
     --menu-active-text: var(--osu-white);
@@ -38,13 +40,13 @@
     --dark-mode-text: var(--osu-white);
 
     --form-bg: var(--osu-white);
-    --form-border: var(--osu-gray);
+    --form-border: var(--osu-black);
     --form-text: var(--osu-dark-gray);
 
     --control-border: var(--osu-dark-gray);
 
-    --footer-bg: var(--osu-white);
-    --footer-text: var(--osu-dark-gray);  
+    --footer-bg: var(--osu-gray);
+    --footer-text: var(--osu-white);  
     
 }
 
@@ -66,10 +68,9 @@
     --menu-active-text: var(--osu-white);
 
     --dark-mode-bg: darkgreen;
-    /* --dark-mode-switch: var(--osu-dark-gray); */
-
+    
     --form-bg: var(--osu-dark-gray);
-    --form-border: var(--osu-scarlet);
+    --form-border: var(--osu-gray);
     --form-text: var(--osu-white);
 
     --control-border: var(--osu-light-gray);
@@ -106,6 +107,11 @@ h1, h2, h3, h4, h5, h6
     font-family: var(--heading-font);
     color: var(--header-text);
     margin: 0;
+}
+
+h1 
+{
+    color: var(--h1-header-text) !important;
 }
 
 /* header */
@@ -189,7 +195,8 @@ nav ul li a.active
 } 
 
 /* Hamburger Menu */
-.hamburger {
+.hamburger 
+{
     display: block;
     background: none;
     border: none;
@@ -198,10 +205,11 @@ nav ul li a.active
 }
 
 .hamburger span {
+
     display: block;
     width: 25px;
     height: 3px;
-    background-color: var(--header-text);
+    background-color: var(--menu-text);
     margin: 5px 0;
     transition: all 0.3s ease-out;
 }
@@ -276,26 +284,21 @@ nav ul li a.active
     transform: translateX(45px);
 }
 
-/* Single text label styles */
 .toggle-text 
 {
     font-family: var(--text-font);
     font-size: 12px;
-    /* font-weight: bold; */
     color: var(--osu-white);
     user-select: none;
     z-index: 2;
-    /* Ensure text is above slider */
     width: 100%;
     text-align: right;
-    /* Default: "OFF" on right (light theme) */
     transition: text-align 0.3s ease;
 }
 
 .toggle-container.on .toggle-text 
 {
     text-align: left;
-    /* "ON" on left (dark theme) */
 }
 
 
@@ -315,7 +318,7 @@ body
 
 main 
 {   
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -350,7 +353,7 @@ footer ul li a {
 .form-wrapper 
 {
     width: 100%;
-    max-width: 500px; 
+    max-width: 550px; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -425,7 +428,7 @@ footer ul li a {
 
 .home-container 
 {
-    padding: 30px;
+    padding: 20px;
     padding-bottom: 60px;
     box-sizing: border-box;
     width: 100%;    
@@ -440,11 +443,17 @@ footer ul li a {
     margin-bottom: 20px;
 }
 
+.headers 
+{
+    margin: 15px 0 5px;
+    padding: 5px 0 0;
+    /* border: green 1px solid; */
+}
+
 .ballistics-container table
 {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     box-shadow: 0 2px 5px var(--shadow-color); 
 } 
 
@@ -454,6 +463,7 @@ footer ul li a {
     background-color: var(--form-bg);
     border: 1px solid var(--osu-gray);
     padding: 8px;
+    font-size: small;
     text-align: center;
     color: var(--text-color);
 }
@@ -467,7 +477,6 @@ footer ul li a {
 
 .ballistics-chart-container 
 {
-    margin: 20px auto;
     max-width: 100%;
     position: relative;
 }
