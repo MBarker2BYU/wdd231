@@ -41,7 +41,7 @@ function setupThemeToggle()
     // Set initial theme, toggle state, and text
     htmlElement.setAttribute('data-theme', savedTheme);
     // toggleLabel.textContent = savedTheme === 'light' ? 'Dark Mode' : 'Light Mode';
-    toggleText.textContent = savedTheme === 'light' ? 'OFF' : 'ON';
+    toggleText.textContent = savedTheme === 'light' ? 'Light' : 'Dark';
     if (savedTheme === 'dark') {
         modeToggle.classList.add('on');
     }
@@ -55,7 +55,7 @@ function setupThemeToggle()
         htmlElement.setAttribute('data-theme', newTheme);
         this.classList.toggle('on');
         // toggleLabel.textContent = newTheme === 'light' ? 'Dark Mode' : 'Light Mode';
-        toggleText.textContent = newTheme === 'light' ? 'OFF' : 'ON';
+        toggleText.textContent = newTheme === 'light' ? 'Light' : 'Dark';
         localStorage.setItem('theme', newTheme);
     });
 }
