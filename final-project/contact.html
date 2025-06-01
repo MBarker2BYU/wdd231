@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BallisticsPro - Professional ballistics calculator and ammunition data">
+  <meta name="keywords" content="ballistics, calculator, ammunition, shooting">
+  <meta name="author" content="Matthew D. Barker">
+  <title>BallisticsPro - Home</title>
+  <link rel="stylesheet" href="desktop.css">
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="./images/ballistics-pro.webp" alt="BallisticsPro Logo" width="150" height="150">
+      <span>BallisticsPro</span>
+    </div>
+    <span class="hamburger" aria-label="Toggle menu">☰</span>
+    <nav>
+      <ul id="nav-links"></ul>
+    </nav>
+    <button class="toggle-container" aria-pressed="false">
+      <span class="toggle-text">Light</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="calculator-section">
+      <h1>Ballistics Calculator</h1>
+      <form id="ballistics-form" onsubmit="handleCalculate(event)">
+        <div class="form-group">
+          <label for="muzzle-velocity">Muzzle Velocity (fps):</label>
+          <input type="number" id="muzzle-velocity" name="muzzle-velocity" value="2800" required min="0">
+        </div>
+        <div class="form-group">
+          <label for="ballistic-coefficient">Ballistic Coefficient:</label>
+          <input type="number" id="ballistic-coefficient" name="ballistic-coefficient" value="1.05" required min="0" step="0.01">
+        </div>
+        <div class="form-group">
+          <label for="bullet-weight">Bullet Weight (grains):</label>
+          <input type="number" id="bullet-weight" name="bullet-weight" value="750" required min="0">
+        </div>
+        <div class="form-group">
+          <label for="wind-speed">Wind Speed (mph):</label>
+          <input type="number" id="wind-speed" name="wind-speed" value="0" required min="0">
+        </div>
+        <button type="submit">Calculate</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <span id="currentyear"></span> BallisticsPro | Matthew D. Barker |
+      Last Modified: <span id="lastmodified"></span>
+    </p>
+  </footer>
+
+  <script src="common.js"></script>
+</body>
+</html>

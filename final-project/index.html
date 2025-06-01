@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BallisticsPro - Professional ballistics calculator and ammunition data">
+    <meta name="keywords" content="ballistics, calculator, ammunition, shooting">
+    <meta name="author" content="Matthew D. Barker">
+    <title>BallisticsPro - Home</title>
+    <link rel="preload" href="./styles/mobile.css" as="style" onload="this.rel='stylesheet'"> 
+    <link rel="preload" href="./styles/desktop.css" as="style" onload="this.rel='stylesheet'">
+
+    <script rel="preload" src="./scripts/ballistics-pro.mjs" type="module"></script>
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/ballistics-pro.webp" alt="BallisticsPro Logo" width="100" height="100">
+            <span>BallisticsPro</span>
+        </div>        
+    </header>
+    <main>
+        <div class="container">
+            <div class="column">
+                <div class="card">
+                    <h2>Column 1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua.</p>
+                    <button id="load-ammo">load </button>
+                </div>
+            </div>
+            <div class="column" style="display: grid;">
+                <div class="ballistic-card">
+                    <h2>Ammunition Data</h2>
+                    <table id="ammoTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Muzzle Velocity (fps)</th>
+                                <th>Ballistic Coefficient</th>
+                                <th>Bullet Weight (grains)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="ballistic-card">
+                    <h2>Calculation Results</h2>
+                    <table id="resultsTableBody">
+                            <thead>
+                                <tr>
+                                    <th>Distance (yards)</th>
+                                    <th>Velocity (fps)</th>
+                                    <th>Energy (ft-lbs)</th>
+                                    <th>Drop (inches)</th>
+                                    <th>Wind Drift (inches)</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p><span id="currentyear"></span> BallisticsPro | Matthew D. Barker | All Rights Reserved</p>
+            <p>Last Updated: <span id="lastmodified"></span></p>
+        </div>
+    </footer>
+</body>
+</html>

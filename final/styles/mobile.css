@@ -135,8 +135,8 @@ h1, h2, h3, h4, h5, h6
 }
 
 .logo img {
-    width: 100px;
-    height: auto;
+    width: 102px;
+    height: 102px;
     border-radius: 10px;
     border: 1px solid var(--osu-scarlet);
     box-shadow: 0 2px 5px var(--shadow-color);
