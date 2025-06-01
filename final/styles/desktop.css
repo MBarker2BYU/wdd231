@@ -27,15 +27,14 @@
         padding: 40px; 
     }
     
-    .hero 
-    {
-        grid-column: 1;
+    .hero {
+        grid-column: 1;        
     }
     
-    .results 
-    {
-        grid-column: 2;
+    .results {
+        grid-column: 2;        
     } 
+
 
     .logo p 
     {

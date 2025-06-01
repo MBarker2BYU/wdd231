@@ -17,6 +17,27 @@
     --text-font: "Allerta Stencil", Arial, serif;    
 }
 
+@font-face {
+    font-family: "Stardos Stencil";
+    src: url("../fonts/stardos-stencil-regular.woff2") format("woff2");
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Stardos Stencil";
+    src: url("../fonts/stardos-stencil-bold.woff2") format("woff2");
+    font-weight: bold;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Allerta Stencil";
+    src: url("../fonts/allerta-stencil-regular.woff2") format("woff2");
+    font-weight: normal;
+    font-display: swap;
+}
+
 [data-theme="light"]
 {
     --main-bg: var(--osu-light-gray);
@@ -134,7 +155,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 20px;
-    min-height: 30px;
+    min-height: 60px;
 }
 
 nav ul 
@@ -472,12 +493,6 @@ footer ul li a {
     /* border: green 1px solid; */
 }
 
-#ammoTable,
-#resultsTableBody 
-{
-    min-height: 150px;
-}
-
 .ballistics-container table
 {
     width: 100%;
@@ -494,6 +509,12 @@ footer ul li a {
     font-size: small;
     text-align: center;
     color: var(--text-color);
+}
+
+#ammoTable,
+#resultsTableBody 
+{
+    min-height: 150px;
 }
 
 .ballistics-container th 

@@ -10,53 +10,93 @@ document.addEventListener('DOMContentLoaded', () =>
     const table = document.getElementById('resultsTableBody');
     const canvas = document.getElementById('trajectory-chart');
 
-    // initializeCharting(table, canvas);
+    initializeCharting(table, canvas);
 
     loadAmmunitionData();
     initilizeCalculator(displayTrajectoryData);
     loadLastCalculation();
 });
 
-function loadAmmunitionData() 
-{
-    fetchData('data/ammunition.json').then(data => 
-    {
-        const tbody = document.querySelector('#ammoTable tbody');
+// function loadAmmunitionData() 
+// {
+//     fetchData('data/ammunition.json').then(data => 
+//     {
+//         const tbody = document.querySelector('#ammoTable tbody');
             
-        data.forEach(item => {
-            const row = document.createElement('tr');
+//         data.forEach(item => {
+//             const row = document.createElement('tr');
             
-            row.innerHTML = `
-            <td>${item.name}</td>
-            <td>${item.muzzleVelocity}</td>
-            <td>${item.ballisticCoefficient}</td>
-            <td>${item.bulletWeight}</td>
-            `;
+//             row.innerHTML = `
+//             <td>${item.name}</td>
+//             <td>${item.muzzleVelocity}</td>
+//             <td>${item.ballisticCoefficient}</td>
+//             <td>${item.bulletWeight}</td>
+//             `;
 
-            tbody.appendChild(row);
+//             tbody.appendChild(row);
+//         });
+//     });
+// }
+
+
+function loadAmmunitionData() {
+    fetchData('data/ammunition.json').then(data => {
+        const tbody = document.querySelector('#ammoTable tbody');
+        let tableContent = '';
+
+        data.forEach(item => {
+            tableContent += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.muzzleVelocity}</td>
+                    <td>${item.ballisticCoefficient}</td>
+                    <td>${item.bulletWeight}</td>
+                </tr>`;
         });
+
+        tbody.innerHTML = tableContent;
     });
 }
 
-function displayTrajectoryData(trajectoryData)
-{    
+// function displayTrajectoryData(trajectoryData)
+// {    
+//     const tbody = document.querySelector('#resultsTableBody tbody');
+ 
+//     tbody.innerHTML = ''; // Clear previous results
+ 
+//     trajectoryData.forEach(trajectory => {
+//         const row = document.createElement('tr');
+//         row.innerHTML = `
+//         <td>${trajectory.distance}</td>
+//         <td>${trajectory.velocity}</td>
+//         <td>${trajectory.energy}</td>
+//         <td>${trajectory.drop}</td>
+//         <td>${trajectory.windDrift}</td>
+//         `;
+//         tbody.appendChild(row);
+//     });
+
+//     // renderChart(trajectoryData);
+// }
+
+function displayTrajectoryData(trajectoryData) {
     const tbody = document.querySelector('#resultsTableBody tbody');
- 
-    tbody.innerHTML = ''; // Clear previous results
- 
+    let tableContent = '';
+
     trajectoryData.forEach(trajectory => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-        <td>${trajectory.distance}</td>
-        <td>${trajectory.velocity}</td>
-        <td>${trajectory.energy}</td>
-        <td>${trajectory.drop}</td>
-        <td>${trajectory.windDrift}</td>
-        `;
-        tbody.appendChild(row);
+        tableContent += `
+            <tr>
+                <td>${trajectory.distance}</td>
+                <td>${trajectory.velocity}</td>
+                <td>${trajectory.energy}</td>
+                <td>${trajectory.drop}</td>
+                <td>${trajectory.windDrift}</td>
+            </tr>`;
     });
 
-    // renderChart(trajectoryData);
+    tbody.innerHTML = tableContent;
+
+    renderChart(trajectoryData);
 }
 
 function initilizeCalculator(displayCallback) 
