@@ -3,11 +3,13 @@
 
     nav ul 
     {
+        background-color: var(--menu-bg);
         display: flex;
         flex-direction: row;
         position: static;
         width: auto;
         gap: 20px;
+        height: auto;
     }
 
     nav ul li 

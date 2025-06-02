@@ -48,8 +48,8 @@
   --border-color: var(--osu-black);
   --menu-bg: var(--osu-gray);
   --menu-text: var(--osu-white);
-  --menu-hover-bg: var(--osu-gray);
-  --menu-hover-text: var(--osu-scarlet);
+  --menu-hover-bg: #bb000050;
+  --menu-hover-text: var(--osu-white);
   --menu-active-bg: var(--osu-scarlet);
   --menu-active-text: var(--osu-white);
   --dark-mode-bg: var(--osu-scarlet);
@@ -64,6 +64,8 @@
   --ballistic-card-bg: var(--osu-white);
   --info-card-bg: var(--osu-white);
   --info-card-text: var(--osu-black);
+
+  --mobile-menu-bg: #333333ee ;
 }
 
 [data-theme="dark"] {
@@ -74,8 +76,8 @@
   --border-color: var(--osu-scarlet);
   --menu-bg: var(--osu-dark-gray);
   --menu-text: var(--osu-white);
-  --menu-hover-bg: var(--osu-dark-gray);
-  --menu-hover-text: var(--osu-scarlet);
+  --menu-hover-bg: #bb000050;
+  --menu-hover-text: var(--osu-white);
   --menu-active-bg: var(--osu-scarlet);
   --menu-active-text: var(--osu-white);
   --dark-mode-bg: darkgreen;
@@ -88,6 +90,8 @@
 
   --ballistic-card-bg: var(--osu-gray);
   --info-card-bg: var(--osu-gray);  
+
+  --mobile-menu-bg: #000000dd ;
 
   --shadow-color: rgba(255, 255, 255, 0.1);
 }
@@ -165,15 +169,19 @@ nav {
 
 nav ul 
 {
-    background-color: var(--menu-bg);
+    background-color: var(--mobile-menu-bg);
     list-style: none;
     display: none;
     flex-direction: column;
-    position: absolute;
-    top: 126px;
+    /* position: absolute; */
+    position: fixed;
+    top: 99px;
     left: 0;
     width: 100%;
+    height: calc(100vh - 99px);
     z-index: 1000;
+    justify-content: center;
+    align-items: center;
 }
 
 nav ul.active 
@@ -200,9 +208,12 @@ nav ul li a
 
 nav ul li a:hover 
 {
-    color: var(--menu-hover-text);
+    color: var(--menu-hover-text);    
+    /* background-color: var(--menu-hover-bg); */
     background-color: var(--menu-hover-bg);
-    transform: scale(1.1);
+    border: var(--osu-scarlet) 1px solid;
+
+    transform: scale(1.2);
 }
 
 nav ul li a.active 
