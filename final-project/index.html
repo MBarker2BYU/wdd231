@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-US" data-theme="light">
+
 <head>
+    <link rel="icon" href="images/favicon.ico">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BallisticsPro - Professional ballistics calculator and ammunition data">
-    <meta name="keywords" content="ballistics, calculator, ammunition, shooting">
     <meta name="author" content="Matthew D. Barker">
+
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="BallisticsPro - Ballistics Calculator for Shooters">
+    <meta property="og:description" content="Calculate bullet trajectories, drop, velocity, and wind drift with BallisticsPro, a tool for hunters and competitive shooters.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mbarker2byu.github.io/wdd231/final-project/index.html">
+    <meta property="og:image" content="https://mbarker2byu.github.io/wdd231/final-project/images/ballistics-pro.webp">
+    <!-- End Open Graph Tags -->
+
     <title>BallisticsPro - Home</title>
-    <link rel="preload" href="./styles/mobile.css" as="style" onload="this.rel='stylesheet'"> 
+    <meta name="description" content="BallisticsPro is a powerful ballistics calculator designed for shooters and hunters to calculate bullet trajectories, drop, velocity, and wind drift.">
+    <meta name="keywords" content="BallisticsPro, ballistics calculator, shooters, hunters, bullet trajectories, drop, velocity, wind drift">
+    
+    <!-- JSON Files -->
+    <link rel="preload" href="data/menu.json" as="fetch" crossorigin="anonymous">
+    <link rel="preload" href="data/ammunition.json" as="fetch" crossorigin="anonymous">
+
+    <!-- Styles and Fonts -->
+    <link rel="preload" href="./styles/mobile.css" as="style" onload="this.rel='stylesheet'">
     <link rel="preload" href="./styles/desktop.css" as="style" onload="this.rel='stylesheet'">
 
+    <script rel="preload" src="./scripts/common.mjs" type="module"></script>
     <script rel="preload" src="./scripts/ballistics-pro.mjs" type="module"></script>
 
 </head>
@@ -18,36 +37,170 @@
         <div class="logo">
             <img src="./images/ballistics-pro.webp" alt="BallisticsPro Logo" width="100" height="100">
             <span>BallisticsPro</span>
-        </div>        
+        </div>
+        <nav>
+            <ul id="nav-links">
+                <li class="required"><a href="./index.html">Home - place holder</a></li>
+                <li class="required"><a href="./about.html">About - place holder</a></li>
+                <li class="required"><a href="./contact.html">Contact - place holder</a></li>              
+            </ul>
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="toggle-wrapper">
+                <div class="toggle-container">
+                    <span class="toggle-text"></span>
+                    <div class="toggle-slider"></div>
+                </div>    
+            </div>
+        </nav>
     </header>
     <main>
-        <div class="container">
-            <div class="column">
-                <div class="card">
-                    <h2>Column 1</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.</p>
-                    <button id="load-ammo">load </button>
-                </div>
-            </div>
-            <div class="column" style="display: grid;">
+        <div class="main-container">
+            <section class="ballistic-calculator">
+                <div>
+                    <div>
+                        <h1>Ballistics Calculator</h1>
+                    </div>
+                    <div class="form-wrapper">
+                        <form id="calcForm">
+                            <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
+                            <input type="number" id="muzzleVelocity" name="muzzleVelocity" required>
+                            <label for="ballisticCoefficient">Ballistic Coefficient:</label>
+                            <input type="number" id="ballisticCoefficient" name="ballisticCoefficient" step="0.001" required>
+                            <label for="bulletWeight">Bullet Weight (grains):</label>
+                            <input type="number" id="bulletWeight" name="bulletWeight" required>
+                            <label for="windSpeed">Wind Speed (mph):</label>
+                            <input type="number" id="windSpeed" name="windSpeed" required>
+                            <button type="submit">Calculate</button>
+                        </form>
+                    </div>
+                </div>   
+            </section>
+            <section class="ballistic-cards">
                 <div class="ballistic-card">
-                    <h2>Ammunition Data</h2>
-                    <table id="ammoTable">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Muzzle Velocity (fps)</th>
-                                <th>Ballistic Coefficient</th>
-                                <th>Bullet Weight (grains)</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <div>
+                        <h2>Ammunition Data</h2>
+                    </div>
+                    <div>
+                        <table id="ammoTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Muzzle Velocity (fps)</th>
+                                    <th>Ballistic Coefficient</th>
+                                    <th>Bullet Weight (grains)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>    
+                    </div>
                 </div>
                 <div class="ballistic-card">
-                    <h2>Calculation Results</h2>
-                    <table id="resultsTableBody">
+                    <div>
+                        <h2>Calculation Results</h2>
+                    </div>
+                    <div>
+                        <table id="resultsTableBody">
                             <thead>
                                 <tr>
                                     <th>Distance (yards)</th>
@@ -57,11 +210,55 @@
                                     <th>Wind Drift (inches)</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
                         </table>
+                    </div>
                 </div>
-                
-            </div>
+                <div class="ballistic-card">
+                    <div>
+                        <h2>Trajectory Chart</h2>
+                    </div>
+                    <div>
+                        <canvas id="trajectory-chart" width="400" height="350"></canvas>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
     <footer>
@@ -71,4 +268,5 @@
         </div>
     </footer>
 </body>
+
 </html>

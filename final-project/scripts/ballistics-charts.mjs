@@ -135,6 +135,24 @@ export function renderChart(trajectoryData) {
     ctx.strokeRect(padding, padding, chartWidth, chartHeight);
 }
 
+export function formatTrajectoryData(originalTrajectoryData) 
+{
+    if (!Array.isArray(originalTrajectoryData) || originalTrajectoryData.length === 0) {
+        console.warn('No trajectory data available to format.');
+        return [];
+    }
+
+    const trajectoryData = [];
+
+    originalTrajectoryData.forEach(data => 
+        {
+            trajectoryData.push({datance: data.distance, drop: -Math.abs(data.drop)});
+        });
+
+    return trajectoryData;
+}
+
+
 function renderChartFromTable() {
     const table = chartingElements.table;
 
@@ -159,39 +177,65 @@ function renderChartFromTable() {
     renderChart(trajectoryData.length > 0 ? trajectoryData : []);
 }
 
+
 function initializeTableObservers(table) {
-    if (!table || !chartingElements.canvas || !renderChartFromTable) return;
+    if (!table || !chartingElements.canvas || !renderChartFromTable) {
+        console.warn('Table or canvas not initialized, skipping observer setup.');
+        return;
+    }
 
     const canvas = chartingElements.canvas;
-    const minHeight = parseFloat(getComputedStyle(canvas).minHeight || '200');
-    const maxHeight = parseFloat(getComputedStyle(canvas).maxHeight || '400');
+    let lastRedrawTime = 0;
+    const REDRAW_THROTTLE_MS = 100;
 
+    // Get canvas dimensions from computed styles
+    const getCanvasDimensions = () => {
+        const styles = getComputedStyle(canvas);
+        const width = parseFloat(styles.width) || table.getBoundingClientRect().width || 300;
+        const height = parseFloat(styles.height) || (width * 0.5) || 350;
+        const minHeight = parseFloat(styles.minHeight || '200');
+        const maxHeight = parseFloat(styles.maxHeight || '400');
+        return {
+            width,
+            height: Math.min(Math.max(height, minHeight), maxHeight)
+        };
+    };
+
+    // Update canvas dimensions and redraw chart
     const updateCanvasAndChart = (width) => {
-        const desiredHeight = width * 0.5;
-        const clampedHeight = Math.min(Math.max(desiredHeight, minHeight), maxHeight);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${clampedHeight}px`;
-        canvas.width = width;
-        canvas.height = clampedHeight;
+        const { width: canvasWidth, height: canvasHeight } = getCanvasDimensions();
+        canvas.style.width = `${width || canvasWidth}px`;
+        canvas.style.height = `${canvasHeight}px`;
+        canvas.width = width || canvasWidth;
+        canvas.height = canvasHeight;
+        console.log(`Canvas updated: width=${canvas.width}, height=${canvas.height}`);
         renderChartFromTable();
     };
 
+    // Throttle redraws to prevent rapid updates
+    const throttleRedraw = (width) => {
+        const now = Date.now();
+        if (now - lastRedrawTime >= REDRAW_THROTTLE_MS) {
+            lastRedrawTime = now;
+            updateCanvasAndChart(width);
+        }
+    };
+
+    // Initial canvas setup
+    throttleRedraw(table.getBoundingClientRect().width);
+
     // ResizeObserver for table size
     new ResizeObserver(entries => {
-        updateCanvasAndChart(entries[0].contentRect.width);
+        throttleRedraw(entries[0].contentRect.width);
     }).observe(table);
 
     // MutationObserver for table content
-    let contentTimeout;
     new MutationObserver(() => {
-        clearTimeout(contentTimeout);
-        contentTimeout = setTimeout(() => updateCanvasAndChart(table.getBoundingClientRect().width), 100);
+        throttleRedraw(table.getBoundingClientRect().width);
     }).observe(table, { childList: true, subtree: true, attributes: true, characterData: true });
 
-    // MutationObserver for theme (data-theme on <html>)
-    let themeTimeout;
+    // MutationObserver for theme changes
     new MutationObserver(() => {
-        clearTimeout(themeTimeout);
-        themeTimeout = setTimeout(() => updateCanvasAndChart(table.getBoundingClientRect().width), 100);
+        throttleRedraw(table.getBoundingClientRect().width);
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 }

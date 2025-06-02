@@ -1,62 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-us" data-theme="light">
+
 <head>
+  <link rel="icon" href="images/favicon.ico">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BallisticsPro - Professional ballistics calculator and ammunition data">
-  <meta name="keywords" content="ballistics, calculator, ammunition, shooting">
   <meta name="author" content="Matthew D. Barker">
-  <title>BallisticsPro - Home</title>
-  <link rel="stylesheet" href="desktop.css">
-  <link rel="stylesheet" href="mobile.css">
+
+  <!-- Open Graph Tags for Social Sharing -->
+  <meta property="og:title" content="BallisticsPro - About">
+  <meta property="og:description"
+    content="Discover BallisticsPro, a tool for hunters and competitive shooters to calculate bullet trajectories and improve accuracy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mbarker2byu.github.io/wdd231/final/contact.html">
+  <meta property="og:image" content="https://mbarker2byu.github.io/wdd231/final/images/ballistics-pro.webp">
+  <!-- End Open Graph Tags -->
+
+  <title>BallisticsPro - Contact</title>
+  <meta name="description"
+    content="Contact BallisticsPro for questions, feedback, or suggestions. We’d love to hear from you!">
+  <meta name="keywords"
+    content="BallisticsPro, contact, feedback, suggestions, ballistics calculator, shooters, hunters">
+
+  <!-- JSON Files -->
+  <link rel="preload" href="data/menu.json" as="fetch" crossorigin="anonymous">
+
+  <!-- Styles and Fonts -->
+  <link rel="preload" href="./styles/mobile.css" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="./styles/desktop.css" as="style" onload="this.rel='stylesheet'">
+
+  <script rel="preload" src="./scripts/common.mjs" type="module"></script>
+  <script rel="preload" src="./scripts/contact.mjs" type="module"></script>
 </head>
+
 <body>
   <header>
-    <div class="logo-container">
-      <img src="./images/ballistics-pro.webp" alt="BallisticsPro Logo" width="150" height="150">
+    <div class="logo">
+      <img src="./images/ballistics-pro.webp" alt="BallisticsPro Logo" width="100" height="100">
       <span>BallisticsPro</span>
     </div>
-    <span class="hamburger" aria-label="Toggle menu">☰</span>
     <nav>
-      <ul id="nav-links"></ul>
+        <ul id="nav-links">
+            <li class="required"><a href="./index.html">Home - place holder</a></li>
+            <li class="required"><a href="./about.html">About - place holder</a></li>
+            <li class="required"><a href="./contact.html">Contact - place holder</a></li>              
+        </ul>
+        <button class="hamburger" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="toggle-wrapper">
+            <div class="toggle-container">
+                <span class="toggle-text"></span>
+                <div class="toggle-slider"></div>
+            </div>    
+        </div>
     </nav>
-    <button class="toggle-container" aria-pressed="false">
-      <span class="toggle-text">Light</span>
-    </button>
   </header>
-
   <main>
-    <section class="calculator-section">
-      <h1>Ballistics Calculator</h1>
-      <form id="ballistics-form" onsubmit="handleCalculate(event)">
-        <div class="form-group">
-          <label for="muzzle-velocity">Muzzle Velocity (fps):</label>
-          <input type="number" id="muzzle-velocity" name="muzzle-velocity" value="2800" required min="0">
+    <div class="contact-container">
+      <section class="contact-section">
+        <div>
+          <div style="text-align: center; line-height: 1.6;">
+            <h1>Contact us about BallisticsPro!</h1>
+            <p>We’d love to hear from you! Use the form below to send us your questions, feedback, or suggestions about BallisticsPro.</p>
+          </div>
+          <div class="contact-form">
+            <div class="form-wrapper">
+              <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required aria-required="true">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required aria-required="true">
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+
+                <button type="submit">Send Message</button>
+              </form>
+            </div>
+          </div>
+          <div>
+              <!-- Modal Dialog for Acknowledgment -->
+              <dialog id="contactModal">
+                  <h3>Message Sent</h3>
+                  <p><span id="modalName"></span>, your message has been sent successfully. We’ll get back to you at <span id="modalEmail"></span> soon!</p>
+                  <button id="closeModalBtn">Close</button>
+              </dialog>  
+          </div>
         </div>
-        <div class="form-group">
-          <label for="ballistic-coefficient">Ballistic Coefficient:</label>
-          <input type="number" id="ballistic-coefficient" name="ballistic-coefficient" value="1.05" required min="0" step="0.01">
-        </div>
-        <div class="form-group">
-          <label for="bullet-weight">Bullet Weight (grains):</label>
-          <input type="number" id="bullet-weight" name="bullet-weight" value="750" required min="0">
-        </div>
-        <div class="form-group">
-          <label for="wind-speed">Wind Speed (mph):</label>
-          <input type="number" id="wind-speed" name="wind-speed" value="0" required min="0">
-        </div>
-        <button type="submit">Calculate</button>
-      </form>
-    </section>
+      </section>
+    </div>
   </main>
-
   <footer>
-    <p>
-      <span id="currentyear"></span> BallisticsPro | Matthew D. Barker |
-      Last Modified: <span id="lastmodified"></span>
-    </p>
+        <div class="footer-container">
+            <p><span id="currentyear"></span> BallisticsPro | Matthew D. Barker | All Rights Reserved</p>
+            <p>Last Updated: <span id="lastmodified"></span></p>
+        </div>
   </footer>
-
-  <script src="common.js"></script>
 </body>
 </html>

@@ -1,50 +1,23 @@
 import { fetchData } from './utilities.mjs';
-// import { calculateTrajectory } from './ballistics-calculator.mjs';
+import { calculateTrajectory } from './ballistics-calculator.mjs';
 
-// import { initializeCharting } from './ballistics-charts.mjs';
-// import { renderChart } from './ballistics-charts.mjs';
+import { initializeCharting } from './ballistics-charts.mjs';
+import { renderChart } from './ballistics-charts.mjs';
+import { formatTrajectoryData } from './ballistics-charts.mjs';
 
 document.addEventListener('DOMContentLoaded', () => 
 {
 
     const table = document.getElementById('resultsTableBody');
     const canvas = document.getElementById('trajectory-chart');
-
-    const loadAmmunition = document.getElementById('load-ammo');
     
-    loadAmmunition.addEventListener('click', () => 
-    {
-        loadAmmunitionData();
-    });
-    // initializeCharting(table, canvas);
+    
+    initializeCharting(table, canvas);
 
-    // loadAmmunitionData();
-    // initilizeCalculator(displayTrajectoryData);
-    // loadLastCalculation();
+    loadAmmunitionData();
+    initilizeCalculator(displayTrajectoryData);
+    loadLastCalculation();
 });
-
-
-
-// function loadAmmunitionData() 
-// {
-//     fetchData('data/ammunition.json').then(data => 
-//     {
-//         const tbody = document.querySelector('#ammoTable tbody');
-            
-//         data.forEach(item => {
-//             const row = document.createElement('tr');
-            
-//             row.innerHTML = `
-//             <td>${item.name}</td>
-//             <td>${item.muzzleVelocity}</td>
-//             <td>${item.ballisticCoefficient}</td>
-//             <td>${item.bulletWeight}</td>
-//             `;
-
-//             tbody.appendChild(row);
-//         });
-//     });
-// }
 
 
 function loadAmmunitionData() 
@@ -68,117 +41,96 @@ function loadAmmunitionData()
     });
 }
 
-// function displayTrajectoryData(trajectoryData)
-// {    
-//     const tbody = document.querySelector('#resultsTableBody tbody');
- 
-//     tbody.innerHTML = ''; // Clear previous results
- 
-//     trajectoryData.forEach(trajectory => {
-//         const row = document.createElement('tr');
-//         row.innerHTML = `
-//         <td>${trajectory.distance}</td>
-//         <td>${trajectory.velocity}</td>
-//         <td>${trajectory.energy}</td>
-//         <td>${trajectory.drop}</td>
-//         <td>${trajectory.windDrift}</td>
-//         `;
-//         tbody.appendChild(row);
-//     });
+function displayTrajectoryData(trajectoryData) {
+    const tbody = document.querySelector('#resultsTableBody tbody');
+    let tableContent = '';
 
-//     // renderChart(trajectoryData);
-// }
+    trajectoryData.forEach(trajectory => {
+        tableContent += `
+            <tr>
+                <td>${trajectory.distance}</td>
+                <td>${trajectory.velocity}</td>
+                <td>${trajectory.energy}</td>
+                <td>${trajectory.drop}</td>
+                <td>${trajectory.windDrift}</td>
+            </tr>`;
+    });
 
-// function displayTrajectoryData(trajectoryData) {
-//     const tbody = document.querySelector('#resultsTableBody tbody');
-//     let tableContent = '';
+    tbody.innerHTML = tableContent;
 
-//     trajectoryData.forEach(trajectory => {
-//         tableContent += `
-//             <tr>
-//                 <td>${trajectory.distance}</td>
-//                 <td>${trajectory.velocity}</td>
-//                 <td>${trajectory.energy}</td>
-//                 <td>${trajectory.drop}</td>
-//                 <td>${trajectory.windDrift}</td>
-//             </tr>`;
-//     });
+    renderChart(formatTrajectoryData(trajectoryData));
+}
 
-//     tbody.innerHTML = tableContent;
+function initilizeCalculator(displayCallback) 
+{
+    const form = document.getElementById('calcForm');
 
-//     renderChart(trajectoryData);
-// }
+    form.addEventListener('submit', (event) => 
+    {
+        event.preventDefault();
 
-// function initilizeCalculator(displayCallback) 
-// {
-//     const form = document.getElementById('calcForm');
+        const formData = new FormData(form);
 
-//     form.addEventListener('submit', (event) => 
-//     {
-//         event.preventDefault();
+        const inputData = 
+        {
+            muzzleVelocity: parseFloat(formData.get('muzzleVelocity')),
+            ballisticCoefficient: parseFloat(formData.get('ballisticCoefficient')),
+            bulletWeight: parseFloat(formData.get('bulletWeight')),
+            windSpeed: parseFloat(formData.get('windSpeed'))
+        };
 
-//         const formData = new FormData(form);
+        if (isNaN(inputData.muzzleVelocity) || isNaN(inputData.ballisticCoefficient) ||
+            isNaN(inputData.bulletWeight) || isNaN(inputData.windSpeed)) {
+            alert('Please enter valid numbers for all fields.');
+            return;
+        }
 
-//         const inputData = 
-//         {
-//             muzzleVelocity: parseFloat(formData.get('muzzleVelocity')),
-//             ballisticCoefficient: parseFloat(formData.get('ballisticCoefficient')),
-//             bulletWeight: parseFloat(formData.get('bulletWeight')),
-//             windSpeed: parseFloat(formData.get('windSpeed'))
-//         };
+        const trajectoryData = calculateTrajectory(inputData);
 
-//         if (isNaN(inputData.muzzleVelocity) || isNaN(inputData.ballisticCoefficient) ||
-//             isNaN(inputData.bulletWeight) || isNaN(inputData.windSpeed)) {
-//             alert('Please enter valid numbers for all fields.');
-//             return;
-//         }
+        saveLastCalculation(inputData, trajectoryData);
 
-//         const trajectoryData = calculateTrajectory(inputData);
+        if(displayCallback)
+        { 
+            displayCallback(trajectoryData);
+        }
 
-//         saveLastCalculation(inputData, trajectoryData);
+    });
 
-//         if(displayCallback)
-//         { 
-//             displayCallback(trajectoryData);
-//         }
+}
 
-//     });
+function loadLastCalculation() 
+{       
+    const lastCalculation = localStorage.getItem('lastCalculation');
 
-// }
-
-// function loadLastCalculation() 
-// {       
-//     const lastCalculation = localStorage.getItem('lastCalculation');
-
-//     if (lastCalculation) 
-//     {
-//         try
-//         {
-//             const { inputData, trajectoryData } = JSON.parse(lastCalculation);
+    if (lastCalculation) 
+    {
+        try
+        {
+            const { inputData, trajectoryData } = JSON.parse(lastCalculation);
             
-//             // Populate the form with the last input data
-//             document.querySelector('#calcForm [name="muzzleVelocity"]').value = inputData.muzzleVelocity;
-//             document.querySelector('#calcForm [name="ballisticCoefficient"]').value = inputData.ballisticCoefficient;
-//             document.querySelector('#calcForm [name="bulletWeight"]').value = inputData.bulletWeight;
-//             document.querySelector('#calcForm [name="windSpeed"]').value = inputData.windSpeed;
+            // Populate the form with the last input data
+            document.querySelector('#calcForm [name="muzzleVelocity"]').value = inputData.muzzleVelocity;
+            document.querySelector('#calcForm [name="ballisticCoefficient"]').value = inputData.ballisticCoefficient;
+            document.querySelector('#calcForm [name="bulletWeight"]').value = inputData.bulletWeight;
+            document.querySelector('#calcForm [name="windSpeed"]').value = inputData.windSpeed;
 
-//             // Display the trajectory data
-//             displayTrajectoryData(trajectoryData);
-//         }
-//         catch (error) 
-//         {
-//             console.error('Error loading last calculation:', error);
-//             localStorage.removeItem('lastCalculation'); // Clear invalid data
-//         }
-//     }
-// }
+            // Display the trajectory data
+            displayTrajectoryData(trajectoryData);
+        }
+        catch (error) 
+        {
+            console.error('Error loading last calculation:', error);
+            localStorage.removeItem('lastCalculation'); // Clear invalid data
+        }
+    }
+}
 
-// function saveLastCalculation(inputData, trajectoryData)
-// {
-//     const lastCalculation = {
-//         inputData: inputData,
-//         trajectoryData: trajectoryData
-//     };
+function saveLastCalculation(inputData, trajectoryData)
+{
+    const lastCalculation = {
+        inputData: inputData,
+        trajectoryData: trajectoryData
+    };
 
-//     localStorage.setItem('lastCalculation', JSON.stringify(lastCalculation));
-// }
+    localStorage.setItem('lastCalculation', JSON.stringify(lastCalculation));
+}
