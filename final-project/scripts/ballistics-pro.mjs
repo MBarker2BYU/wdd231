@@ -1,7 +1,6 @@
 import { fetchData } from './utilities.mjs';
 import { calculateTrajectory } from './ballistics-calculator.mjs';
 
-import { initializeCharting } from './ballistics-charts.mjs';
 import { renderChart } from './ballistics-charts.mjs';
 import { formatTrajectoryData } from './ballistics-charts.mjs';
 
@@ -9,14 +8,12 @@ document.addEventListener('DOMContentLoaded', () =>
 {
 
     const table = document.getElementById('resultsTableBody');
-    const canvas = document.getElementById('trajectory-chart');
+    const canvas = document.getElementById('trajectory-chart');    
     
-    
-    initializeCharting(table, canvas);
-
     loadAmmunitionData();
-    initilizeCalculator(displayTrajectoryData);
-    loadLastCalculation();
+    initilizeCalculator(displayTrajectoryData);   
+    
+    initializeObserver('resultsTableBody');
 });
 
 
@@ -87,50 +84,51 @@ function initilizeCalculator(displayCallback)
 
         const trajectoryData = calculateTrajectory(inputData);
 
-        saveLastCalculation(inputData, trajectoryData);
-
         if(displayCallback)
         { 
             displayCallback(trajectoryData);
         }
 
     });
-
 }
 
-function loadLastCalculation() 
-{       
-    const lastCalculation = localStorage.getItem('lastCalculation');
+function initializeObserver(tableSelector, callback) {
+  const table = document.querySelector(tableSelector);
 
-    if (lastCalculation) 
-    {
-        try
-        {
-            const { inputData, trajectoryData } = JSON.parse(lastCalculation);
-            
-            // Populate the form with the last input data
-            document.querySelector('#calcForm [name="muzzleVelocity"]').value = inputData.muzzleVelocity;
-            document.querySelector('#calcForm [name="ballisticCoefficient"]').value = inputData.ballisticCoefficient;
-            document.querySelector('#calcForm [name="bulletWeight"]').value = inputData.bulletWeight;
-            document.querySelector('#calcForm [name="windSpeed"]').value = inputData.windSpeed;
+  // MutationObserver for data and structural changes
+  const mutationObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        callback('Size changed', {
+          rows: table.querySelectorAll('tr').length,
+          cols: table.querySelector('tr')?.querySelectorAll('td, th').length || 0
+        });
+      } else if (mutation.type === 'characterData') {
+        callback('Data changed', { cell: mutation.target.textContent });
+      } else if (mutation.type === 'attributes' && ['style', 'width', 'height'].includes(mutation.attributeName)) {
+        callback('Attribute-based size changed', table.getBoundingClientRect());
+      }
+    });
+  });
 
-            // Display the trajectory data
-            displayTrajectoryData(trajectoryData);
-        }
-        catch (error) 
-        {
-            console.error('Error loading last calculation:', error);
-            localStorage.removeItem('lastCalculation'); // Clear invalid data
-        }
-    }
-}
+  mutationObserver.observe(table, {
+    childList: true,
+    characterData: true,
+    attributes: true,
+    subtree: true,
+    attributeFilter: ['style', 'width', 'height']
+  });
 
-function saveLastCalculation(inputData, trajectoryData)
-{
-    const lastCalculation = {
-        inputData: inputData,
-        trajectoryData: trajectoryData
-    };
+  // ResizeObserver for rendered size changes
+  const resizeObserver = new ResizeObserver(() => {
+    callback('Rendered size changed', table.getBoundingClientRect());
+  });
 
-    localStorage.setItem('lastCalculation', JSON.stringify(lastCalculation));
+  resizeObserver.observe(table);
+
+  // Return function to stop observing
+  return () => {
+    mutationObserver.disconnect();
+    resizeObserver.disconnect();
+  };
 }
