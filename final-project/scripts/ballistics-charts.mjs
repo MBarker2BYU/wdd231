@@ -1,5 +1,10 @@
-export function renderChart(trajectoryData) {
-    const canvas = chartingElements.canvas;
+export function renderChart(id, trajectoryData) {
+    const canvas = document.getElementById(id);
+    if (!trajectoryData || !Array.isArray(trajectoryData) || trajectoryData.length === 0) 
+        {
+        console.warn('No trajectory data available to render the chart.');
+        return;
+        }
 
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
         console.error('Canvas element is not initialized or is not a valid HTMLCanvasElement.');
@@ -139,8 +144,9 @@ export function formatTrajectoryData(originalTrajectoryData) {
 }
 
 
-function renderChartFromTable() {
-    const table = chartingElements.table;
+export function getDataFromTable(id) 
+{    
+    const table = document.getElementById(id);
 
     if (!table || !(table instanceof HTMLTableElement)) {
         console.error('Table element is not initialized or is not a valid HTMLTableElement.');
@@ -149,16 +155,22 @@ function renderChartFromTable() {
 
     const trajectoryData = [];
     const rows = table.querySelectorAll('tbody tr');
-    rows.forEach(row => {
+
+    rows.forEach(row => 
+    {
         const cells = row.querySelectorAll('td');
-        if (cells.length >= 5) {
+        
+        if (cells.length >= 5) 
+        {
             const distance = parseFloat(cells[0].textContent);
             const drop = parseFloat(cells[3].textContent);
-            if (!isNaN(distance) && !isNaN(drop)) {
+            
+            if (!isNaN(distance) && !isNaN(drop)) 
+            {
                 trajectoryData.push({ distance, drop: -Math.abs(drop) });
             }
         }
     });
 
-    renderChart(trajectoryData.length > 0 ? trajectoryData : []);
+    return trajectoryData.length > 0 ? trajectoryData : [];
 }

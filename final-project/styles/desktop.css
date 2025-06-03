@@ -52,6 +52,11 @@
         width: 100%;
     }
 
+    /* .ballistic-card canvas
+    {
+        width: 675px;        
+    } */
+
     .ballistic-card,
     .info-card
     {

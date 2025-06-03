@@ -3,19 +3,32 @@ import { calculateTrajectory } from './ballistics-calculator.mjs';
 
 import { renderChart } from './ballistics-charts.mjs';
 import { formatTrajectoryData } from './ballistics-charts.mjs';
+import { getDataFromTable } from './ballistics-charts.mjs';
+
+const resultsTableName = 'resultsTableBody';
+const trajectoryChartName = 'trajectory-chart';
 
 document.addEventListener('DOMContentLoaded', () => 
 {
-
-    const table = document.getElementById('resultsTableBody');
-    const canvas = document.getElementById('trajectory-chart');    
     
+    // const resultsTableName = 'resultsTableBody';
+    // const trajectoryChartName = 'trajectory-chart';
+
     loadAmmunitionData();
     initilizeCalculator(displayTrajectoryData);   
     
-    initializeObserver('resultsTableBody');
+    initializeTableWatch(resultsTableName, refresh);
+
 });
 
+export function refresh()
+{
+  // const trajectoryChartName = 'trajectory-chart';
+
+  var trajectoryData = getDataFromTable(resultsTableName);
+
+  renderChart(trajectoryChartName, trajectoryData);
+}
 
 function loadAmmunitionData() 
 {
@@ -92,43 +105,70 @@ function initilizeCalculator(displayCallback)
     });
 }
 
-function initializeObserver(tableSelector, callback) {
-  const table = document.querySelector(tableSelector);
 
-  // MutationObserver for data and structural changes
-  const mutationObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'childList') {
-        callback('Size changed', {
-          rows: table.querySelectorAll('tr').length,
-          cols: table.querySelector('tr')?.querySelectorAll('td, th').length || 0
-        });
-      } else if (mutation.type === 'characterData') {
-        callback('Data changed', { cell: mutation.target.textContent });
-      } else if (mutation.type === 'attributes' && ['style', 'width', 'height'].includes(mutation.attributeName)) {
-        callback('Attribute-based size changed', table.getBoundingClientRect());
-      }
+function initializeTableWatch(id, callback, debounceMs = 100) {
+  // Get the table element by ID
+  const table = document.getElementById(id);
+  
+  // Validate inputs
+  if (!table) 
+  {
+    console.error(`Table with ID "${id}" not found`);
+    return null;
+  }
+
+  if (typeof callback !== 'function') 
+  {
+    console.error('Callback must be a function');
+    return null;
+  }
+  
+  // Debounce function to limit callback frequency
+  let timeoutId;
+
+  const debouncedCallback = (event) => 
+  {
+    clearTimeout(timeoutId);
+    
+    timeoutId = setTimeout(() => 
+    {
+      callback(event);
+    }, debounceMs);
+  };
+  
+  // Create a MutationObserver to watch for changes
+  const mutationObserver = new MutationObserver((mutations) => 
+  {
+    mutations.forEach((mutation) => 
+    {
+      debouncedCallback(mutation);
     });
   });
-
-  mutationObserver.observe(table, {
-    childList: true,
-    characterData: true,
-    attributes: true,
-    subtree: true,
-    attributeFilter: ['style', 'width', 'height']
+  
+  // Configure and start the MutationObserver
+  mutationObserver.observe(table, 
+  {
+    childList: true, // Watch for addition/removal of child elements
+    subtree: true,   // Watch all descendants
+    attributes: true // Watch for attribute changes
   });
-
-  // ResizeObserver for rendered size changes
-  const resizeObserver = new ResizeObserver(() => {
-    callback('Rendered size changed', table.getBoundingClientRect());
+  
+  // Create a ResizeObserver to watch for size changes
+  const resizeObserver = new ResizeObserver((entries) => 
+  {
+    entries.forEach((entry) => 
+    {
+      debouncedCallback(entry);
+    });
   });
-
+  
+  // Start the ResizeObserver
   resizeObserver.observe(table);
-
-  // Return function to stop observing
-  return () => {
-    mutationObserver.disconnect();
-    resizeObserver.disconnect();
+  
+  // Return both observers to allow for disconnection later
+  return 
+  {
+    mutationObserver,
+    resizeObserver
   };
 }
