@@ -1,5 +1,4 @@
 import { loadMenu } from './menu.mjs';
-import { refresh } from './ballistics-pro.mjs';
 
 document.addEventListener('DOMContentLoaded', () => 
 {
@@ -58,11 +57,13 @@ function setupThemeToggle()
         toggleText.textContent = newTheme === 'light' ? 'Light' : 'Dark';
         localStorage.setItem('theme', newTheme);
 
-        // Refresh the page to apply the new theme
-        if(document.getElementById('trajectory-chart')) 
+        if(window.location.pathname.includes('index.html'))
         {
-            refresh();
-        }
+            import('./ballistics-pro.mjs').then((module) =>
+            {
+               module.refresh(); 
+            });
+        }           
 
     });
 }

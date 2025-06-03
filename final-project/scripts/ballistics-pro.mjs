@@ -1,4 +1,4 @@
-import { fetchData } from './utilities.mjs';
+import { fetchData, saveDataToLocalStorage, getDataFromLocalStorage } from './utilities.mjs';
 import { calculateTrajectory } from './ballistics-calculator.mjs';
 
 import { renderChart } from './ballistics-charts.mjs';
@@ -7,13 +7,10 @@ import { getDataFromTable } from './ballistics-charts.mjs';
 
 const resultsTableName = 'resultsTableBody';
 const trajectoryChartName = 'trajectory-chart';
+const lastInputDataKey = 'lastInputData';
 
 document.addEventListener('DOMContentLoaded', () => 
-{
-    
-    // const resultsTableName = 'resultsTableBody';
-    // const trajectoryChartName = 'trajectory-chart';
-
+{  
     loadAmmunitionData();
     initilizeCalculator(displayTrajectoryData);   
     
@@ -23,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () =>
 
 export function refresh()
 {
-  // const trajectoryChartName = 'trajectory-chart';
-
   var trajectoryData = getDataFromTable(resultsTableName);
 
   renderChart(trajectoryChartName, trajectoryData);
@@ -97,20 +92,38 @@ function initilizeCalculator(displayCallback)
 
         const trajectoryData = calculateTrajectory(inputData);
 
+        saveDataToLocalStorage(lastInputDataKey, inputData);
+
         if(displayCallback)
         { 
             displayCallback(trajectoryData);
         }
 
     });
+
+    // Load last input data from localStorage
+    let lastInputData = {};
+
+    if(getDataFromLocalStorage(lastInputDataKey, lastInputData, true))
+    {   
+        if (lastInputData) 
+        {
+            form.elements['muzzleVelocity'].value = parseInt(lastInputData.data.muzzleVelocity) || 0;
+            form.elements['ballisticCoefficient'].value = lastInputData.data.ballisticCoefficient || 0;
+            form.elements['bulletWeight'].value = lastInputData.data.bulletWeight || 0;
+            form.elements['windSpeed'].value = lastInputData.data.windSpeed || 0;
+        }
+
+        form.dispatchEvent(new Event('submit'));
+    }
+
 }
 
 
 function initializeTableWatch(id, callback, debounceMs = 100) {
-  // Get the table element by ID
-  const table = document.getElementById(id);
   
-  // Validate inputs
+  const table = document.getElementById(id);
+    
   if (!table) 
   {
     console.error(`Table with ID "${id}" not found`);
@@ -123,7 +136,7 @@ function initializeTableWatch(id, callback, debounceMs = 100) {
     return null;
   }
   
-  // Debounce function to limit callback frequency
+  
   let timeoutId;
 
   const debouncedCallback = (event) => 
@@ -136,7 +149,7 @@ function initializeTableWatch(id, callback, debounceMs = 100) {
     }, debounceMs);
   };
   
-  // Create a MutationObserver to watch for changes
+  
   const mutationObserver = new MutationObserver((mutations) => 
   {
     mutations.forEach((mutation) => 
@@ -145,7 +158,7 @@ function initializeTableWatch(id, callback, debounceMs = 100) {
     });
   });
   
-  // Configure and start the MutationObserver
+  
   mutationObserver.observe(table, 
   {
     childList: true, // Watch for addition/removal of child elements
@@ -153,7 +166,7 @@ function initializeTableWatch(id, callback, debounceMs = 100) {
     attributes: true // Watch for attribute changes
   });
   
-  // Create a ResizeObserver to watch for size changes
+  
   const resizeObserver = new ResizeObserver((entries) => 
   {
     entries.forEach((entry) => 
@@ -162,10 +175,10 @@ function initializeTableWatch(id, callback, debounceMs = 100) {
     });
   });
   
-  // Start the ResizeObserver
+  
   resizeObserver.observe(table);
   
-  // Return both observers to allow for disconnection later
+  
   return 
   {
     mutationObserver,
