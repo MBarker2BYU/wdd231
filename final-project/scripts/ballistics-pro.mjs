@@ -81,7 +81,17 @@ function initilizeCalculator(displayCallback)
             muzzleVelocity: parseFloat(formData.get('muzzleVelocity')),
             ballisticCoefficient: parseFloat(formData.get('ballisticCoefficient')),
             bulletWeight: parseFloat(formData.get('bulletWeight')),
-            windSpeed: parseFloat(formData.get('windSpeed'))
+            bulletDiameter: parseFloat(formData.get('bulletDiameter')),
+            windSpeed: parseFloat(formData.get('windSpeed')),
+            windDirection: parseFloat(formData.get('windDirection')),
+            temperature: parseFloat(formData.get('temperature')),
+            pressure: parseFloat(formData.get('pressure')),
+            humidity: parseFloat(formData.get('humidity')),
+            latitude: parseFloat(formData.get('latitude')),
+            twistLength: parseFloat(formData.get('twistLength')),
+            sightHeight: parseFloat(formData.get('sightHeight')),
+            zeroRange: parseFloat(formData.get('zeroRange')),
+            maxDistance: parseFloat(formData.get('maxDistance'))
         };
 
         if (isNaN(inputData.muzzleVelocity) || isNaN(inputData.ballisticCoefficient) ||

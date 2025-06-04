@@ -64,7 +64,7 @@
                     <div>
                         <h1>Ballistics Calculator</h1>
                     </div>
-                    <div class="form-wrapper">
+                    <!-- <div class="form-wrapper">
                         <form id="calcForm">
                             <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
                             <input type="number" id="muzzleVelocity" name="muzzleVelocity" required>
@@ -76,7 +76,54 @@
                             <input type="number" id="windSpeed" name="windSpeed" required>
                             <button type="submit">Calculate</button>
                         </form>
-                    </div>
+                    </div> -->
+                    <div class="form-wrapper">
+                <form id="calcForm">
+                    <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
+                    <input type="number" id="muzzleVelocity" name="muzzleVelocity" value="2836" required>
+                    
+                    <label for="ballisticCoefficient">Ballistic Coefficient (G1):</label>
+                    <input type="number" id="ballisticCoefficient" name="ballisticCoefficient" step="0.001" value="1.050" required>
+                    
+                    <label for="bulletWeight">Bullet Weight (grains):</label>
+                    <input type="number" id="bulletWeight" name="bulletWeight" value="750" required>
+                    
+                    <label for="bulletDiameter">Bullet Diameter (inches):</label>
+                    <input type="number" id="bulletDiameter" name="bulletDiameter" step="0.001" value="0.510" required>
+                    
+                    <label for="windSpeed">Wind Speed (mph):</label>
+                    <input type="number" id="windSpeed" name="windSpeed" value="11.18" required>
+                    
+                    <label for="windDirection">Wind Direction (degrees from north):</label>
+                    <input type="number" id="windDirection" name="windDirection" min="0" max="360" value="90" required>
+                    
+                    <label for="temperature">Temperature (°F):</label>
+                    <input type="number" id="temperature" name="temperature" value="75" required>
+                    
+                    <label for="pressure">Pressure (inHg):</label>
+                    <input type="number" id="pressure" name="pressure" step="0.01" value="29.80" required>
+                    
+                    <label for="humidity">Humidity (%):</label>
+                    <input type="number" id="humidity" name="humidity" min="0" max="100" value="70" required>
+                    
+                    <label for="latitude">Latitude (degrees):</label>
+                    <input type="number" id="latitude" name="latitude" min="-90" max="90" value="45" required>
+                    
+                    <label for="twistLength">Barrel Twist Length (inches, e.g., 15 for 1:15):</label>
+                    <input type="number" id="twistLength" name="twistLength" value="15" required>
+                    
+                    <label for="sightHeight">Sight Height (inches):</label>
+                    <input type="number" id="sightHeight" name="sightHeight" step="0.01" value="-1.5" required>
+                    
+                    <label for="zeroRange">Zero Range (yards):</label>
+                    <input type="number" id="zeroRange" name="zeroRange" value="100" required>
+                    
+                    <label for="maxDistance">Max Distance (yards):</label>
+                    <input type="number" id="maxDistance" name="maxDistance" value="500" required>
+                    
+                    <button type="submit">Calculate</button>
+                </form>
+            </div>
                 </div>   
             </section>
             <section class="ballistic-cards">
