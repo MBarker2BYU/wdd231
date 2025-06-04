@@ -95,10 +95,16 @@ function initilizeCalculator(displayCallback)
         };
 
         if (isNaN(inputData.muzzleVelocity) || isNaN(inputData.ballisticCoefficient) ||
-            isNaN(inputData.bulletWeight) || isNaN(inputData.windSpeed)) {
-            alert('Please enter valid numbers for all fields.');
-            return;
-        }
+            isNaN(inputData.bulletWeight) || isNaN(inputData.bulletDiameter) || 
+            isNaN(inputData.windSpeed) || isNaN(inputData.windDirection) || 
+            isNaN(inputData.temperature) || isNaN(inputData.pressure) || 
+            isNaN(inputData.humidity) || isNaN(inputData.latitude) || 
+            isNaN(inputData.twistLength) || isNaN(inputData.sightHeight) || 
+            isNaN(inputData.zeroRange) || isNaN(inputData.maxDistance))
+            {
+                alert('Please enter valid numbers for all fields.');
+                return;
+            }
 
         const trajectoryData = calculateTrajectory(inputData);
 
