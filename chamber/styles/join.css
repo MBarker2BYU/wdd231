@@ -1,0 +1,177 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.membership-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.form-section .card {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: var(--text-font);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    font-family: var(--text-font);
+    border: 1px solid var(--osu-gray);
+    border-radius: 5px;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: var(--osu-dark-gray);
+    color: var(--osu-white);
+    border-color: var(--osu-scarlet);
+}
+
+.membership-card 
+{
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+    border: 1px solid var(--osu-gray);
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px var(--shadow-color);
+    margin: 10px 0;    
+}
+
+body.dark-mode .membership-card {
+    background-color: var(--osu-dark-gray);
+    border-color: var(--osu-scarlet);
+    color: var(--osu-white);
+}
+
+.membership-card h3 {
+    font-family: var(--heading-font);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--osu-gray);
+}
+
+body.dark-mode .membership-card h3 
+{
+    border-bottom: 1px solid var(--osu-scarlet);
+}
+
+.membership-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.membership-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.membership-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.membership-card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--osu-white);
+    padding: 20px;
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px var(--shadow-color);
+}
+
+body.dark-mode .modal-content {
+    background: var(--osu-dark-gray);
+    border: 1px solid var(--osu-scarlet);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content h3 {
+    font-family: var(--heading-font);
+    border-bottom: 1px solid var(--osu-gray);
+    padding-bottom: 10px;
+}
+
+body.dark-mode .modal-content h3 {
+    border-bottom: 1px solid var(--osu-scarlet);
+}
+
+.modal-content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.close-modal {
+    background: var(--osu-light-gray);
+    border: 1px solid var(--osu-gray);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+body.dark-mode .close-modal {
+    background: var(--osu-dark-gray);
+    border-color: var(--osu-scarlet);
+    color: var(--osu-white);
+}
+
+@media (max-width: 768px) 
+{
+    .membership-section {
+        order: 2;
+    }
+
+    .form-section {
+        order: 1;
+    }
+}

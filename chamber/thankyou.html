@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="images/hammerhead-shark.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 231 – Web Frontend Development I - Matthew D. Barker</title>
+    <meta name="description" content="WDD231: Web Frontend Development I - Matthew D. Barker - Thank You Page">
+    <meta name="keywords" content="WDD 231, Web Frontend Development I, Index Page, Cape Coral, Florida, United States of America">
+    <meta name="author" content="Matthew D. Barker">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/desktop.css">
+    <link rel="stylesheet" href="styles/thankyou.css">
+            
+    <script defer src="scripts/common.js"></script>
+    <script defer src="scripts/thankyou.js"></script>
+     
+</head>
+<body class="light-mode">
+    <header>
+        <div class="logo">
+            <img src="images/hammerhead-shark.webp" alt="Logo">
+        </div>
+        <div class="title-container">
+            <h1>Hammerhead Cove</h1>
+            <p>Chamber of Commerce</p>
+        </div>
+        <nav>
+            <ul class="nav-links"></ul>
+            <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+            <button class="hamburger" aria-label="Toggle menu">☰</button>
+        </nav>
+    </header>
+    <main class="container">
+        <h2>Thank You for Your Application!</h2>
+        <div class="confirmation card">
+            <p><strong>First Name:</strong> <span id="firstName"></span></p>
+            <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Mobile Phone:</strong> <span id="phone"></span></p>
+            <p><strong>Business/Organization:</strong> <span id="orgName"></span></p>
+            <p><strong>Submission Date:</strong> <span id="timestamp"></span></p>
+        </div>
+        <p>We will review your application and contact you soon.</p>
+    </main>
+    <footer>
+        <div class="footer-section">
+            <h3>Hammerhead Cove Chamber of Commerce</h3>
+            <p>1776 Shark Island Ave.<br>Hammerhead Cove, Florida 12345<br>info@hammerheadcove.org<br>(239) 555-1212</p>
+        </div>
+        <div class="footer-section social-media">
+            <a href="#"><img src="images/youtube.png" alt="You Tube Logo"></a>
+            <a href="#"><img src="images/twitter_x.png" alt="X Logo"></a>
+            <a href="#"><img src="images/linkedin.png" alt="LinkIn Logo"></a>
+        </div>
+        <div class="footer-section">
+            <h3>WDD231 Class Project</h3>
+            <p>Matthew D. Barker<br><span id="currentyear"></span> Hammerhead Cove Chamber of Commerce<br>Last Modification: <span id="lastmodified"></span></p>
+        </div>
+    </footer>    
+</body>
+</html>

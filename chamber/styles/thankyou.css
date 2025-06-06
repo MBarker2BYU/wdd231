@@ -1,0 +1,18 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.confirmation.card {
+    padding: 20px;
+}
+
+.confirmation p {
+    margin: 10px 0;
+    font-family: var(--text-font);
+}
+
+.confirmation strong {
+    font-family: var(--heading-font);
+}
