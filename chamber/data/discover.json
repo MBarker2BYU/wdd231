@@ -1,0 +1,52 @@
+{
+    "items": [
+        {
+            "name": "Edison and Ford Winter Estates",
+            "image": "edison-fords.webp",
+            "address": "100 Coastal Dr, Hammerhead Cove, FL 12345",
+            "description": "The historic winter homes of Thomas Edison and Henry Ford feature botanical gardens, a museum with Edison’s inventions, and guided or self-guided tours. Located at 2350 McGregor Blvd, it’s a must-visit for history and innovation enthusiasts. Open daily, with higher admission costs but rich educational value."
+        },
+        {
+            "name": "Farmers Market",
+            "image": "farmers-market.webp",
+            "address": "200 History Ln, Hammerhead Cove, FL 12345",
+            "description": "Held every Saturday from 8 a.m. to 1 p.m. at SE 47th Terrace and SE 10th Place in Club Square, this market features fresh produce, baked goods, and artisan products. It’s a family-friendly spot to experience local culture."
+        },
+        {
+            "name": "Times Square",
+            "image": "fort-myers-beach.webp",
+            "address": "300 Bloom St, Hammerhead Cove, FL 12345",
+            "description": "The heart of Fort Myers Beach, this pedestrian-friendly area at the base of the Matanzas Pass Bridge features restaurants, shops, and street performers. Enjoy seafood at spots like The Beached Whale or browse beachwear boutiques. It’s lively day or night, with sunset views over the Gulf."
+        },
+        {
+            "name": "Lakes Regional Park",
+            "image": "lakes-park.webp",
+            "address": "400 Gallery Rd, Hammerhead Cove, FL 12345",
+            "description": "A 289-acre park at 7330 Gladiolus Dr, transformed from a quarry into a family oasis. Offers a miniature train ride, boat rentals, playgrounds, and picnic areas. Free entry, with affordable rentals for bikes or boats, ideal for outdoor fun."
+        },
+        {
+            "name": "Manatee Park",
+            "image": "manatee-park.webp",
+            "address": "500 Nature Way, Hammerhead Cove, FL 12345",
+            "description": "A free park at 10901 Palm Beach Blvd where visitors can observe manatees in warmer months, especially winter. Features walking paths, a gift shop, and kayak rentals. Parking is $5/day, making it a budget-friendly nature outing."
+        },
+        {
+            "name": "River District",
+            "image": "river-district.webp",
+            "address": "600 Ocean Ave, Hammerhead Cove, FL 12345",
+            "description": "The historic downtown area along the Caloosahatchee River offers brick-paved streets, public art, shops, and waterfront dining. Highlights include the Florida Panther sculpture on Monroe Street and vibrant nightlife. Great for a leisurely stroll or evening out."
+        },
+        {
+            "name": "Sun Splash Family Waterpark",
+            "image": "sun-splash.webp",
+            "address": "700 Dock St, Hammerhead Cove, FL 12345",
+            "description": "A 14-acre waterpark at 400 Santa Barbara Blvd with thrilling slides, a lazy river, and kid-friendly areas. Open seasonally (March-September), it’s perfect for families seeking fun. Check online for deals and cabana rentals."
+        },
+        {
+            "name": "Wicked Dolphin Rum Distillery",
+            "image": "wicked-dolphin-distillery.webp",
+            "address": "800 Book Blvd, Hammerhead Cove, FL 12345",
+            "description": "Located at 131 SW 3rd Pl, this distillery offers free tours (Tuesday, Thursday, Friday, Saturday) showcasing the rum-making process, ending with tastings of award-winning rums. A unique stop for adults interested in local craft spirits."
+        }
+    ]
+}

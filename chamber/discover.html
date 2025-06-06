@@ -14,8 +14,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Stardos+Stencil:wght@400;700&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/desktop.css">
+    <link rel="stylesheet" href="styles/discover.css">
+
     <script defer src="scripts/common.js"></script>    
+    <script defer src="scripts/discover.js"></script>
 </head>
 <body class="light-mode">
     <header>
@@ -33,8 +39,12 @@
         </nav>
     </header>
     <main>
-        <h1>Discovery Page</h1>
-        <h2>Under Construction</h2>        
+        <aside class="visit-message">
+            <p id="visitMessage"></p>
+        </aside>
+        <section class="discover-grid">
+            <!-- Cards will be dynamically inserted here via JavaScript -->
+        </section>        
     </main>
     <footer>
         <div class="footer-section">
