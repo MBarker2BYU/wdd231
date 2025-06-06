@@ -78,6 +78,24 @@ body.dark-mode .membership-card h3
     border-bottom: 1px solid var(--osu-scarlet);
 }
 
+.membership-card-content
+{
+    display: grid; 
+    grid-template-columns: 40% 60%;     
+}
+
+.membership-card-text
+{
+    padding: 10px;     
+}
+
+.membership-card-image
+{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;    
+}
+
 .membership-card:nth-child(1) {
     animation-delay: 0.2s;
 }
