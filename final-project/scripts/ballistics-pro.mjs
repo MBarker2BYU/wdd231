@@ -1,9 +1,9 @@
 import { fetchData, saveDataToLocalStorage, getDataFromLocalStorage } from './utilities.mjs';
-import { calculateTrajectory } from './ballistics-calculator.mjs';
+import { calculateTrajectory, runSelfCheck } from './ballistics-calculator.mjs';
 
-import { renderChart } from './ballistics-charts.mjs';
-import { formatTrajectoryData } from './ballistics-charts.mjs';
-import { getDataFromTable } from './ballistics-charts.mjs';
+import { renderChart, formatTrajectoryData, getDataFromTable } from './ballistics-charts.mjs';
+// import { formatTrajectoryData } from './ballistics-charts.mjs';
+// import { getDataFromTable } from './ballistics-charts.mjs';
 
 const resultsTableName = 'resultsTableBody';
 const trajectoryChartName = 'trajectory-chart';
@@ -11,6 +11,12 @@ const lastInputDataKey = 'lastInputData';
 
 document.addEventListener('DOMContentLoaded', () => 
 {  
+    // Run self-check to ensure the calculator is functioning correctly
+    runSelfCheck().then(() => 
+    {
+        console.log('Self-check completed successfully.');
+    });
+
     loadAmmunitionData();
     initilizeCalculator(displayTrajectoryData);   
     
@@ -46,10 +52,17 @@ function loadAmmunitionData()
     });
 }
 
-function displayTrajectoryData(trajectoryData) {
+function displayTrajectoryData(trajectoryData) 
+{
     const tbody = document.querySelector('#resultsTableBody tbody');
     let tableContent = '';
 
+    if (!trajectoryData || trajectoryData.length === 0) 
+      {
+        tbody.innerHTML = '<tr><td colspan="5">No data available</td></tr>';
+        return;
+      }
+      
     trajectoryData.forEach(trajectory => {
         tableContent += `
             <tr>
