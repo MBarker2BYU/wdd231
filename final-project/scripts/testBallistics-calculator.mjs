@@ -4,8 +4,9 @@ import {
   calculateBulletDrop,
   calculateKineticEnergy,
   calculateWindDrift,
-  calculateAirDensity
-} from './ballistics-calculator.mjs';
+  calculateAirDensity,
+  calculateTrajectory
+} from 'ballistics-calculator.mjs';
 
 // Simple test framework
 function assert(condition, message) {
@@ -82,6 +83,37 @@ console.log('Running Ballistics Calculator Unit Tests...\n');
   const expectedDensity = 1.225;
   const result = calculateAirDensity(tempF, pressureInHg, humidityPercent);
   assertCloseTo(result, expectedDensity, 0.01, 'calculateAirDensity computes density correctly');
+}
+
+// Test calculateTrajectory drag factor
+{
+  const inputs = {
+    muzzleVelocity: 3000, // fps
+    ballisticCoefficient: 0.3,
+    bulletWeight: 150, // grains
+    windSpeed: 10, // mph
+    bulletDiameter: 0.308, // inches
+    tempF: 59, // °F
+    pressureInHg: 29.92, // inHg
+    humidityPercent: 50 // %
+  };
+  const GRAINS_TO_KG = 0.00006479891;
+  const INCHES_TO_METERS = 0.0254;
+  const airDensity = calculateAirDensity(inputs.tempF, inputs.pressureInHg, inputs.humidityPercent);
+  const bulletDiameterMeters = inputs.bulletDiameter * INCHES_TO_METERS;
+  const crossSectionalArea = Math.PI * (bulletDiameterMeters / 2) ** 2;
+  const bulletMassKg = inputs.bulletWeight * GRAINS_TO_KG;
+  const expectedDragFactor = (airDensity / (2 * inputs.ballisticCoefficient * bulletMassKg)) * crossSectionalArea;
+  const results = calculateTrajectory(inputs);
+  const firstResult = results[0];
+  const distanceMeters = 0; // First point at 0 yards
+  const expectedVelocity = inputs.muzzleVelocity * Math.exp(-expectedDragFactor * distanceMeters);
+  assertCloseTo(
+    firstResult.velocity,
+    expectedVelocity,
+    0.01,
+    'calculateTrajectory applies drag factor correctly at 0 yards'
+  );
 }
 
 console.log('\nTests completed.');
