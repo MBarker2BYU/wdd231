@@ -48,8 +48,10 @@
         <section class="form-section">
             <div class="card">
                 <h1>Join today!</h1>
-                <p>Join the Hammerhead Cove Chamber of Commerce today! Fill out the application form below to become a member and enjoy exclusive benefits.</p>
-                <p>Membership is open to all businesses and organizations in the Hammerhead Cove area.</p>
+                <div style="border: red 1px solid; padding: 10px; margin-bottom: 20px;">
+                    <p>Join the Hammerhead Cove Chamber of Commerce today! Fill out the application form below to become a member and enjoy exclusive benefits.</p>
+                    <p>Membership is open to all businesses and organizations in the Hammerhead Cove area.</p>
+                </div>
                 <form method="get" action="thankyou.html">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
@@ -78,6 +80,7 @@
                     <div class="form-group">
                         <label for="membershipLevel">Membership Level</label>
                         <select id="membershipLevel" name="membershipLevel" title="Select Membership Level" required>
+                            <option value="">Select Membership Level</option>
                             <option value="np">NP Membership (Non-Profit)</option>
                             <option value="bronze">Bronze Membership</option>
                             <option value="silver">Silver Membership</option>
