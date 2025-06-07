@@ -17,6 +17,12 @@
     min-width: 300px;
 }
 
+.join-offer
+{
+    padding: 10px; 
+    margin-bottom: 20px;
+}
+
 .form-section .card {
     padding: 20px;
 }
