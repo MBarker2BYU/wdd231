@@ -1,28 +1,33 @@
-header 
-{
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
 }
 
-.logo img 
-{
+.logo img {
     max-width: 128px;
     height: auto;
 }
 
-.nav-links 
-{
+.nav-links {
     display: flex;
 }
 
-.nav-links li 
-{
+.nav-links li {
     margin-left: 1.5rem;
 }
 
-.hamburger 
-{
+.hamburger {
     display: none;
+}
+
+.title-container p 
+{
+    font-size: 2.5rem;
+}
+
+.title-container span 
+{
+    font-size: 1.25rem;
 }

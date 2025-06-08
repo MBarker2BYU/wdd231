@@ -96,6 +96,21 @@ body.dark-mode .visit-message p {
     color: var(--osu-white);
 }
 
+.card.loading {
+    background-color: var(--osu-light-gray);
+    border: 1px solid var(--osu-gray);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 300px; /* Match card width */
+    height: 400px; /* Approximate height of a card with image, text, and button */
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+body.dark-mode .card.loading {
+    background-color: var(--osu-gray);
+    border-color: var(--osu-scarlet);
+}
+
 /* Small Screens (320px–640px) */
 @media screen and (max-width: 640px) {
     .discover-grid {

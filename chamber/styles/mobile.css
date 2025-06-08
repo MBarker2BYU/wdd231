@@ -36,13 +36,15 @@
     .theme-toggle {
         order: -1;
         margin-right: 1rem;
-    }
-
-    .title-container h1 {
+    } 
+    
+    .title-container p 
+    {
         font-size: 1.2rem;
     }
 
-    .title-container p {
-        font-size: 0.6rem;
+    .title-container span 
+    {
+        font-size: 0.85rem;
     }
 }

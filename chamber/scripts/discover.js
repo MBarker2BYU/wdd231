@@ -17,11 +17,32 @@ if (!lastVisit) {
 localStorage.setItem("lastVisit", now);
 
 // Fetch and display discover items
+// fetch("data/discover.json")
+//     .then(response => response.json())
+//     .then(data => {
+//         const grid = document.querySelector(".discover-grid");
+//         data.items.forEach(item => {
+//             const card = document.createElement("article");
+//             card.className = "card";
+//             card.innerHTML = `
+//                 <h2>${item.name}</h2>
+//                 <figure>
+//                     <img src="images/${item.image}" alt="${item.name}" width="300" height="200">
+//                 </figure>
+//                 <address>${item.address}</address>
+//                 <p>${item.description}</p>
+//                 <button>Learn More</button>
+//             `;
+//             grid.appendChild(card);
+//         });
+//     });
+
 fetch("data/discover.json")
     .then(response => response.json())
     .then(data => {
         const grid = document.querySelector(".discover-grid");
-        data.items.forEach(item => {
+        const placeholders = grid.querySelectorAll(".card.loading");
+        data.items.forEach((item, index) => {
             const card = document.createElement("article");
             card.className = "card";
             card.innerHTML = `
@@ -33,6 +54,15 @@ fetch("data/discover.json")
                 <p>${item.description}</p>
                 <button>Learn More</button>
             `;
-            grid.appendChild(card);
+            // Replace placeholder with actual card
+            if (placeholders[index]) {
+                placeholders[index].replaceWith(card);
+            } else {
+                grid.appendChild(card); // Fallback for unexpected cases
+            }
+        });
+        // Remove any remaining placeholders (if data.items < 8)
+        placeholders.forEach((placeholder, index) => {
+            if (index >= data.items.length) placeholder.remove();
         });
     });

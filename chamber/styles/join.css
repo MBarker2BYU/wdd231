@@ -17,6 +17,11 @@
     min-width: 300px;
 }
 
+.join-header
+{
+    font-size: xx-large;
+}
+
 .join-offer
 {
     padding: 10px; 
@@ -95,6 +100,17 @@ body.dark-mode .membership-card h3
     padding: 10px;     
 }
 
+.modal-link
+{
+    color: green;
+    text-decoration: none;
+}
+
+body.dark-mode .modal-link
+{
+    color: orange;
+}
+
 .membership-card-image
 {
     display: flex; 
@@ -117,6 +133,7 @@ body.dark-mode .membership-card h3
 .membership-card:nth-child(4) {
     animation-delay: 0.8s;
 }
+
 
 @keyframes fadeIn {
     from {

@@ -1,14 +1,27 @@
 @import url('desktop.css');
 @import url('mobile.css');
 
-@font-face {
-  font-family: 'Allerta Stencil';
-  src: url('https://fonts.googleapis.com/css2?family=Allerta+Stencil');
+@font-face 
+{
+  font-family: "Stardos Stencil";
+  src: url("../fonts/stardos-stencil-regular.woff2") format("woff2");
+  font-weight: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: 'Stardos Stencil';
-  src: url('https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700');
+
+@font-face 
+{
+  font-family: "Stardos Stencil";
+  src: url("../fonts/stardos-stencil-bold.woff2") format("woff2");
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face 
+{
+  font-family: "Allerta Stencil";
+  src: url("../fonts/allerta-stencil-regular.woff2") format("woff2");
+  font-weight: normal;
   font-display: swap;
 }
 
@@ -75,28 +88,16 @@ body.dark-mode header
     margin-left: 1rem;
 }
 
-.title-container h1 
-{
-    /* font-size: 1.8rem; */
-    color: var(--osu-black);
-}
-
-body.dark-mode .title-container h1 
-{ 
-    color: var(--osu-white);
-}
-
 .title-container p 
 {
-    font-size: 0.9rem;
-    color: var(--osu-dark-gray); 
-    opacity: 0.8;
+    /* border: red 1px solid; */
+    line-height: 1;
 }
 
-body.dark-mode .title-container p 
+/* .title-container span 
 {
-    color: var(--osu-white);     
-}
+    border: blue 1px solid;
+} */
 
 nav 
 {
@@ -123,22 +124,6 @@ body.dark-mode .nav-links a
 {
     color: var(--osu-white);     
 }
-
-/* .nav-links a:hover,
-.nav-links a:focus,
-.nav-links a:active 
-{
-    color: var(--osu-scarlet);
-    transform: scale(1.2); 
-}
-
-body.dark-mode .nav-links a:hover,
-body.dark-mode .nav-links a:focus,
-body.dark-mode .nav-links a:active 
-{
-    color: var(--osu-scarlet);
-    transform: scale(1.2);
-} */
 
 /* Base styles for nav links */
 .nav-links a:hover,
@@ -191,10 +176,10 @@ body.dark-mode .theme-toggle
     color: var(--osu-gray); 
 }
 
-body.dark-mode .theme-toggle:hover 
+/* body.dark-mode .theme-toggle:hover 
 {
     color: var(--osu-scarlet);
-}
+} */
 
 .hamburger 
 {
