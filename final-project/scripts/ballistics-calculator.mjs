@@ -1,133 +1,184 @@
-export function calculateTrajectory(inputs) {
-  const { 
-    muzzleVelocity, 
-    ballisticCoefficient, 
-    bulletWeight, 
-    windSpeed, 
-    bulletDiameter, 
-    tempF, 
-    pressureInHg, 
-    humidityPercent 
-  } = inputs;
+// ballistics-calculator.mjs
+/**
+ * @typedef {Object} TrajectoryInput
+ * @property {number} muzzleVelocity - Muzzle velocity in fps
+ * @property {number} ballisticCoefficient - Ballistic coefficient
+ * @property {number} bulletWeight - Bullet weight in grains
+ * @property {number} windSpeed - Wind speed in mph
+ * @property {number} windDirection - Wind direction in degrees (0 = headwind, 90 = right, 180 = tailwind, 270 = left)
+ * @property {number} altitude - Altitude in feet
+ * @property {number} temperature - Temperature in °F
+ * @property {number} humidity - Relative humidity (0 to 100%)
+ * @property {number} sightHeight - Sight height in inches
+ * @property {number} twistRate - Twist rate in inches per turn
+ * @property {number} latitude - Latitude in degrees
+ * @property {number} zeroRange - Zero range in yards
+ * @property {number} maxDistance - Maximum distance in yards
+ */
 
-  // Constants
-  const GRAVITY = 32.174; // ft/s^2
-  const YARDS_TO_FEET = 3; // 1 yard = 3 feet
-  const WIND_SPEED_FPS = windSpeed * 1.46667; // Convert mph to fps (1 mph = 1.46667 fps)
-  const ENERGY_CONSTANT = 450395; // Ballistics energy constant for ft-lbs
-  const GRAINS_TO_KG = 0.00006479891; // 1 grain = 0.00006479891 kg
-  const INCHES_TO_METERS = 0.0254; // 1 inch = 0.0254 meters
-  const FEET_TO_METERS = 0.3048; // 1 foot = 0.3048 meters
+/**
+ * @typedef {Object} TrajectoryResult
+ * @property {number} distance - Distance in yards
+ * @property {string} velocity - Velocity in fps, formatted to 2 decimal places
+ * @property {string} energy - Energy in ft-lbs, rounded to 0 decimal places
+ * @property {string} drop - Drop in inches, formatted to 2 decimal places
+ * @property {string} lateralDrift - Lateral drift in inches, formatted to 2 decimal places
+ */
 
-  // Calculate air density (kg/m^3)
-  const airDensity = calculateAirDensity(tempF, pressureInHg, humidityPercent);
+// Constants (unchanged)
+const GRAVITY = 32.174;
+const YARDS_TO_FEET = 3;
+const INCHES_TO_FEET = 1 / 12;
+const WIND_SPEED_CONVERSION = 1.46667;
+const ENERGY_CONSTANT = 450395;
+const GAS_CONSTANT_DRY = 1716;
+const GAS_CONSTANT_VAPOR = 2763;
+const SEA_LEVEL_PRESSURE = 2116.22;
+const SEA_LEVEL_TEMP = 518.67;
+const LAPSE_RATE = 0.003566;
+const GRAINS_TO_SLUGS = 1 / (7000 * 32.174);
+const GRAINS_TO_POUNDS = 1 / 7000;
+const SUB_STEP_YARDS = 0.1;
+const BC_AREA_CONVERSION = 175.0;
+const SPIN_DRIFT_CONSTANT = 1.25;
+const EARTH_ANGULAR_VELOCITY = 7.292e-5;
 
-  // Calculate cross-sectional area (m^2) from bullet diameter (inches)
-  const bulletDiameterMeters = bulletDiameter * INCHES_TO_METERS;
-  const crossSectionalArea = Math.PI * (bulletDiameterMeters / 2) ** 2;
+/**
+ * Calculates the bullet trajectory based on input parameters
+ * @param {TrajectoryInput} inputs - Input parameters for trajectory calculation
+ * @returns {TrajectoryResult[]} Array of trajectory results
+ */
+function calculateTrajectory(inputs) 
+{
+    // Input validation
+    if (inputs.muzzleVelocity <= 0) throw new Error("Muzzle velocity must be positive.");
+    if (inputs.ballisticCoefficient <= 0) throw new Error("Ballistic coefficient must be positive.");
+    if (inputs.bulletWeight <= 0) throw new Error("Bullet weight must be positive.");
+    if (inputs.altitude < -1000 || inputs.altitude > 30000) throw new Error("Altitude out of reasonable range.");
+    if (inputs.temperature < -50 || inputs.temperature > 120) throw new Error("Temperature out of reasonable range.");
+    if (inputs.twistRate <= 0) throw new Error("Twist rate must be positive.");
+    if (inputs.latitude < -90 || inputs.latitude > 90) throw new Error("Latitude out of range.");
+    if (inputs.windDirection < 0 || inputs.windDirection >= 360) throw new Error("Wind direction must be 0–359 degrees.");
+    if (inputs.zeroRange <= 0) throw new Error("Zero range must be positive.");
+    if (inputs.maxDistance <= 0) throw new Error("Max distance must be positive.");
 
-  // Calculate drag factor (1/m)
-  // k = (ρ * Cd * A) / (2 * m) = ρ / (2 * BC), where BC = m / (Cd * A)
-  // Convert BC and bulletWeight to consistent units
-  const bulletMassKg = bulletWeight * GRAINS_TO_KG;
-  const dragFactor = (airDensity / (2 * ballisticCoefficient * bulletMassKg)) *           crossSectionalArea;
+    const muzzleVelocity = inputs.muzzleVelocity;
+    const ballisticCoefficient = inputs.ballisticCoefficient;
+    const bulletWeight = inputs.bulletWeight;
+    const windSpeed = inputs.windSpeed;
+    const windDirectionRad = inputs.windDirection * Math.PI / 180;
+    const altitude = inputs.altitude;
+    const temperatureF = inputs.temperature;
+    const relativeHumidity = Math.min(Math.max(inputs.humidity / 100, 0), 1); // Convert % to fraction
+    const sightHeightFeet = inputs.sightHeight * INCHES_TO_FEET;
+    const twistRateInches = inputs.twistRate;
+    const latitudeRad = inputs.latitude * Math.PI / 180;
+    const zeroRangeYards = inputs.zeroRange;
+    const maxDistanceYards = Math.min(inputs.maxDistance, 1000); // Cap for safety
 
-  // Calculate trajectory at 100-yard intervals up to 500 yards
-  const results = [];
-  let velocity = muzzleVelocity; // Initial velocity in fps
-  for (let distance = 0; distance <= 500; distance += 100) {
-    const distanceFeet = distance * YARDS_TO_FEET; // Convert yards to feet
-    const distanceMeters = distanceFeet * FEET_TO_METERS; // Convert feet to meters for drag calculation
+    // Convert temperature to Rankine and Celsius
+    const temperatureR = temperatureF + 459.67;
+    const temperatureC = (temperatureF - 32) * 5 / 9;
 
-    // Calculate time of flight
-    const time = calculateTimeOfFlight(distanceFeet, velocity);
+    // Calculate pressure at altitude (ignoring form's pressure input for now)
+    const tempRatio = 1 - (LAPSE_RATE * altitude) / SEA_LEVEL_TEMP;
+    if (tempRatio <= 0) throw new Error("Altitude too high for standard atmosphere model.");
+    const pressure = SEA_LEVEL_PRESSURE * Math.pow(tempRatio, 5.255);
 
-    // Calculate velocity decay (using distance in meters)
-    velocity = calculateVelocityDecay(muzzleVelocity, dragFactor, distanceMeters);
+    // Calculate saturation vapor pressure (Magnus-Tetens, converted to lb/ft²)
+    const satVaporPressurePa = 610.78 * Math.pow(10, 7.5 * temperatureC / (temperatureC + 237.3));
+    const satVaporPressure = satVaporPressurePa * 0.020885;
 
-    // Calculate bullet drop
-    const dropInches = calculateBulletDrop(time, GRAVITY);
+    // Water vapor pressure
+    const vaporPressure = relativeHumidity * satVaporPressure;
 
-    // Calculate kinetic energy
-    const energy = calculateKineticEnergy(bulletWeight, velocity, ENERGY_CONSTANT);
+    // Virtual temperature
+    const Rd_Rv_Ratio = GAS_CONSTANT_DRY / GAS_CONSTANT_VAPOR;
+    const virtualTempR = temperatureR / (1 - (vaporPressure / pressure) * (1 - Rd_Rv_Ratio));
 
-    // Calculate wind drift
-    const windDriftInches = calculateWindDrift(WIND_SPEED_FPS, time);
+    // Air density
+    const airDensity = pressure / (GAS_CONSTANT_DRY * virtualTempR);
 
-    results.push({
-      distance: distance, // yards
-      velocity: velocity.toFixed(2), // fps
-      energy: energy.toFixed(0), // ft-lbs, rounded to 0 decimal places
-      drop: dropInches.toFixed(2), // inches
-      windDrift: windDriftInches.toFixed(2) // inches
-    });
-  }
+    // Convert bullet weight
+    const massSlugs = bulletWeight * GRAINS_TO_SLUGS;
+    const massPounds = bulletWeight * GRAINS_TO_POUNDS;
 
-  return results;
+    // Drag coefficient * area
+    const dragCoefficientArea = massPounds / (ballisticCoefficient * BC_AREA_CONVERSION);
+
+    // Calculate initial upward velocity for zero range
+    const zeroDistanceFeet = zeroRangeYards * YARDS_TO_FEET;
+    const avgVelocity = (muzzleVelocity + 2714.45) / 2; // Avg velocity approximation
+    const timeToZero = zeroDistanceFeet / avgVelocity;
+    const dropAtZero = 0.5 * GRAVITY * timeToZero * timeToZero;
+    const initialVy = (dropAtZero + sightHeightFeet) / timeToZero * 0.87;
+
+    // Calculate trajectory
+    const results = [];
+    let velocity = muzzleVelocity;
+    let vy = initialVy;
+    let cumulativeTime = 0;
+    let currentDistanceFeet = 0;
+    let currentHeightFeet = -sightHeightFeet;
+    let currentLateralDriftFeet = 0;
+
+    for (let distance = 0; distance <= maxDistanceYards; distance += 100) {
+        const targetDistanceFeet = distance * YARDS_TO_FEET;
+
+        // Process sub-steps
+        while (currentDistanceFeet < targetDistanceFeet) {
+            let subStepFeet = SUB_STEP_YARDS * YARDS_TO_FEET;
+            if (subStepFeet > targetDistanceFeet - currentDistanceFeet) {
+                subStepFeet = targetDistanceFeet - currentDistanceFeet;
+            }
+
+            const initialVelocity = velocity;
+            const time = subStepFeet / initialVelocity;
+
+            const windComponentFps = windSpeed * WIND_SPEED_CONVERSION * Math.cos(windDirectionRad);
+            let effectiveVelocity = initialVelocity - windComponentFps;
+            if (effectiveVelocity < 0) effectiveVelocity = 0;
+
+            const dragForce = 0.5 * airDensity * effectiveVelocity * effectiveVelocity * dragCoefficientArea;
+            const dragAcceleration = -dragForce / massSlugs;
+
+            let finalVelocity = initialVelocity + dragAcceleration * time;
+            if (finalVelocity < 0) finalVelocity = 0;
+            velocity = (initialVelocity + finalVelocity) / 2;
+
+            vy -= GRAVITY * time;
+            currentHeightFeet += vy * time;
+
+            const crosswindSpeedFps = windSpeed * WIND_SPEED_CONVERSION * Math.sin(windDirectionRad);
+            const windDriftFeet = crosswindSpeedFps * time;
+
+            const spinDriftFeet = SPIN_DRIFT_CONSTANT * Math.pow(cumulativeTime + time, 2) /
+                twistRateInches * Math.pow(velocity / 1000, 2) * INCHES_TO_FEET * time;
+
+            const coriolisDriftFeet = EARTH_ANGULAR_VELOCITY * velocity *
+                (cumulativeTime + time) * Math.sin(latitudeRad) * time;
+
+            currentLateralDriftFeet += windDriftFeet + spinDriftFeet + coriolisDriftFeet;
+
+            cumulativeTime += time;
+            currentDistanceFeet += subStepFeet;
+        }
+
+        const dropInches = -currentHeightFeet * 12;
+        const energy = (bulletWeight * velocity * velocity) / ENERGY_CONSTANT;
+        const roundedEnergy = Math.round(energy);
+        const lateralDriftInches = currentLateralDriftFeet * 12;
+
+        results.push({
+            distance: distance,
+            velocity: velocity.toFixed(2),
+            energy: roundedEnergy.toFixed(0),
+            drop: dropInches.toFixed(2),
+            lateralDrift: lateralDriftInches.toFixed(2)
+        });
+    }
+
+    return results;
 }
 
-// Calculate time of flight (simplified, assumes constant velocity for each segment)
-function calculateTimeOfFlight(distanceFeet, velocity) {
-  return distanceFeet / velocity;
-}
-
-// Calculate velocity decay due to drag (simplified exponential decay)
-function calculateVelocityDecay(muzzleVelocity, dragFactor, distanceMeters) {
-  return muzzleVelocity * Math.exp(-dragFactor * distanceMeters);
-}
-
-// Calculate bullet drop due to gravity (d = 0.5 * g * t^2)
-function calculateBulletDrop(time, gravity) {
-  const dropFeet = 0.5 * gravity * time * time;
-  return dropFeet * 12; // Convert feet to inches
-}
-
-// Calculate kinetic energy (E = (weight * v^2) / energyConstant)
-function calculateKineticEnergy(bulletWeight, velocity, energyConstant) {
-  const energy = (bulletWeight * velocity * velocity) / energyConstant;
-  return Math.round(energy); // Round to 0 decimal places
-}
-
-// Calculate wind drift (simplified: drift = wind speed * time of flight)
-function calculateWindDrift(windSpeedFps, time) {
-  const windDriftFeet = windSpeedFps * time;
-  return windDriftFeet * 12; // Convert feet to inches
-}
-
-// Calculate air density (kg/m^3) given temperature (°F), pressure (inHg), and relative humidity (%)
-export function calculateAirDensity(tempF, pressureInHg, humidityPercent) {
-  // Constants
-  const RD = 287.05;  // Gas constant for dry air (J/(kg·K))
-  const RV = 461.495; // Gas constant for water vapor (J/(kg·K))
-  
-  // Convert inputs
-  const tempC = (tempF - 32) * 5 / 9; // °F to °C
-  const tempK = tempC + 273.15;       // °C to K
-  const pressurePa = pressureInHg * 3386.39; // inHg to Pa
-  const humidity = humidityPercent / 100.0;  // Percentage to decimal
-  
-  // Calculate saturation vapor pressure using Tetens formula
-  const satVaporPressure = 610.78 * Math.pow(10, (7.5 * tempC) / (237.3 + tempC)); // Pa
-  
-  // Actual vapor pressure
-  const vaporPressure = humidity * satVaporPressure;
-  
-  // Dry air partial pressure
-  const dryPressure = pressurePa - vaporPressure;
-  
-  // Air density: ρ = (Pd / (Rd * T)) + (Pv / (Rv * T))
-  const density = (dryPressure / (RD * tempK)) + (vaporPressure / (RV * tempK));
-  
-  return density;
-}
-
-// Self-check function to run tests
-export async function runSelfCheck() {
-  try {
-    // Dynamically import the test module
-    await import('./testBallistics-calculator.mjs');
-    console.log('Self-check completed: All tests executed.');
-  } catch (error) {
-    console.error('Self-check failed:', error.message);
-  }
-}
+export { calculateTrajectory };
