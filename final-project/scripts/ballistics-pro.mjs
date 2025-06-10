@@ -7,7 +7,8 @@ const resultsTableName = 'resultsTableBody';
 const trajectoryChartName = 'trajectory-chart';
 const lastInputDataKey = 'lastInputData';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => 
+{
     loadAmmunitionData();
     initializeCalculator(displayTrajectoryData);
     initializeTableWatch(resultsTableName, refresh);
@@ -66,7 +67,8 @@ function displayTrajectoryData(trajectoryData) {
 function initializeCalculator(displayCallback) {
     const form = document.getElementById('calcForm');
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', (event) => 
+        {
         event.preventDefault();
 
         const formData = new FormData(form);
@@ -127,9 +129,13 @@ function initializeCalculator(displayCallback) {
         }
 
         let trajectoryData;
-        try {
-            trajectoryData = calculateTrajectory(inputData);
-        } catch (error) {
+
+        try 
+        {
+            // trajectoryData = calculateTrajectory(inputData);
+        } 
+        catch (error) 
+        {
             alert(`Calculation error: ${error.message}`);
             return;
         }
@@ -143,6 +149,7 @@ function initializeCalculator(displayCallback) {
 
     // Load last input data from localStorage
     let lastInputData = {};
+
     if (getDataFromLocalStorage(lastInputDataKey, lastInputData, true) && lastInputData.data) {
         const fields = [
             'muzzleVelocity', 'ballisticCoefficient', 'bulletWeight', 'bulletDiameter','windSpeed',
@@ -160,38 +167,48 @@ function initializeCalculator(displayCallback) {
 
 function initializeTableWatch(id, callback, debounceMs = 100) {
     const table = document.getElementById(id);
-    if (!table) {
+
+    if (!table) 
+    {
         console.error(`Table with ID "${id}" not found`);
         return null;
     }
 
-    if (typeof callback !== 'function') {
+    if (typeof callback !== 'function') 
+    {
         console.error('Callback must be a function');
         return null;
     }
 
     let timeoutId;
-    const debouncedCallback = (event) => {
+
+    const debouncedCallback = (event) => 
+    {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
             callback(event);
         }, debounceMs);
     };
 
-    const mutationObserver = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
+    const mutationObserver = new MutationObserver((mutations) => 
+    {
+        mutations.forEach((mutation) => 
+        {
             debouncedCallback(mutation);
         });
     });
 
-    mutationObserver.observe(table, {
+    mutationObserver.observe(table, 
+    {
         childList: true,
         subtree: true,
         attributes: true
     });
 
-    const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach((entry) => {
+    const resizeObserver = new ResizeObserver((entries) => 
+    {
+        entries.forEach((entry) => 
+        {
             debouncedCallback(entry);
         });
     });
