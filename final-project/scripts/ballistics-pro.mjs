@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () =>
 {
     loadAmmunitionData();
     initializeCalculator(displayTrajectoryData);
-    initializeTableWatch(resultsTableName, refresh);
+    // initializeTableWatch(resultsTableName, refresh);
 });
 
 export function refresh() {
@@ -38,8 +38,12 @@ function loadAmmunitionData() {
     });
 }
 
-function displayTrajectoryData(trajectoryData) {
+function displayTrajectoryData(trajectoryData) 
+{
     const tbody = document.querySelector('#resultsTableBody');
+
+    // return;
+
     let tableContent = '';
 
     if (!trajectoryData || trajectoryData.length === 0) {
@@ -61,7 +65,7 @@ function displayTrajectoryData(trajectoryData) {
 
     tbody.innerHTML = tableContent;
     const chartData = formatTrajectoryData(trajectoryData);
-    renderChart(trajectoryChartName, chartData);
+    // renderChart(trajectoryChartName, chartData);
 }
 
 function initializeCalculator(displayCallback) {
@@ -132,7 +136,7 @@ function initializeCalculator(displayCallback) {
 
         try 
         {
-            // trajectoryData = calculateTrajectory(inputData);
+            trajectoryData = calculateTrajectory(inputData);
         } 
         catch (error) 
         {
@@ -142,7 +146,8 @@ function initializeCalculator(displayCallback) {
 
         saveDataToLocalStorage(lastInputDataKey, inputData);
 
-        if (displayCallback) {
+        if (displayCallback) 
+        {
             displayCallback(trajectoryData);
         }
     });

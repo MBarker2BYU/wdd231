@@ -121,12 +121,16 @@ function calculateTrajectory(inputs)
     let currentDistanceFeet = 0;
     let currentHeightFeet = -sightHeightFeet;
     let currentLateralDriftFeet = 0;
+    
+    // return null;
 
-    for (let distance = 0; distance <= maxDistanceYards; distance += 100) {
+    for (let distance = 0; distance <= maxDistanceYards; distance += 100) 
+    {
         const targetDistanceFeet = distance * YARDS_TO_FEET;
 
         // Process sub-steps
-        while (currentDistanceFeet < targetDistanceFeet) {
+        while (currentDistanceFeet < targetDistanceFeet) 
+        {
             let subStepFeet = SUB_STEP_YARDS * YARDS_TO_FEET;
             if (subStepFeet > targetDistanceFeet - currentDistanceFeet) {
                 subStepFeet = targetDistanceFeet - currentDistanceFeet;
