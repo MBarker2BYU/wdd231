@@ -3,7 +3,7 @@ import { fetchData, saveDataToLocalStorage, getDataFromLocalStorage } from './ut
 import { calculateTrajectory } from './ballistics-calculator.mjs';
 import { renderChart, getDataFromTable, formatTrajectoryData } from './ballistics-charts.mjs';
 
-const resultsTableName = 'resultsTableBody';
+const resultsTableName = 'resultsTable';
 const trajectoryChartName = 'trajectory-chart';
 const lastInputDataKey = 'lastInputData';
 
@@ -40,7 +40,7 @@ function loadAmmunitionData() {
 
 function displayTrajectoryData(trajectoryData) 
 {
-    const tbody = document.querySelector('#resultsTableBody');
+    const tbody = document.querySelector('#resultsTable tbody');
 
     // return;
 
@@ -65,7 +65,7 @@ function displayTrajectoryData(trajectoryData)
 
     tbody.innerHTML = tableContent;
     const chartData = formatTrajectoryData(trajectoryData);
-    // renderChart(trajectoryChartName, chartData);
+    renderChart(trajectoryChartName, chartData);
 }
 
 function initializeCalculator(displayCallback) {
@@ -81,11 +81,12 @@ function initializeCalculator(displayCallback) {
             muzzleVelocity: parseFloat(formData.get('muzzleVelocity')),
             ballisticCoefficient: parseFloat(formData.get('ballisticCoefficient')),
             bulletWeight: parseFloat(formData.get('bulletWeight')),
-            bulletDiameter: parseFloat(formData.get('bulletDiameter')),
+            // bulletDiameter: parseFloat(formData.get('bulletDiameter')),
             windSpeed: parseFloat(formData.get('windSpeed')),
             windDirection: parseFloat(formData.get('windDirection')),
+            altitude: parseFloat(formData.get('altitude')),
             temperature: parseFloat(formData.get('temperature')),
-            pressure: parseFloat(formData.get('pressure')),
+            // pressure: parseFloat(formData.get('pressure')),
             humidity: parseFloat(formData.get('humidity')),
             latitude: parseFloat(formData.get('latitude')),
             twistRate: parseFloat(formData.get('twistRate')),
@@ -157,8 +158,8 @@ function initializeCalculator(displayCallback) {
 
     if (getDataFromLocalStorage(lastInputDataKey, lastInputData, true) && lastInputData.data) {
         const fields = [
-            'muzzleVelocity', 'ballisticCoefficient', 'bulletWeight', 'bulletDiameter','windSpeed',
-            'windDirection', 'temperature', 'pressure', 'humidity', 'latitude', 
+            'muzzleVelocity', 'ballisticCoefficient', 'bulletWeight', 'windSpeed',
+            'windDirection', 'altitude', 'temperature', 'humidity', 'latitude', 
             'twistRate', 'sightHeight', 'zeroRange', 'maxDistance'
         ];
         fields.forEach(field => {

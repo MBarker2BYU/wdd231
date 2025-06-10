@@ -104,4 +104,21 @@ function getDataFromLocalStorage(key, out, debug = false)
   }
 }
 
-export { fetchData, saveDataToLocalStorage, getDataFromLocalStorage };
+function roundTo(number, precision = 2) 
+{
+  if (typeof number !== 'number' || isNaN(number)) 
+  {
+    throw new Error('Invalid number provided for rounding.');
+  }
+
+  if (typeof precision !== 'number' || precision < 0) 
+  {
+    throw new Error('Invalid precision provided for rounding.');
+  }
+
+  const factor = Math.pow(10, precision);
+  
+  return Math.round(number * factor) / factor;
+}
+
+export { fetchData, saveDataToLocalStorage, getDataFromLocalStorage, roundTo };
