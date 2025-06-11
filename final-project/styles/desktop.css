@@ -43,11 +43,6 @@
         width: 100%;
     }
 
-    /* .ballistic-card canvas
-    {
-        width: 675px;        
-    } */
-
     .ballistic-card,
     .info-card {
         max-width: none;
@@ -71,10 +66,8 @@
         width: 100%;
     }
 
-    footer .footer-container p,
-    footer .footer-container span,
-    footer .footer-container a 
-    {
-        font-size: large;
-    }    
-}    
+    .ballistic-card td,
+    .ballistic-card th {
+        font-size: 1.25em;
+    }
+}
