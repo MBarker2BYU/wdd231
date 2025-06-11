@@ -1,81 +1,98 @@
 import { loadMenu } from './menu.mjs';
 import { setupAttributionsModal } from './attributions.mjs';
 
-// Apply theme immediately on script load
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-
-document.addEventListener('DOMContentLoaded', () => 
+/**
+ * Common functionality for all pages
+ */
+document.addEventListener('DOMContentLoaded', async () => 
 {
+    applyTheme();
     updateFooter();
-    loadMenu();
-    setupHambergerMenu();
+    setupHamburgerMenu();
     setupThemeToggle();
-    
-    setupAttributionsModal();
+    await loadMenu();
+
+    await setupAttributionsModal();
+
+    // Page-specific initialization
+    const page = window.location.pathname.split('/').pop().replace(/\.[^/.]+$/, '') || 'index';
+    switch (page.toLowerCase()) {
+        case 'index':
+            const { initializeCalculator } = await import('./ballistics-pro.mjs');
+            initializeCalculator();
+            break;               break;
+        case 'contact':
+            const { setupContactForm } = await import('./contact.mjs');
+            setupContactForm();
+            break;
+    }
 });
 
-function updateFooter()
-{
-    const today = new Date();
-    const currentyear = document.getElementById("currentyear");
-    const lastmodified = document.getElementById("lastmodified");
+/**
+ * Apply saved theme
+ */
+function applyTheme() {
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
 
-    currentyear.textContent = "\u00A9" + today.getFullYear();
-    lastmodified.textContent = document.lastModified;
+    // Sync toggle UI
+    const toggle = document.querySelector('.toggle-container');
+    const toggleText = document.querySelector('.toggle-text');
+    if (toggle && toggleText) {
+        toggleText.textContent = theme === 'light' ? 'Light' : 'Dark';
+        toggle.classList.toggle('on', theme === 'dark');
+    }
 }
 
-function setupHambergerMenu()
-{
+/**
+ * Update footer with current year and last modified date
+ */
+function updateFooter() {
+    const today = new Date();
+    const currentYear = document.getElementById('currentyear');
+    const lastModified = document.getElementById('lastmodified');
+    if (currentYear) currentYear.textContent = `©${today.getFullYear()}`;
+    if (lastModified) lastModified.textContent = document.lastModified;
+}
+
+/**
+ * Set up hamburger menu toggle
+ */
+function setupHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('nav ul');
-
-    hamburger.addEventListener('click', () => 
-    {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
 }
 
-function setupThemeToggle() 
-{
-    const modeToggle = document.querySelector('.toggle-container');
+/**
+ * Set up theme toggle
+ */
+function setupThemeToggle() {
+    const toggle = document.querySelector('.toggle-container');
     const toggleText = document.querySelector('.toggle-text');
-    const htmlElement = document.documentElement;
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (!toggle || !toggleText) return;
 
-    // Set initial theme, toggle state, and text
-    htmlElement.setAttribute('data-theme', savedTheme);
-    // toggleLabel.textContent = savedTheme === 'light' ? 'Dark Mode' : 'Light Mode';
-    toggleText.textContent = savedTheme === 'light' ? 'Light' : 'Dark';
-    if (savedTheme === 'dark') {
-        modeToggle.classList.add('on');
-    }
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    toggleText.textContent = theme === 'light' ? 'Light' : 'Dark';
+    if (theme === 'dark') toggle.classList.add('on');
 
-    // Add event listener for toggle
-    modeToggle.addEventListener('click', function () {
-        const currentTheme = htmlElement.getAttribute('data-theme');
+    toggle.addEventListener('click', async () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-        // Update theme, toggle state, label, and text
-        htmlElement.setAttribute('data-theme', newTheme);
-
-        this.classList.toggle('on');
-        
-        // toggleLabel.textContent = newTheme === 'light' ? 'Dark Mode' : 'Light Mode';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        toggle.classList.toggle('on');
         toggleText.textContent = newTheme === 'light' ? 'Light' : 'Dark';
-        
         localStorage.setItem('theme', newTheme);
 
-        const isIndex = window.location.pathname.includes('index.html');
-
-        if(isIndex)
-        {
-            import('./ballistics-pro.mjs').then((module) =>
-            {
-               module.refresh(); 
-            });
-        }           
-
+        if (window.location.pathname.includes('index')) {
+            const { refresh } = await import('./ballistics-pro.mjs');
+            refresh();
+        }
     });
 }

@@ -1,74 +1,39 @@
-import { fetchData } from "./utilities.mjs";
+import { fetchData } from './utilities.mjs';
 
-export async function loadMenu() 
-{
+/**
+ * Load navigation menu for all pages
+ */
+export async function loadMenu() {
     const navLinks = document.getElementById('nav-links');
-
-    if (!navLinks) 
-    {
-        console.error('Navigation container (nav-links) not found in the DOM');
+    if (!navLinks) {
+        console.error('Navigation container not found');
         return;
-    }    
+    }
 
     navLinks.textContent = 'Loading menu...';
 
-    try 
-    {
-        const data = await fetchData('./data/menu.json');
+    try {
+        const { menu } = await fetchData('./data/menu.json');
+        if (!menu?.length) throw new Error('No menu items found');
 
-        buildMenu(data.menu, navLinks);
-    } 
-    catch (error) 
-    {
-        const errorMessage = document.createElement('li');
+        const pageName = (window.location.pathname.split('/').pop().replace(/\.[^/.]+$/, '') || 'index').toLowerCase();
+        navLinks.innerHTML = menu
+            .filter(item => item.name && item.url)
+            .map(item => {
+                const itemPage = item.url.replace(/\.[^/.]+$/, '').toLowerCase();
+                const isActive = itemPage === pageName;
+                return `
+                    <li>
+                        <a href="${item.url}" ${isActive ? 'class="active" aria-current="page"' : ''}>
+                            ${item.name}
+                        </a>
+                    </li>
+                `;
+            }).join('');
 
-        console.error('Error loading menu:', error.message);
-        navLinks.textContent = '';
-        errorMessage.className = 'error-message';
-        errorMessage.textContent = `Failed to load menu: ${error.message}. Please check the server or menu.json file.`;
-        navLinks.appendChild(errorMessage);
-    }
-}
-
-function buildMenu(menuItems, navLinks)
-{
-    // Clear existing content and show loading message
-    // Another work around for audit requirements
-    
-    navLinks.innerHTML = '';
-    navLinks.textContent = '';
-    
-    const pageName = window.location.pathname
-        .split('/')
-        .pop()
-        .replace(/\.[^/.]+$/, '') || 'index';
-
-    for (const item of menuItems) 
-    {
-        if (!item.name || !item.url) {
-            console.warn('Skipping invalid menu item:', item);
-            continue;
-        }
-
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-
-        a.href = item.url;
-        a.textContent = item.name;
-
-        const itemPage = item.url.replace(/\.[^/.]+$/, '');
-
-        if (itemPage.toLowerCase() === pageName.toLowerCase()) {
-            a.classList.add('active');
-            a.setAttribute('aria-current', 'page');
-        }
-
-        li.appendChild(a);
-        navLinks.appendChild(li);
-    }
-
-    if (navLinks.children.length === 0) 
-    {
-        throw new Error('No valid menu items found in menu.json');
+        if (!navLinks.children.length) throw new Error('No valid menu items');
+    } catch (error) {
+        console.error('Error loading menu:', error);
+        navLinks.innerHTML = `<li class="error-message">Failed to load menu: ${error.message}</li>`;
     }
 }

@@ -1,4 +1,3 @@
-// ballistics-pro.mjs
 import { fetchData, saveDataToLocalStorage, getDataFromLocalStorage } from './utilities.mjs';
 import { calculateTrajectory } from './ballistics-calculator.mjs';
 import { renderChart, getDataFromTable, formatTrajectoryData } from './ballistics-charts.mjs';
@@ -7,87 +6,97 @@ const resultsTableName = 'resultsTable';
 const trajectoryChartName = 'trajectory-chart';
 const lastInputDataKey = 'lastInputData';
 
-document.addEventListener('DOMContentLoaded', () => 
-{
+/**
+ * Initialize ballistics calculator for index page
+ */
+export function initializeCalculator() {
     loadAmmunitionData();
-    initializeCalculator(displayTrajectoryData);
-    // initializeTableWatch(resultsTableName, refresh);
-});
-
-export function refresh() 
-{
-    const trajectoryData = getDataFromTable(resultsTableName);
-    renderChart(trajectoryChartName, trajectoryData);
+    setupForm();
 }
 
-function loadAmmunitionData() {
-    fetchData('data/ammunition.json').then(data => {
-        const tbody = document.querySelector('#ammoTable tbody');
-        let tableContent = '';
-        data.forEach(item => {
-            tableContent += `
-                <tr>
-                    <td>${item.name}</td>
-                    <td>${item.muzzleVelocity}</td>
-                    <td>${item.ballisticCoefficient}</td>
-                    <td>${item.bulletWeight}</td>
-                </tr>`;
-        });
-        tbody.innerHTML = tableContent;
-    }).catch(error => {
+/**
+ * Refresh trajectory chart
+ */
+export function refresh() {
+    const data = getDataFromTable(resultsTableName);
+    renderChart(trajectoryChartName, data);
+}
+
+/**
+ * Load ammunition data into table
+ */
+async function loadAmmunitionData() {
+    const tbody = document.querySelector('#ammoTable tbody');
+    if (!tbody) {
+        console.error('Ammunition table not found');
+        return;
+    }
+    try {
+        const data = await fetchData('data/ammunition.json');
+        tbody.innerHTML = data.map(item => `
+            <tr>
+                <td>${item.name || 'N/A'}</td>
+                <td>${item.muzzleVelocity || 0}</td>
+                <td>${item.ballisticCoefficient || 0}</td>
+                <td>${item.bulletWeight || 0}</td>
+            </tr>
+        `).join('');
+    } catch (error) {
         console.error('Failed to load ammunition data:', error);
-    });
+        tbody.innerHTML = '<tr><td colspan="4">No data available</td></tr>';
+    }
 }
 
-function displayTrajectoryData(trajectoryData) 
-{
+/**
+ * Display trajectory data in table and chart
+ * @param {Array} data - Trajectory data
+ */
+function displayTrajectoryData(data) {
     const tbody = document.querySelector('#resultsTable tbody');
+    if (!tbody) {
+        console.error('Results table not found');
+        return;
+    }
 
-    // return;
-
-    let tableContent = '';
-
-    if (!trajectoryData || trajectoryData.length === 0) {
+    if (!data?.length) {
         tbody.innerHTML = '<tr><td colspan="5">No data available</td></tr>';
         renderChart(trajectoryChartName, []);
         return;
     }
 
-    trajectoryData.forEach(trajectory => {
-        tableContent += `
-            <tr>
-                <td>${trajectory.distance}</td>
-                <td>${trajectory.velocity}</td>
-                <td>${trajectory.energy}</td>
-                <td>${trajectory.drop}</td>
-                <td>${trajectory.lateralDrift}</td>
-            </tr>`;
-    });
-
-    tbody.innerHTML = tableContent;
-    const chartData = formatTrajectoryData(trajectoryData);
-    renderChart(trajectoryChartName, chartData);
+    tbody.innerHTML = data.map(trajectory => `
+        <tr>
+            <td>${trajectory.distance}</td>
+            <td>${trajectory.velocity}</td>
+            <td>${trajectory.energy}</td>
+            <td>${trajectory.drop}</td>
+            <td>${trajectory.lateralDrift}</td>
+        </tr>
+    `).join('');
+    renderChart(trajectoryChartName, formatTrajectoryData(data));
 }
 
-function initializeCalculator(displayCallback) {
+/**
+ * Set up calculator form
+ */
+function setupForm() {
     const form = document.getElementById('calcForm');
+    if (!form) {
+        console.error('Calculator form not found');
+        return;
+    }
 
-    form.addEventListener('submit', (event) => 
-        {
-        event.preventDefault();
-
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
         const formData = new FormData(form);
-
         const inputData = {
             muzzleVelocity: parseFloat(formData.get('muzzleVelocity')),
             ballisticCoefficient: parseFloat(formData.get('ballisticCoefficient')),
             bulletWeight: parseFloat(formData.get('bulletWeight')),
-            // bulletDiameter: parseFloat(formData.get('bulletDiameter')),
             windSpeed: parseFloat(formData.get('windSpeed')),
             windDirection: parseFloat(formData.get('windDirection')),
             altitude: parseFloat(formData.get('altitude')),
             temperature: parseFloat(formData.get('temperature')),
-            // pressure: parseFloat(formData.get('pressure')),
             humidity: parseFloat(formData.get('humidity')),
             latitude: parseFloat(formData.get('latitude')),
             twistRate: parseFloat(formData.get('twistRate')),
@@ -96,132 +105,39 @@ function initializeCalculator(displayCallback) {
             maxDistance: parseFloat(formData.get('maxDistance'))
         };
 
-        // Comprehensive validation
+        // Validation
+        const errors = [];
         for (const [key, value] of Object.entries(inputData)) {
-            if (isNaN(value)) {
-                alert(`Please enter a valid number for ${key}.`);
-                return;
-            }
+            if (isNaN(value)) errors.push(`Invalid ${key}`);
         }
+        if (inputData.muzzleVelocity <= 0) errors.push('Muzzle velocity must be positive');
+        if (inputData.ballisticCoefficient <= 0) errors.push('Ballistic coefficient must be positive');
+        if (inputData.bulletWeight <= 0) errors.push('Bullet weight must be positive');
+        if (inputData.windDirection < 0 || inputData.windDirection >= 360) errors.push('Wind direction must be 0-359°');
+        if (inputData.twistRate <= 0) errors.push('Twist rate must be positive');
+        if (inputData.zeroRange <= 0) errors.push('Zero range must be positive');
+        if (inputData.maxDistance <= 0) errors.push('Max distance must be positive');
 
-        // Additional validation for specific fields
-        if (inputData.muzzleVelocity <= 0) {
-            alert('Muzzle velocity must be positive.');
-            return;
-        }
-        if (inputData.ballisticCoefficient <= 0) {
-            alert('Ballistic coefficient must be positive.');
-            return;
-        }
-        if (inputData.bulletWeight <= 0) {
-            alert('Bullet weight must be positive.');
-            return;
-        }
-        if (inputData.windDirection < 0 || inputData.windDirection >= 360) {
-            alert('Wind direction must be between 0 and 359 degrees.');
-            return;
-        }
-        if (inputData.twistRate <= 0) {
-            alert('Twist rate must be positive.');
-            return;
-        }
-        if (inputData.zeroRange <= 0) {
-            alert('Zero range must be positive.');
-            return;
-        }
-        if (inputData.maxDistance <= 0) {
-            alert('Max distance must be positive.');
+        if (errors.length) {
+            alert(errors.join('\n'));
             return;
         }
 
-        let trajectoryData;
-
-        try 
-        {
-            trajectoryData = calculateTrajectory(inputData);
-        } 
-        catch (error) 
-        {
+        try {
+            const trajectoryData = calculateTrajectory(inputData);
+            saveDataToLocalStorage(lastInputDataKey, inputData);
+            displayTrajectoryData(trajectoryData);
+        } catch (error) {
             alert(`Calculation error: ${error.message}`);
-            return;
-        }
-
-        saveDataToLocalStorage(lastInputDataKey, inputData);
-
-        if (displayCallback) 
-        {
-            displayCallback(trajectoryData);
         }
     });
 
-    // Load last input data from localStorage
-    let lastInputData = {};
-
-    if (getDataFromLocalStorage(lastInputDataKey, lastInputData, true) && lastInputData.data) {
-        const fields = [
-            'muzzleVelocity', 'ballisticCoefficient', 'bulletWeight', 'windSpeed',
-            'windDirection', 'altitude', 'temperature', 'humidity', 'latitude', 
-            'twistRate', 'sightHeight', 'zeroRange', 'maxDistance'
-        ];
-        fields.forEach(field => {
-            if (lastInputData.data[field]) {
-                form.elements[field].value = lastInputData.data[field] || 0;
-            }
+    // Load saved inputs
+    const savedData = getDataFromLocalStorage(lastInputDataKey);
+    if (savedData) {
+        Object.entries(savedData).forEach(([key, value]) => {
+            if (form.elements[key]) form.elements[key].value = value;
         });
         form.dispatchEvent(new Event('submit'));
     }
-}
-
-function initializeTableWatch(id, callback, debounceMs = 100) 
-{
-    const table = document.getElementById(id);
-
-    if (!table) 
-    {
-        console.error(`Table with ID "${id}" not found`);
-        return null;
-    }
-
-    if (typeof callback !== 'function') 
-    {
-        console.error('Callback must be a function');
-        return null;
-    }
-
-    let timeoutId;
-
-    const debouncedCallback = (event) => 
-    {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            callback(event);
-        }, debounceMs);
-    };
-
-    const mutationObserver = new MutationObserver((mutations) => 
-    {
-        mutations.forEach((mutation) => 
-        {
-            debouncedCallback(mutation);
-        });
-    });
-
-    mutationObserver.observe(table, 
-    {
-        childList: true,
-        subtree: true,
-        attributes: true
-    });
-
-    const resizeObserver = new ResizeObserver((entries) => 
-    {
-        entries.forEach((entry) => 
-        {
-            debouncedCallback(entry);
-        });
-    });
-
-    resizeObserver.observe(table);
-
-    return { mutationObserver, resizeObserver };
 }

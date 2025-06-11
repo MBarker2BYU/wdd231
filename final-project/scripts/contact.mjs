@@ -1,36 +1,40 @@
-document.getElementById('contactForm').addEventListener('submit', (e) => {
-    e.preventDefault();
+import { saveDataToLocalStorage } from './utilities.mjs';
 
-    const formData = new FormData(e.target);
-    const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-    };
-
-    localStorage.setItem('contactFormData', JSON.stringify(data));
-
-    const contactModal = document.getElementById('contactModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
+/**
+ * Set up contact form for contact page
+ */
+export function setupContactForm() {
+    const form = document.getElementById('contactForm');
+    const modal = document.getElementById('contactModal');
+    const closeBtn = document.getElementById('closeModalBtn');
     const modalName = document.getElementById('modalName');
     const modalEmail = document.getElementById('modalEmail');
 
-    modalName.textContent = data.name || 'User';
-    modalEmail.textContent = data.email || 'No email provided';
-
-    if (contactModal && closeModalBtn) {
-        // Hide body scrollbars when modal is open
-        document.body.style.overflow = 'hidden';
-        
-        contactModal.showModal();
-
-        closeModalBtn.addEventListener('click', () => {
-            contactModal.close();
-            // Restore body scrollbars
-            document.body.style.overflow = '';
-        });
-
-        // Optionally clear the form
-        e.target.reset();
+    if (!form || !modal || !closeBtn || !modalName || !modalEmail) {
+        console.error('Contact form elements not found');
+        return;
     }
-});
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get('name') || 'User',
+            email: formData.get('email') || 'No email provided',
+            message: formData.get('message') || ''
+        };
+
+        saveDataToLocalStorage('contactFormData', data);
+        modalName.textContent = data.name;
+        modalEmail.textContent = data.email;
+        document.body.style.overflow = 'hidden';
+        modal.showModal();
+
+        form.reset();
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.close();
+        document.body.style.overflow = '';
+    });
+}

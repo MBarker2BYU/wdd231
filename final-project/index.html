@@ -28,6 +28,10 @@
     <link rel="preload" href="data/ammunition.json" as="fetch" crossorigin="anonymous">
 
     <!-- Styles and Fonts -->
+    <link rel="preload" href="./fonts/stardos-stencil-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./fonts/stardos-stencil-bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./fonts/allerta-stencil-regular.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="preload" href="./styles/mobile.css" as="style" onload="this.rel='stylesheet'">
     <link rel="preload" href="./styles/desktop.css" as="style" onload="this.rel='stylesheet'">
 
@@ -78,10 +82,7 @@
                                 value="0" required>
 
                             <label for="bulletWeight">Bullet Weight (grains):</label>
-                            <input type="number" id="bulletWeight" name="bulletWeight" value="0" required>
-
-                            <!-- <label for="bulletDiameter">Bullet Diameter (inches):</label>
-                            <input type="number" id="bulletDiameter" name="bulletDiameter" step="0.001" value="0" required> -->
+                            <input type="number" id="bulletWeight" name="bulletWeight" value="0" required>                            
 
                             <label for="windSpeed">Wind Speed (mph):</label>
                             <input type="number" id="windSpeed" name="windSpeed" value="0" required>
@@ -94,10 +95,7 @@
                             <input type="number" id="altitude" name="altitude" value="0" required>
 
                             <label for="temperature">Temperature (°F):</label>
-                            <input type="number" id="temperature" name="temperature" value="79" step="0.1" required>
-
-                            <!-- <label for="pressure">Pressure (inHg):</label>
-                            <input type="number" id="pressure" name="pressure" step="0.01" value="29.80" required> -->
+                            <input type="number" id="temperature" name="temperature" value="79" step="0.1" required>                          
 
                             <label for="humidity">Humidity (%):</label>
                             <input type="number" id="humidity" name="humidity" min="0" max="100" value="70" step="0.1"

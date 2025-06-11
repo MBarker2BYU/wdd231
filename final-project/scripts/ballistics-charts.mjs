@@ -1,17 +1,25 @@
-// ballistics-charts.mjs
-function renderChart(id, trajectoryData) {
+/**
+ * Render trajectory chart on canvas
+ * @param {string} id - Canvas element ID
+ * @param {Array<{distance: number, drop: number}>} data - Trajectory data
+ */
+function renderChart(id, data) {
     const canvas = document.getElementById(id);
-    if (!trajectoryData || !Array.isArray(trajectoryData) || trajectoryData.length === 0) {
-        console.warn('No trajectory data available to render the chart.');
+    if (!canvas?.getContext) {
+        console.error('Invalid canvas element:', id);
         return;
     }
-
-    if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
-        console.error('Canvas element is not initialized or is not a valid HTMLCanvasElement.');
+    if (!data?.length) {
+        console.warn('No trajectory data to render');
         return;
     }
 
     const ctx = canvas.getContext('2d');
+    const { width, height } = canvas;
+    const padding = 60;
+    const chartWidth = width - 2 * padding;
+    const chartHeight = height - 2 * padding;
+
     const root = document.documentElement;
     const colors = {
         background: getComputedStyle(root).getPropertyValue('--form-bg').trim(),
@@ -22,38 +30,27 @@ function renderChart(id, trajectoryData) {
         labels: getComputedStyle(root).getPropertyValue('--form-text').trim()
     };
 
-    const width = canvas.width;
-    const height = canvas.height;
-    const padding = 60;
-
     ctx.clearRect(0, 0, width, height);
-
-    const chartWidth = parseInt(width - 2 * padding);
-    const chartHeight = parseInt(height - 2 * padding);
-
     ctx.fillStyle = colors.background;
     ctx.fillRect(padding, padding, chartWidth, chartHeight);
 
-    const maxDistance = trajectoryData.length > 0 ? Math.max(...trajectoryData.map(d => d.distance)) : 500;
-    const maxDrop = trajectoryData.length > 0 ? Math.max(...trajectoryData.map(d => Math.abs(d.drop))) : 50;
-    const minDrop = trajectoryData.length > 0 ? Math.min(...trajectoryData.map(d => d.drop)) : -50;
-
+    const maxDistance = Math.max(...data.map(d => d.distance), 500);
+    const maxDrop = Math.max(...data.map(d => Math.abs(d.drop)), 50);
+    const minDrop = Math.min(...data.map(d => d.drop), -50);
     const xScale = chartWidth / maxDistance;
     const yScale = chartHeight / (maxDrop - minDrop);
 
-    ctx.beginPath();
+    // Grid lines
     ctx.strokeStyle = colors.grid;
     ctx.lineWidth = 1;
     ctx.setLineDash([2, 2]);
-
+    ctx.beginPath();
     for (let i = 100; i <= maxDistance; i += 100) {
         const x = padding + i * xScale;
         ctx.moveTo(x, padding);
         ctx.lineTo(x, height - padding);
     }
-
-    const dropStep = (maxDrop - minDrop) / 4;
-    for (let i = minDrop; i <= maxDrop; i += dropStep) {
+    for (let i = minDrop; i <= maxDrop; i += (maxDrop - minDrop) / 4) {
         const y = height - padding - (i - minDrop) * yScale;
         ctx.moveTo(padding, y);
         ctx.lineTo(width - padding, y);
@@ -61,106 +58,91 @@ function renderChart(id, trajectoryData) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    ctx.beginPath();
+    // Axes
     ctx.strokeStyle = colors.axes;
-    ctx.lineWidth = 1;
+    ctx.beginPath();
     ctx.moveTo(padding, height - padding);
     ctx.lineTo(width - padding, height - padding);
     ctx.moveTo(padding, padding);
     ctx.lineTo(padding, height - padding);
     ctx.stroke();
 
+    // Labels
     ctx.font = '14px "Allerta Stencil", Arial, serif';
     ctx.fillStyle = colors.labels;
-
     ctx.textAlign = 'center';
     ctx.fillText('Distance (yards)', width / 2, height - 20);
-
     ctx.save();
     ctx.translate(padding - 40, height / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.textAlign = 'center';
     ctx.fillText('Drop (inches)', 0, 0);
     ctx.restore();
 
     for (let i = 0; i <= maxDistance; i += 100) {
-        const x = padding + i * xScale;
-        ctx.fillText(i.toString(), x, height - padding + 20);
+        ctx.fillText(i, padding + i * xScale, height - padding + 20);
     }
-
-    const dropStepLabel = (maxDrop - minDrop) / 4;
     ctx.textAlign = 'right';
-    for (let i = minDrop; i <= maxDrop; i += dropStepLabel) {
-        const y = height - padding - (i - minDrop) * yScale;
-        ctx.fillText(Math.round(i).toString(), padding - 10, y + 5);
+    for (let i = minDrop; i <= maxDrop; i += (maxDrop - minDrop) / 4) {
+        ctx.fillText(Math.round(i), padding - 10, height - padding - (i - minDrop) * yScale + 5);
     }
 
-    if (trajectoryData && trajectoryData.length > 0) {
-        ctx.beginPath();
-        ctx.strokeStyle = colors.trajectory;
-        ctx.lineWidth = 2;
-        trajectoryData.forEach((point, index) => {
-            const x = padding + point.distance * xScale;
-            const y = height - padding - (point.drop - minDrop) * yScale;
-            if (index === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
-            }
-        });
-        ctx.stroke();
-    }
+    // Trajectory
+    ctx.strokeStyle = colors.trajectory;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    data.forEach(({ distance, drop }, i) => {
+        const x = padding + distance * xScale;
+        const y = height - padding - (drop - minDrop) * yScale;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
 
+    // Border
     ctx.strokeStyle = colors.border;
     ctx.lineWidth = 2;
     ctx.strokeRect(padding, padding, chartWidth, chartHeight);
 }
 
-function formatTrajectoryData(originalTrajectoryData) {
-    if (!Array.isArray(originalTrajectoryData) || originalTrajectoryData.length === 0) {
-        console.warn('No trajectory data available to format.');
-        return [];
-    }
-
-    return originalTrajectoryData.map(data => ({
-        distance: parseFloat(data.distance),
-        drop: parseFloat(data.drop)
-    }));
-}
-
+/**
+ * Get trajectory data from table
+ * @param {string} id - Table element ID
+ * @returns {Array<{distance: number, drop: number}>} - Parsed data
+ */
 function getDataFromTable(id) {
     const table = document.getElementById(id);
-    if (!table || !(table instanceof HTMLTableElement)) {
-        console.error('Table element is not initialized or is not a valid HTMLTableElement.');
+    if (!table?.querySelectorAll) {
+        console.error('Invalid table element:', id);
         return [];
     }
 
-    const trajectoryData = [];
-    const rows = table.querySelectorAll('tbody tr');
-
-    rows.forEach(row => {
+    const data = [];
+    table.querySelectorAll('tbody tr').forEach(row => {
         const cells = row.querySelectorAll('td');
         if (cells.length >= 5) {
             const distance = parseFloat(cells[0].textContent);
             const drop = parseFloat(cells[3].textContent);
             if (!isNaN(distance) && !isNaN(drop)) {
-                trajectoryData.push({ distance, drop });
+                data.push({ distance, drop });
             }
         }
     });
-
-    return trajectoryData.length > 0 ? trajectoryData : [];
+    return data;
 }
 
-function convertTrajectoryData(calculatorData) {
-    if (!Array.isArray(calculatorData) || calculatorData.length === 0) {
-        console.warn('No trajectory data available to convert.');
+/**
+ * Format trajectory data
+ * @param {Array<{distance: number, drop: number}>} data - Raw data
+ * @returns {Array<{distance: number, drop: number}>} - Formatted data
+ */
+function formatTrajectoryData(data) {
+    if (!Array.isArray(data) || !data.length) {
+        console.warn('No trajectory data to format');
         return [];
     }
-    return calculatorData.map(data => ({
-        distance: parseFloat(data.distance),
-        drop: parseFloat(data.drop)
+    return data.map(({ distance, drop }) => ({
+        distance: parseFloat(distance),
+        drop: parseFloat(drop)
     }));
 }
 
-export { renderChart, getDataFromTable, formatTrajectoryData, convertTrajectoryData };
+export { renderChart, getDataFromTable, formatTrajectoryData };

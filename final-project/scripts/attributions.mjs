@@ -1,74 +1,47 @@
 import { fetchData } from './utilities.mjs';
 
-async function setupAttributionsModal() 
-{
-    const attributionsModal = document.getElementById('attributions-modal');
-    const openAttributionsModal = document.getElementById('open-attributions-modal');
-    const closeAttributionsModal = document.getElementById('close-attributions-modal');
+/**
+ * Set up attributions modal for about page
+ */
+async function setupAttributionsModal() {
+    const modal = document.getElementById('attributions-modal');
+    const openBtn = document.getElementById('open-attributions-modal');
+    const closeBtn = document.getElementById('close-attributions-modal');
+    const contributors = document.getElementById('contributors');
 
-    openAttributionsModal.addEventListener('click', async (e) => {
+    if (!modal || !openBtn || !closeBtn || !contributors) {
+        console.error('Attributions modal elements not found');
+        return;
+    }
+
+    openBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-
-        if (attributionsModal) {
-            // Hide body scrollbars when modal is open
-            document.body.style.overflow = 'hidden';
-
-            attributionsModal.showModal();
-
-            closeAttributionsModal.addEventListener('click', () => 
-            {
-                attributionsModal.close();
-                // Restore body scrollbars
-                document.body.style.overflow = '';
-            });
-
-        }
-        else {
-            console.error('Attributions modal not found in the DOM');
-        }
+        document.body.style.overflow = 'hidden';
+        modal.showModal();
 
         const data = await fetchData('./data/attributions.json');
-
-        if (!data || data.length === 0) 
-        {
-            console.error('No attributions data found or invalid format');
+        if (!data?.length) {
+            console.error('No attributions data found');
+            contributors.innerHTML = '<p>No data available</p>';
             return;
         }
 
-        const contributors = document.getElementById('contributors');
-
-        contributors.innerHTML = ''; // Clear existing content
-        contributors.id ="contributors"; // Ensure the ID is set correctly
-               
-
-        data.forEach(attribution => 
-        {
-            const infoCard = document.createElement('div');
-            infoCard.className = 'info-card';
-
-            const cardHeader = document.createElement('div');
-            cardHeader.className = 'card-header';
-            const header = document.createElement('h3');
-            header.textContent = `${attribution.name || 'Unknown' } (${attribution.lifespan || 'Date not available'})`;
-            cardHeader.appendChild(header);
-            
-            const cardContent = document.createElement('div');
-            cardContent.className = 'card-content';
-            
-            const p = document.createElement('p');
-            p.textContent = attribution.contributions;
-            
-            cardContent.appendChild(p);
-            
-            infoCard.appendChild(cardHeader);
-            infoCard.appendChild(cardContent);
-
-            contributors.appendChild(infoCard);
-
-        });
-        
+        contributors.innerHTML = data.map(attribution => `
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>${attribution.name || 'Unknown'} (${attribution.lifespan || 'N/A'})</h3>
+                </div>
+                <div class="card-content">
+                    <p>${attribution.contributions || 'No contributions listed'}</p>
+                </div>
+            </div>
+        `).join('');
     });
 
+    closeBtn.addEventListener('click', () => {
+        modal.close();
+        document.body.style.overflow = '';
+    });
 }
 
 export { setupAttributionsModal };
