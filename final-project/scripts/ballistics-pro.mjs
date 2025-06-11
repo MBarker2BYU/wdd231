@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () =>
     // initializeTableWatch(resultsTableName, refresh);
 });
 
-export function refresh() {
+export function refresh() 
+{
     const trajectoryData = getDataFromTable(resultsTableName);
     renderChart(trajectoryChartName, trajectoryData);
 }
@@ -171,7 +172,8 @@ function initializeCalculator(displayCallback) {
     }
 }
 
-function initializeTableWatch(id, callback, debounceMs = 100) {
+function initializeTableWatch(id, callback, debounceMs = 100) 
+{
     const table = document.getElementById(id);
 
     if (!table) 

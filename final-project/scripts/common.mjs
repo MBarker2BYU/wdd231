@@ -1,4 +1,9 @@
 import { loadMenu } from './menu.mjs';
+import { setupAttributionsModal } from './attributions.mjs';
+
+// Apply theme immediately on script load
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
 
 document.addEventListener('DOMContentLoaded', () => 
 {
@@ -6,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () =>
     loadMenu();
     setupHambergerMenu();
     setupThemeToggle();
+    
+    setupAttributionsModal();
 });
 
 function updateFooter()
@@ -52,12 +59,17 @@ function setupThemeToggle()
 
         // Update theme, toggle state, label, and text
         htmlElement.setAttribute('data-theme', newTheme);
+
         this.classList.toggle('on');
+        
         // toggleLabel.textContent = newTheme === 'light' ? 'Dark Mode' : 'Light Mode';
         toggleText.textContent = newTheme === 'light' ? 'Light' : 'Dark';
+        
         localStorage.setItem('theme', newTheme);
 
-        if(window.location.pathname.includes('index.html'))
+        const isIndex = window.location.pathname.includes('index.html');
+
+        if(isIndex)
         {
             import('./ballistics-pro.mjs').then((module) =>
             {

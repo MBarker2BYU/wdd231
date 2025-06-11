@@ -10,16 +10,19 @@
 
     <!-- Open Graph Tags for Social Sharing -->
     <meta property="og:title" content="BallisticsPro - Ballistics Calculator for Shooters">
-    <meta property="og:description" content="Calculate bullet trajectories, drop, velocity, and wind drift with BallisticsPro, a tool for hunters and competitive shooters.">
+    <meta property="og:description"
+        content="Calculate bullet trajectories, drop, velocity, and wind drift with BallisticsPro, a tool for hunters and competitive shooters.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mbarker2byu.github.io/wdd231/final-project/index.html">
     <meta property="og:image" content="https://mbarker2byu.github.io/wdd231/final-project/images/ballistics-pro.webp">
     <!-- End Open Graph Tags -->
 
     <title>BallisticsPro - Home</title>
-    <meta name="description" content="BallisticsPro is a powerful ballistics calculator designed for shooters and hunters to calculate bullet trajectories, drop, velocity, and wind drift.">
-    <meta name="keywords" content="BallisticsPro, ballistics calculator, shooters, hunters, bullet trajectories, drop, velocity, wind drift">
-    
+    <meta name="description"
+        content="BallisticsPro is a powerful ballistics calculator designed for shooters and hunters to calculate bullet trajectories, drop, velocity, and wind drift.">
+    <meta name="keywords"
+        content="BallisticsPro, ballistics calculator, shooters, hunters, bullet trajectories, drop, velocity, wind drift">
+
     <!-- JSON Files -->
     <link rel="preload" href="data/menu.json" as="fetch" crossorigin="anonymous">
     <link rel="preload" href="data/ammunition.json" as="fetch" crossorigin="anonymous">
@@ -30,8 +33,9 @@
 
     <script rel="preload" src="./scripts/common.mjs" type="module"></script>
     <script rel="preload" src="./scripts/ballistics-pro.mjs" type="module"></script>
-    
+
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -42,7 +46,7 @@
             <ul id="nav-links">
                 <li class="required"><a href="./index.html">Home - place holder</a></li>
                 <li class="required"><a href="./about.html">About - place holder</a></li>
-                <li class="required"><a href="./contact.html">Contact - place holder</a></li>              
+                <li class="required"><a href="./contact.html">Contact - place holder</a></li>
             </ul>
             <button class="hamburger" aria-label="Toggle navigation menu">
                 <span></span>
@@ -53,7 +57,7 @@
                 <div class="toggle-container">
                     <span class="toggle-text"></span>
                     <div class="toggle-slider"></div>
-                </div>    
+                </div>
             </div>
         </nav>
     </header>
@@ -63,58 +67,64 @@
                 <div>
                     <div>
                         <h1>Ballistics Calculator</h1>
-                    </div>                    
+                    </div>
                     <div class="form-wrapper">
                         <form id="calcForm">
                             <label for="muzzleVelocity">Muzzle Velocity (fps):</label>
                             <input type="number" id="muzzleVelocity" name="muzzleVelocity" value="0" required>
-                            
+
                             <label for="ballisticCoefficient">Ballistic Coefficient (G1):</label>
-                            <input type="number" id="ballisticCoefficient" name="ballisticCoefficient" step="0.001" value="0" required>
-                            
+                            <input type="number" id="ballisticCoefficient" name="ballisticCoefficient" step="0.001"
+                                value="0" required>
+
                             <label for="bulletWeight">Bullet Weight (grains):</label>
                             <input type="number" id="bulletWeight" name="bulletWeight" value="0" required>
-                            
+
                             <!-- <label for="bulletDiameter">Bullet Diameter (inches):</label>
                             <input type="number" id="bulletDiameter" name="bulletDiameter" step="0.001" value="0" required> -->
-                            
+
                             <label for="windSpeed">Wind Speed (mph):</label>
                             <input type="number" id="windSpeed" name="windSpeed" value="0" required>
-                            
+
                             <label for="windDirection">Wind Direction (degrees from north):</label>
-                            <input type="number" id="windDirection" name="windDirection" min="0" max="360" value="0" required>
-                                            
+                            <input type="number" id="windDirection" name="windDirection" min="0" max="360" value="0"
+                                required>
+
                             <label for="altitude">Altitude (feet):</label>
                             <input type="number" id="altitude" name="altitude" value="0" required>
 
                             <label for="temperature">Temperature (°F):</label>
                             <input type="number" id="temperature" name="temperature" value="79" step="0.1" required>
-                            
+
                             <!-- <label for="pressure">Pressure (inHg):</label>
                             <input type="number" id="pressure" name="pressure" step="0.01" value="29.80" required> -->
-                            
+
                             <label for="humidity">Humidity (%):</label>
-                            <input type="number" id="humidity" name="humidity" min="0" max="100" value="70" step="0.1" required>
-                            
+                            <input type="number" id="humidity" name="humidity" min="0" max="100" value="70" step="0.1"
+                                required>
+
                             <label for="latitude">Latitude (degrees):</label>
-                            <input type="number" id="latitude" name="latitude" min="-90" max="90" value="26" step="0.01" required>
-                            
+                            <input type="number" id="latitude" name="latitude" min="-90" max="90" value="26" step="0.01"
+                                required>
+
                             <label for="twistRate">Barrel Twist Rate (inches, e.g., 15 for 1:15):</label>
                             <input type="number" id="twistRate" name="twistRate" value="9.5" step="0.1" required>
-                            
+
                             <label for="sightHeight">Sight Height (inches):</label>
                             <input type="number" id="sightHeight" name="sightHeight" step="0.01" value="1.5" required>
-                            
+
                             <label for="zeroRange">Zero Range (yards):</label>
-                            <input type="number" id="zeroRange" name="zeroRange" min="25" max="200" value="100" required>
-                            
+                            <input type="number" id="zeroRange" name="zeroRange" min="25" max="200" value="100"
+                                required>
+
                             <label for="maxDistance">Max Distance (yards):</label>
-                            <input type="number" id="maxDistance" name="maxDistance" min="25" max="2000" value="500" required>
-                            
+                            <input type="number" id="maxDistance" name="maxDistance" min="25" max="2000" value="500"
+                                required>
+
                             <button type="submit">Calculate</button>
                         </form>
                     </div>
-                </div>   
+                </div>
             </section>
             <section class="ballistic-cards">
                 <div class="ballistic-card">
@@ -229,7 +239,7 @@
                                     <td>-</td>
                                 </tr>
                             </tbody>
-                        </table>    
+                        </table>
                     </div>
                 </div>
                 <div class="ballistic-card">
@@ -297,10 +307,16 @@
                 </div>
             </section>
         </div>
+        <dialog id="attributions-modal" >
+            <h1>Contributors to Modern Ballistics</h1>
+            <div id="contributors"></div>           
+            <button id="close-attributions-modal">Close</button>
+        </dialog>
     </main>
     <footer>
         <div class="footer-container">
             <p><span id="currentyear"></span> BallisticsPro | Matthew D. Barker | All Rights Reserved</p>
+            <a href="#" id="open-attributions-modal">Attributions</a>
             <p>Last Updated: <span id="lastmodified"></span></p>
         </div>
     </footer>

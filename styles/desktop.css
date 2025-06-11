@@ -1,23 +1,18 @@
-@media only screen and (min-width: 600px) 
-{
-    .profile-name 
-    {
+@media only screen and (min-width: 600px) {
+    .profile-name {
         font-size: 2.5em;
-    }       
-
-    /* hamburger menu */
-    #hamburger-menu 
-    {        
-        display: none;        
     }
 
-    .menu-toggle 
-    {
+    /* hamburger menu */
+    #hamburger-menu {
         display: none;
     }
 
-    .nav-menu 
-    {
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-menu {
         display: flex;
         position: static;
         width: auto;
@@ -29,44 +24,38 @@
         z-index: auto;
     }
 
-    .nav-menu.active 
-    {
+    .nav-menu.active {
         display: flex;
     }
 
-    .nav-item 
-    {
+    .nav-item {
         margin: 0;
     }
 
-    .nav-link 
-    {
+    .nav-link {
         font-size: medium;
         padding: 8px 12px;
     }
 
-    .info-cards
-    {        
-        flex-direction: row; 
+    .info-cards {
+        flex-direction: row;
     }
-    
-    .filter-button
-    {
+
+    .filter-button {
         font-size: medium;
     }
 
-    .filtered-courses
-    {
+    .filtered-courses {
         grid-template-columns: 50% 50%;
     }
 
-    .course-button
-    {
-        font-size: small;        
+    .course-button {
+        font-size: small;
     }
 
-    footer 
-    {
-        font-size: small;
+    
+    .footer-container a 
+    {        
+        font-size: large !important;
     }
 }

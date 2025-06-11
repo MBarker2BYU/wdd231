@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Galileo Galilei",
+        "lifespan": "1564–1642",
+        "contributions": "Established projectile motion principles, showing objects fall at the same rate and describing parabolic trajectories, key to ballistics."
+    },
+    {
+        "name": "Isaac Newton",
+        "lifespan": "1643–1727",
+        "contributions": "Formulated laws of motion and gravitation, providing the mathematical basis for projectile paths and forces in ballistics."
+    },
+    {
+        "name": "Benjamin Robins",
+        "lifespan": "1707–1751",
+        "contributions": "Invented the ballistic pendulum and authored New Principles of Gunnery (1742), advancing external ballistics."
+    },
+    {
+        "name": "Carl Cranz",
+        "lifespan": "1858–1945",
+        "contributions": "Formalized ballistics as a science with Lehrbuch der Ballistik, researching projectile dynamics extensively."
+    },
+    {
+        "name": "F.W. Lanchester",
+        "lifespan": "1868–1946",
+        "contributions": "Advanced internal ballistics with gas dynamics studies, influencing modern firearm design."
+    },
+    {
+        "name": "United States Marine Corps",
+        "lifespan": "1775–Present",
+        "contributions": "Developed advanced marksmanship training, setting precision and combat shooting standards for modern ballistics."
+    }
+]

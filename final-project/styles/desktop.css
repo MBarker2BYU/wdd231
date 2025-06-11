@@ -1,8 +1,6 @@
-@media screen and (min-width: 768px) 
-{
+@media screen and (min-width: 768px) {
 
-    nav ul 
-    {
+    nav ul {
         background-color: var(--menu-bg);
         display: flex;
         flex-direction: row;
@@ -12,42 +10,35 @@
         height: auto;
     }
 
-    nav ul li 
-    {
+    nav ul li {
         margin: 0;
     }
 
-    .hamburger 
-    {
+    .hamburger {
         display: none;
     }
 
-    .logo img 
-    {
+    .logo img {
         width: 102px;
         height: 102px;
     }
 
-    .logo span 
-    {
+    .logo span {
         font-size: 2.5em;
     }
-    
+
     .about-container,
     .contact-container,
-    .main-container
-    {        
-        width: 1240px;    
-    }
-    
-    .main-container
-    {        
+    .main-container {
         width: 1240px;
-        grid-template-columns: 486px 724px;        
     }
 
-    .ballistic-cards
-    {
+    .main-container {
+        width: 1240px;
+        grid-template-columns: 486px 724px;
+    }
+
+    .ballistic-cards {
         max-width: none;
         width: 100%;
     }
@@ -58,17 +49,15 @@
     } */
 
     .ballistic-card,
-    .info-card
-    {
+    .info-card {
         max-width: none;
         width: 100%;
-    }    
+    }
 
-    .info-cards
-    {
+    .info-cards {
         max-width: 800px;
         width: 100%;
-    }   
+    }
 
     .marksmanship-image,
     .trajectory-formula-image {
@@ -77,15 +66,15 @@
         margin: 0 20px;
     }
 
-    .contact-section
-    {
+    .contact-section {
         max-width: 800px;
         width: 100%;
     }
 
     footer .footer-container p,
-    footer .footer-container span 
+    footer .footer-container span,
+    footer .footer-container a 
     {
-        font-size: large;              
-    }
-}
+        font-size: large;
+    }    
+}    
