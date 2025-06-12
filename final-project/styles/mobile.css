@@ -129,6 +129,12 @@ h1, h2, h3
     font-family: var(--heading-font);
 }
 
+h1 
+{
+    font-size: 1.75em;
+    margin: 0;
+}
+
 .logo 
 {
     display: flex;
@@ -339,7 +345,7 @@ nav ul li a.active
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;    
     padding: var(--main-padding);    
 }
 
@@ -404,6 +410,11 @@ nav ul li a.active
 .form-wrapper form button:focus 
 {
     background-color: var(--osu-gray);
+}
+
+#calcForm
+{
+    margin-top: 20px;
 }
 
 /* Main Container */
