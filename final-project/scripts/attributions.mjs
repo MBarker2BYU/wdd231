@@ -3,7 +3,8 @@ import { fetchData } from './utilities.mjs';
 /**
  * Set up attributions modal for about page
  */
-async function setupAttributionsModal() {
+async function setupAttributionsModal() 
+{
     const modal = document.getElementById('attributions-modal');
     const openBtn = document.getElementById('open-attributions-modal');
     const closeBtn = document.getElementById('close-attributions-modal');

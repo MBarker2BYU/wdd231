@@ -9,7 +9,8 @@ const lastInputDataKey = 'lastInputData';
 /**
  * Initialize ballistics calculator for index page
  */
-export function initializeCalculator() {
+export function initializeCalculator() 
+{
     loadAmmunitionData();
     setupForm();
 }
@@ -17,7 +18,8 @@ export function initializeCalculator() {
 /**
  * Refresh trajectory chart
  */
-export function refresh() {
+export function refresh() 
+{
     const data = getDataFromTable(resultsTableName);
     renderChart(trajectoryChartName, data);
 }
@@ -25,14 +27,19 @@ export function refresh() {
 /**
  * Load ammunition data into table
  */
-async function loadAmmunitionData() {
+async function loadAmmunitionData() 
+{
     const tbody = document.querySelector('#ammoTable tbody');
+    
     if (!tbody) {
         console.error('Ammunition table not found');
         return;
     }
-    try {
+
+    try 
+    {
         const data = await fetchData('data/ammunition.json');
+        
         tbody.innerHTML = data.map(item => `
             <tr>
                 <td>${item.name || 'N/A'}</td>
@@ -41,7 +48,8 @@ async function loadAmmunitionData() {
                 <td>${item.bulletWeight || 0}</td>
             </tr>
         `).join('');
-    } catch (error) {
+    } 
+    catch (error) {
         console.error('Failed to load ammunition data:', error);
         tbody.innerHTML = '<tr><td colspan="4">No data available</td></tr>';
     }
@@ -51,8 +59,10 @@ async function loadAmmunitionData() {
  * Display trajectory data in table and chart
  * @param {Array} data - Trajectory data
  */
-function displayTrajectoryData(data) {
+function displayTrajectoryData(data) 
+{
     const tbody = document.querySelector('#resultsTable tbody');
+    
     if (!tbody) {
         console.error('Results table not found');
         return;
@@ -64,7 +74,10 @@ function displayTrajectoryData(data) {
         return;
     }
 
-    tbody.innerHTML = data.map(trajectory => `
+    try 
+    {
+
+        tbody.innerHTML = data.map(trajectory => `
         <tr>
             <td>${trajectory.distance}</td>
             <td>${trajectory.velocity}</td>
@@ -73,14 +86,22 @@ function displayTrajectoryData(data) {
             <td>${trajectory.lateralDrift}</td>
         </tr>
     `).join('');
-    renderChart(trajectoryChartName, formatTrajectoryData(data));
+        renderChart(trajectoryChartName, formatTrajectoryData(data));
+    }
+    catch (error) {
+        console.error('Error displaying trajectory data:', error);
+        tbody.innerHTML = '<tr><td colspan="5">Error displaying data</td></tr>';
+        renderChart(trajectoryChartName, []);
+    }
 }
 
 /**
  * Set up calculator form
  */
-function setupForm() {
+function setupForm() 
+{
     const form = document.getElementById('calcForm');
+
     if (!form) {
         console.error('Calculator form not found');
         return;
@@ -123,9 +144,12 @@ function setupForm() {
             return;
         }
 
-        try {
+        try 
+        {
             const trajectoryData = calculateTrajectory(inputData);
+        
             saveDataToLocalStorage(lastInputDataKey, inputData);
+        
             displayTrajectoryData(trajectoryData);
         } catch (error) {
             alert(`Calculation error: ${error.message}`);
@@ -134,7 +158,9 @@ function setupForm() {
 
     // Load saved inputs
     const savedData = getDataFromLocalStorage(lastInputDataKey);
-    if (savedData) {
+
+    if (savedData) 
+    {
         Object.entries(savedData).forEach(([key, value]) => {
             if (form.elements[key]) form.elements[key].value = value;
         });

@@ -77,8 +77,15 @@ function roundTo(number, precision = 2) {
     if (typeof precision !== 'number' || precision < 0) {
         throw new Error('Invalid precision for rounding');
     }
-    const factor = 10 ** precision;
-    return Math.round(number * factor) / factor;
+
+    try {
+        const factor = 10 ** precision;
+        return Math.round(number * factor) / factor;
+    }
+    catch (error) {
+        console.error('Error rounding number:', error);
+        return number; // Return original number on error
+    }
 }
 
 export { fetchData, saveDataToLocalStorage, getDataFromLocalStorage, roundTo };

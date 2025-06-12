@@ -14,93 +14,103 @@ function renderChart(id, data) {
         return;
     }
 
-    const ctx = canvas.getContext('2d');
-    const { width, height } = canvas;
-    const padding = 60;
-    const chartWidth = width - 2 * padding;
-    const chartHeight = height - 2 * padding;
+    try {
 
-    const root = document.documentElement;
-    const colors = {
-        background: getComputedStyle(root).getPropertyValue('--form-bg').trim(),
-        border: getComputedStyle(root).getPropertyValue('--osu-gray').trim(),
-        grid: getComputedStyle(root).getPropertyValue('--osu-gray').trim(),
-        axes: getComputedStyle(root).getPropertyValue('--osu-white').trim(),
-        trajectory: getComputedStyle(root).getPropertyValue('--osu-scarlet').trim(),
-        labels: getComputedStyle(root).getPropertyValue('--form-text').trim()
-    };
+        const ctx = canvas.getContext('2d');
+        const { width, height } = canvas;
+        const padding = 60;
+        const chartWidth = width - 2 * padding;
+        const chartHeight = height - 2 * padding;
 
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = colors.background;
-    ctx.fillRect(padding, padding, chartWidth, chartHeight);
+        const root = document.documentElement;
+        const colors = {
+            background: getComputedStyle(root).getPropertyValue('--form-bg').trim(),
+            border: getComputedStyle(root).getPropertyValue('--osu-gray').trim(),
+            grid: getComputedStyle(root).getPropertyValue('--osu-gray').trim(),
+            axes: getComputedStyle(root).getPropertyValue('--osu-white').trim(),
+            trajectory: getComputedStyle(root).getPropertyValue('--osu-scarlet').trim(),
+            labels: getComputedStyle(root).getPropertyValue('--form-text').trim()
+        };
 
-    const maxDistance = Math.max(...data.map(d => d.distance), 500);
-    const maxDrop = Math.max(...data.map(d => Math.abs(d.drop)), 50);
-    const minDrop = Math.min(...data.map(d => d.drop), -50);
-    const xScale = chartWidth / maxDistance;
-    const yScale = chartHeight / (maxDrop - minDrop);
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = colors.background;
+        ctx.fillRect(padding, padding, chartWidth, chartHeight);
 
-    // Grid lines
-    ctx.strokeStyle = colors.grid;
-    ctx.lineWidth = 1;
-    ctx.setLineDash([2, 2]);
-    ctx.beginPath();
-    for (let i = 100; i <= maxDistance; i += 100) {
-        const x = padding + i * xScale;
-        ctx.moveTo(x, padding);
-        ctx.lineTo(x, height - padding);
+        const maxDistance = Math.max(...data.map(d => d.distance), 500);
+        const maxDrop = Math.max(...data.map(d => Math.abs(d.drop)), 50);
+        const minDrop = Math.min(...data.map(d => d.drop), -50);
+        const xScale = chartWidth / maxDistance;
+        const yScale = chartHeight / (maxDrop - minDrop);
+
+        // Grid lines
+        ctx.strokeStyle = colors.grid;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath();
+        for (let i = 100; i <= maxDistance; i += 100) {
+            const x = padding + i * xScale;
+            ctx.moveTo(x, padding);
+            ctx.lineTo(x, height - padding);
+        }
+        for (let i = minDrop; i <= maxDrop; i += (maxDrop - minDrop) / 4) {
+            const y = height - padding - (i - minDrop) * yScale;
+            ctx.moveTo(padding, y);
+            ctx.lineTo(width - padding, y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Axes
+        ctx.strokeStyle = colors.axes;
+        ctx.beginPath();
+        ctx.moveTo(padding, height - padding);
+        ctx.lineTo(width - padding, height - padding);
+        ctx.moveTo(padding, padding);
+        ctx.lineTo(padding, height - padding);
+        ctx.stroke();
+
+        // Labels
+        ctx.font = '14px "Allerta Stencil", Arial, serif';
+        ctx.fillStyle = colors.labels;
+        ctx.textAlign = 'center';
+        ctx.fillText('Distance (yards)', width / 2, height - 20);
+        ctx.save();
+        ctx.translate(padding - 40, height / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillText('Drop (inches)', 0, 0);
+        ctx.restore();
+
+        for (let i = 0; i <= maxDistance; i += 100) {
+            ctx.fillText(i, padding + i * xScale, height - padding + 20);
+        }
+        ctx.textAlign = 'right';
+        for (let i = minDrop; i <= maxDrop; i += (maxDrop - minDrop) / 4) {
+            ctx.fillText(Math.round(i), padding - 10, height - padding - (i - minDrop) * yScale + 5);
+        }
+
+        // Trajectory
+        ctx.strokeStyle = colors.trajectory;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        data.forEach(({ distance, drop }, i) => {
+            const x = padding + distance * xScale;
+            const y = height - padding - (drop - minDrop) * yScale;
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        // Border
+        ctx.strokeStyle = colors.border;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(padding, padding, chartWidth, chartHeight);
     }
-    for (let i = minDrop; i <= maxDrop; i += (maxDrop - minDrop) / 4) {
-        const y = height - padding - (i - minDrop) * yScale;
-        ctx.moveTo(padding, y);
-        ctx.lineTo(width - padding, y);
+    catch (error) {
+        console.error('Error rendering chart:', error);
+        ctx.fillStyle = colors.background;
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = colors.labels;
+        ctx.fillText('Error rendering chart', width / 2, height / 2);
     }
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Axes
-    ctx.strokeStyle = colors.axes;
-    ctx.beginPath();
-    ctx.moveTo(padding, height - padding);
-    ctx.lineTo(width - padding, height - padding);
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, height - padding);
-    ctx.stroke();
-
-    // Labels
-    ctx.font = '14px "Allerta Stencil", Arial, serif';
-    ctx.fillStyle = colors.labels;
-    ctx.textAlign = 'center';
-    ctx.fillText('Distance (yards)', width / 2, height - 20);
-    ctx.save();
-    ctx.translate(padding - 40, height / 2);
-    ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Drop (inches)', 0, 0);
-    ctx.restore();
-
-    for (let i = 0; i <= maxDistance; i += 100) {
-        ctx.fillText(i, padding + i * xScale, height - padding + 20);
-    }
-    ctx.textAlign = 'right';
-    for (let i = minDrop; i <= maxDrop; i += (maxDrop - minDrop) / 4) {
-        ctx.fillText(Math.round(i), padding - 10, height - padding - (i - minDrop) * yScale + 5);
-    }
-
-    // Trajectory
-    ctx.strokeStyle = colors.trajectory;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    data.forEach(({ distance, drop }, i) => {
-        const x = padding + distance * xScale;
-        const y = height - padding - (drop - minDrop) * yScale;
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-
-    // Border
-    ctx.strokeStyle = colors.border;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(padding, padding, chartWidth, chartHeight);
 }
 
 /**
@@ -110,23 +120,34 @@ function renderChart(id, data) {
  */
 function getDataFromTable(id) {
     const table = document.getElementById(id);
+
     if (!table?.querySelectorAll) {
         console.error('Invalid table element:', id);
         return [];
     }
 
-    const data = [];
-    table.querySelectorAll('tbody tr').forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length >= 5) {
-            const distance = parseFloat(cells[0].textContent);
-            const drop = parseFloat(cells[3].textContent);
-            if (!isNaN(distance) && !isNaN(drop)) {
-                data.push({ distance, drop });
+    try {
+
+        const data = [];
+
+        table.querySelectorAll('tbody tr').forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length >= 5) {
+                const distance = parseFloat(cells[0].textContent);
+                const drop = parseFloat(cells[3].textContent);
+                if (!isNaN(distance) && !isNaN(drop)) {
+                    data.push({ distance, drop });
+                }
             }
-        }
-    });
-    return data;
+        });
+
+        return data;
+    }
+    catch (error) {
+        console.error('Error parsing table data:', error);
+        return [];
+    }
+
 }
 
 /**
@@ -139,10 +160,18 @@ function formatTrajectoryData(data) {
         console.warn('No trajectory data to format');
         return [];
     }
-    return data.map(({ distance, drop }) => ({
-        distance: parseFloat(distance),
-        drop: parseFloat(drop)
-    }));
+
+    try {
+
+        return data.map(({ distance, drop }) => ({
+            distance: parseFloat(distance),
+            drop: parseFloat(drop)
+        }));
+    }
+    catch (error) {
+        console.error('Error formatting trajectory data:', error);
+        return [];
+    }
 }
 
 export { renderChart, getDataFromTable, formatTrajectoryData };

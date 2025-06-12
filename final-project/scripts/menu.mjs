@@ -12,7 +12,8 @@ export async function loadMenu() {
 
     // navLinks.textContent = 'Loading menu...';
 
-    try {
+    try 
+    {
         const { menu } = await fetchData('./data/menu.json');
         if (!menu?.length) throw new Error('No menu items found');
 
@@ -31,8 +32,11 @@ export async function loadMenu() {
                 `;
             }).join('');
 
-        if (!navLinks.children.length) throw new Error('No valid menu items');
-    } catch (error) {
+        if (!navLinks.children.length) 
+            throw new Error('No valid menu items');
+    } 
+    catch (error) 
+    {
         console.error('Error loading menu:', error);
         navLinks.innerHTML = `<li class="error-message">Failed to load menu: ${error.message}</li>`;
     }
