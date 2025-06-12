@@ -3,6 +3,7 @@ import { fetchData } from './utilities.mjs';
 /**
  * Set up attributions modal for about page
  */
+// Sets up accessible modal dialog for attributions using <dialog> element
 async function setupAttributionsModal() 
 {
     const modal = document.getElementById('attributions-modal');

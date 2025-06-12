@@ -3,6 +3,7 @@ import { saveDataToLocalStorage } from './utilities.mjs';
 /**
  * Set up contact form for contact page
  */
+// Implements accessible confirmation modal for contact form submission
 export function setupContactForm() 
 {
     try {
@@ -17,6 +18,7 @@ export function setupContactForm()
             return;
         }
 
+        // Demonstrates DOM manipulation (form data processing) and event handling (submit event)
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(form);

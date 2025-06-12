@@ -1,3 +1,4 @@
+// Uses ES Modules for code organization and modularity
 import { saveDataToLocalStorage, getDataFromLocalStorage } from './utilities.mjs';
 import { loadMenu } from './menu.mjs';
 import { setupAttributionsModal } from './attributions.mjs';

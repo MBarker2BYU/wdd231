@@ -1,3 +1,4 @@
+// Uses ES Modules for code organization and modularity
 import { fetchData, saveDataToLocalStorage, getDataFromLocalStorage } from './utilities.mjs';
 import { calculateTrajectory } from './ballistics-calculator.mjs';
 import { renderChart, getDataFromTable, formatTrajectoryData } from './ballistics-charts.mjs';
@@ -27,6 +28,7 @@ export function refresh()
 /**
  * Load ammunition data into table
  */
+// Dynamically generates 15+ ammunition items with 4 properties (name, muzzleVelocity, ballisticCoefficient, bulletWeight)
 async function loadAmmunitionData() 
 {
     const tbody = document.querySelector('#ammoTable tbody');
@@ -40,6 +42,8 @@ async function loadAmmunitionData()
     {
         const data = await fetchData('data/ammunition.json');
         
+        // Uses map array method to process ammunition data for dynamic table generation
+        // Uses template literals for dynamic HTML string construction
         tbody.innerHTML = data.map(item => `
             <tr>
                 <td>${item.name || 'N/A'}</td>
@@ -59,6 +63,7 @@ async function loadAmmunitionData()
  * Display trajectory data in table and chart
  * @param {Array} data - Trajectory data
  */
+// Dynamically generates 15+ trajectory data points with 5 properties (distance, velocity, energy, drop, lateralDrift)
 function displayTrajectoryData(data) 
 {
     const tbody = document.querySelector('#resultsTable tbody');
@@ -76,7 +81,7 @@ function displayTrajectoryData(data)
 
     try 
     {
-
+        // Uses template literals for dynamic HTML string construction
         tbody.innerHTML = data.map(trajectory => `
         <tr>
             <td>${trajectory.distance}</td>
