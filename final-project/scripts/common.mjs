@@ -1,3 +1,4 @@
+import { saveDataToLocalStorage, getDataFromLocalStorage } from './utilities.mjs';
 import { loadMenu } from './menu.mjs';
 import { setupAttributionsModal } from './attributions.mjs';
 
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () =>
 function applyTheme() 
 {
     try {
-        const theme = localStorage.getItem('theme') || 'light';
+        const theme = getDataFromLocalStorage('theme') || 'light';
         document.documentElement.setAttribute('data-theme', theme);
 
         // Sync toggle UI
@@ -111,20 +112,23 @@ function setupThemeToggle()
     
         if (!toggle || !toggleText) return;
 
-        const theme = localStorage.getItem('theme') || 'light';
+        const theme = getDataFromLocalStorage('theme') || 'light';
     
         document.documentElement.setAttribute('data-theme', theme);
         toggleText.textContent = theme === 'light' ? 'Light' : 'Dark';
     
         if (theme === 'dark') toggle.classList.add('on');
 
-        toggle.addEventListener('click', async () => {
+        toggle.addEventListener('click', async () => 
+            {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
             document.documentElement.setAttribute('data-theme', newTheme);
             toggle.classList.toggle('on');
             toggleText.textContent = newTheme === 'light' ? 'Light' : 'Dark';
-            localStorage.setItem('theme', newTheme);
+            
+            saveDataToLocalStorage('theme', newTheme);
 
             if (window.location.pathname.includes('index')) {
                 const { refresh } = await import('./ballistics-pro.mjs');
