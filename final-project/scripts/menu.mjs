@@ -10,7 +10,7 @@ export async function loadMenu() {
         return;
     }
 
-    navLinks.textContent = 'Loading menu...';
+    // navLinks.textContent = 'Loading menu...';
 
     try {
         const { menu } = await fetchData('./data/menu.json');

@@ -38,8 +38,7 @@
         grid-template-columns: 486px 724px;
     }
 
-    h1 
-    {
+    h1 {
         font-size: 2.5em;
         margin: 0;
     }
@@ -75,5 +74,10 @@
     .ballistic-card td,
     .ballistic-card th {
         font-size: 1.25em;
+    }
+
+    #contributors {
+        max-height: 600px;
+
     }
 }
